@@ -284,10 +284,10 @@
         .choice-btn.home { background: #374151; color: #f3f4f6; }
         .choice-btn.home:hover { background: #4b5563; }
 
-        /* 긴급 폐쇄 오버레이 화면 */
+        /* 실시간 동기화되는 긴급 폐쇄 오버레이 화면 */
         #emergency-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #090d16; color: #fff; z-index: 99999; display: none;
+            background: #090d16; color: #fff; z-index: 999999; display: none;
             flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem;
         }
         #emergency-overlay i { font-size: 5rem; color: #dc2626; margin-bottom: 1.5rem; animation: pulse 1.5s infinite; }
@@ -322,7 +322,7 @@
         </div>
     </div>
 
-    <!-- 긴급 폐쇄 오버레이 -->
+    <!-- 전역 동기화 긴급 폐쇄 오버레이 -->
     <div id="emergency-overlay">
         <i class="fa-solid fa-triangle-exclamation"></i>
         <h1 style="color: #fff; font-size: 2.5rem; margin-bottom: 1rem;">시스템 보안 경고: 비정상 트래픽 및 바이러스 감지</h1>
@@ -677,10 +677,17 @@
             switchPage('home');
         }
 
-        // 긴급 폐쇄 토글
-        let isEmergency = false;
+        // ==========================================
+        // 실시간 전역 동기화 긴급 폐쇄 시스템
+        // ==========================================
         function toggleEmergency() {
-            isEmergency = !isEmergency;
+            let currentState = localStorage.getItem('site_emergency') === 'true';
+            let newState = !currentState;
+            localStorage.setItem('site_emergency', newState ? 'true' : 'false');
+            applyEmergencyState(newState);
+        }
+
+        function applyEmergencyState(isEmergency) {
             const overlay = document.getElementById('emergency-overlay');
             const btn = document.getElementById('emergency-toggle-btn');
 
@@ -698,6 +705,35 @@
                 }
             }
         }
+
+        // 다른 탭이나 다른 사용자의 브라우저에서 상태 변경을 실시간 감지
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'site_emergency') {
+                let isEmergency = (e.newValue === 'true');
+                applyEmergencyState(isEmergency);
+            }
+        });
+
+        // 페이지 로드 시 및 주기적 동기화 체크 (폴링 방식 겸용)
+        setInterval(function() {
+            let isEmergency = localStorage.getItem('site_emergency') === 'true';
+            const overlay = document.getElementById('emergency-overlay');
+            const btn = document.getElementById('emergency-toggle-btn');
+            
+            if (isEmergency && overlay.style.display !== 'flex') {
+                overlay.style.display = 'flex';
+                if(btn) {
+                    btn.innerText = "긴급 폐쇄 해제하기";
+                    btn.className = "emergency-btn normal";
+                }
+            } else if (!isEmergency && overlay.style.display === 'flex') {
+                overlay.style.display = 'none';
+                if(btn) {
+                    btn.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> 사이트 긴급 폐쇄 발동';
+                    btn.className = "emergency-btn";
+                }
+            }
+        }, 500);
     </script>
 </body>
 </html>
