@@ -33,4 +33,208 @@
             border-bottom: 1px solid var(--border-color); z-index: 1000;
         }
         .nav-container {
-            max-
+            max-width: 1400px; margin: 0 auto; display: flex;
+            justify-content: space-between; align-items: center; padding: 1.2rem 2rem;
+        }
+        .logo-box { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; color: var(--text-main); }
+        .logo-icon {
+            width: 40px; height: 40px; background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff;
+            box-shadow: 0 4px 10px rgba(30, 58, 138, 0.25);
+        }
+        .logo-text { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.5px; color: #0f172a; }
+        .nav-menu { display: flex; list-style: none; gap: 1.5rem; flex-wrap: wrap; }
+        .nav-menu a {
+            text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.9rem; transition: 0.3s;
+        }
+        .nav-menu a:hover, .nav-menu a.active { color: var(--accent-blue); }
+
+        main { max-width: 1200px; margin: 130px auto 60px; padding: 0 2rem; width: 100%; }
+
+        /* 히어로 섹션 */
+        .hero {
+            background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+            border: 1px solid var(--border-color); border-radius: 24px; padding: 4.5rem 3rem; text-align: center;
+            box-shadow: var(--shadow-md); margin-bottom: 2.5rem; position: relative; overflow: hidden;
+        }
+        .hero-badge {
+            display: inline-block; background: rgba(30, 58, 138, 0.08); color: var(--accent-blue);
+            border: 1px solid rgba(30, 58, 138, 0.15); padding: 0.4rem 1.2rem; border-radius: 30px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1.5rem;
+        }
+        .hero h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 1.2rem; color: #0f172a; letter-spacing: -1px; }
+        .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 650px; margin: 0 auto 2.5rem; line-height: 1.7; }
+        .btn-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn-blue {
+            display: inline-flex; align-items: center; gap: 0.8rem;
+            background: linear-gradient(135deg, #1e3a8a, #1d4ed8); color: #fff;
+            padding: 0.9rem 2rem; border-radius: 10px; font-weight: 700; text-decoration: none; transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.25);
+        }
+        .btn-blue:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(30, 58, 138, 0.35); }
+        .btn-outline {
+            display: inline-flex; align-items: center; gap: 0.8rem;
+            background: #ffffff; color: var(--text-main); border: 1px solid var(--border-color);
+            padding: 0.9rem 2rem; border-radius: 10px; font-weight: 700; text-decoration: none; transition: 0.3s;
+        }
+        .btn-outline:hover { background: #f8fafc; border-color: #cbd5e1; }
+
+        /* 대시보드 위젯 그리드 */
+        .dashboard-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem;
+        }
+        .widget {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            padding: 1.8rem; border-radius: 16px; position: relative; overflow: hidden;
+            box-shadow: var(--shadow-sm); transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .widget:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        .widget::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent-blue); }
+        .widget-title { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
+        .clock-display { font-size: 1.8rem; font-weight: 700; font-family: monospace; color: #0f172a; }
+        .stat-number { font-size: 1.8rem; font-weight: 800; color: var(--accent-blue); }
+
+        /* 컨텐츠 섹션 그리드 (대대장 소개 + 홍보/소식) */
+        .content-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2.5rem;
+        }
+        @media(max-width: 900px) { .content-grid { grid-template-columns: 1fr; } }
+        
+        .section-card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 20px; padding: 2.5rem; box-shadow: var(--shadow-sm);
+        }
+        .section-header {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem; border-bottom: 2px solid var(--border-color);
+        }
+        .section-header h2 { font-size: 1.3rem; font-weight: 700; color: #0f172a; display: flex; align-items: center; gap: 0.6rem; }
+        .section-header a { font-size: 0.85rem; color: var(--accent-blue); text-decoration: none; font-weight: 600; }
+        .section-header a:hover { text-decoration: underline; }
+
+        /* 대대장 미리보기 내용 */
+        .commander-preview { display: flex; gap: 1.5rem; align-items: center; }
+        .commander-img-box {
+            width: 90px; height: 110px; background: #f1f5f9; border: 1px solid var(--border-color);
+            border-radius: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: var(--text-muted); font-size: 0.75rem; font-weight: 600; flex-shrink: 0; gap: 0.3rem;
+        }
+        .commander-img-box i { font-size: 2rem; color: var(--accent-blue); }
+        .commander-text p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.8rem; }
+        .commander-name { font-weight: 700; color: #0f172a; font-size: 1rem; }
+
+        /* 홍보 및 주요 소식 리스트 */
+        .news-list { display: flex; flex-direction: column; gap: 1rem; }
+        .news-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem; background: #f8fafc; border: 1px solid var(--border-color); border-radius: 10px;
+            text-decoration: none; color: inherit; transition: 0.2s;
+        }
+        .news-item:hover { background: #f1f5f9; border-color: #cbd5e1; }
+        .news-title { font-size: 0.95rem; font-weight: 600; color: #334155; display: flex; align-items: center; gap: 0.5rem; }
+        .news-date { font-size: 0.8rem; color: var(--text-muted); }
+
+        footer { text-align: center; padding: 2.5rem; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border-color); background: #ffffff; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo-box">
+                <div class="logo-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <span class="logo-text">제3대항전술대대</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">1. 홈페이지</a></li>
+                <li><a href="greeting.html">2. 대대장 인사말</a></li>
+                <li><a href="battalion_hq.html">3. 대대본부 소개</a></li>
+                <li><a href="history.html">4. 대대약력</a></li>
+                <li><a href="company_hq.html">5. 중대본부 소개</a></li>
+                <li><a href="promo.html">6. 홍보</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <!-- 히어로 섹션 -->
+        <div class="hero">
+            <div class="hero-badge">3RD TACTICAL BATTALION</div>
+            <h1>실전적 훈련과 최정예 전술의 중추</h1>
+            <p>완벽한 전투태세와 철저한 임무 수행 능력으로 조국의 평화와 안전을 최선두에서 수호합니다.</p>
+            <div class="btn-group">
+                <a href="greeting.html" class="btn-blue">대대장 인사말 <i class="fa-solid fa-arrow-right"></i></a>
+                <a href="promo.html" class="btn-outline">부대 홍보 및 소식 <i class="fa-solid fa-video"></i></a>
+            </div>
+        </div>
+
+        <!-- 실시간 지휘통제 위젯 -->
+        <div class="dashboard-grid">
+            <div class="widget">
+                <div class="widget-title"><i class="fa-regular fa-clock"></i> 표준시각 (KST)</div>
+                <div class="clock-display" id="clock">00:00:00</div>
+            </div>
+            <div class="widget">
+                <div class="widget-title"><i class="fa-solid fa-chart-line"></i> 누적 방문자 현황</div>
+                <div class="stat-number">4,128 <span style="font-size: 1rem; color: var(--text-muted); font-weight: 400;">명</span></div>
+            </div>
+            <div class="widget">
+                <div class="widget-title"><i class="fa-solid fa-circle-check"></i> 부대 보안 태세</div>
+                <div style="font-size: 1.1rem; font-weight: 700; color: #059669; margin-top: 0.4rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <span style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; display: inline-block;"></span>
+                    정상 가동 중 (Green)
+                </div>
+            </div>
+        </div>
+
+        <!-- 콘텐츠 상세 (대대장 소개 요약 + 홍보 및 공지 아카이브) -->
+        <div class="content-grid">
+            <!-- 대대장 간략 소개 카드 -->
+            <div class="section-card">
+                <div class="section-header">
+                    <h2><i class="fa-solid fa-user-tie" style="color: var(--accent-blue);"></i> 지휘관 인사말 요약</h2>
+                    <a href="greeting.html">전체보기 <i class="fa-solid fa-angle-right"></i></a>
+                </div>
+                <div class="commander-preview">
+                    <div class="commander-img-box">
+                        <i class="fa-solid fa-user"></i>
+                        <span>대대장</span>
+                    </div>
+                    <div class="commander-text">
+                        <p>“혹독한 실전 훈련과 빈틈없는 전술 연구로 승리를 보장하는 최정예 대항전술부대를 이뤄내겠습니다.”</p>
+                        <div class="commander-name">제3대항전술대대장 중령 ◯ ◯ ◯</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 홍보 및 최신 소식 카드 -->
+            <div class="section-card">
+                <div class="section-header">
+                    <h2><i class="fa-solid fa-bullhorn" style="color: var(--accent-blue);"></i> 부대 홍보 및 공지</h2>
+                    <a href="promo.html">더보기 <i class="fa-solid fa-angle-right"></i></a>
+                </div>
+                <div class="news-list">
+                    <a href="promo.html" class="news-item">
+                        <span class="news-title"><i class="fa-solid fa-play-circle" style="color: var(--accent-blue);"></i> 제3대항전술대대 실전 훈련 하이라이트 영상 공개</span>
+                        <span class="news-date">2026.10.01</span>
+                    </a>
+                    <a href="promo.html" class="news-item">
+                        <span class="news-title"><i class="fa-solid fa-calendar-days" style="color: var(--accent-blue);"></i> 이번 달 부대 면회 및 방문 안내 사항 공지</span>
+                        <span class="news-date">2026.09.28</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>&copy; 2026 제3대항전술대대 (3rd Tactical Battalion). All Rights Reserved.</footer>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').innerText = String(now.getHours()).padStart(2, '0') + ':' + 
+                String(now.getMinutes()).padStart(2, '0') + ':' + String(now.getSeconds()).padStart(2, '0');
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
