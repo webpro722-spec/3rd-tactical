@@ -3,429 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>제3대항전술대대 공식 홍보 사이트</title>
+    <title>제3대항전술대대 - 메인</title>
     <style>
-        /* 기본 스타일 초기화 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; }
+        body { background-color: #f8fafc; color: #1e293b; }
+        
+        /* 상단 네비게이션 */
+        header { position: fixed; top: 0; width: 100%; background: #ffffff; border-bottom: 1px solid #e2e8f0; z-index: 1000; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
+        .logo { font-size: 1.4rem; font-weight: 800; color: #0f172a; text-decoration: none; }
+        .nav-menu { display: flex; list-style: none; gap: 1.5rem; }
+        .nav-menu a { text-decoration: none; color: #475569; font-weight: 600; padding: 0.5rem 0.8rem; border-radius: 6px; transition: 0.2s; }
+        .nav-menu a:hover, .nav-menu a.active { color: #2563eb; background: #eff6ff; }
+        
+        /* 메인 컨테이너 */
+        main { max-width: 1100px; margin: 120px auto 60px; padding: 0 2rem; }
+        
+        /* 실시간 시계 & 현황 위젯 */
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+        .widget { background: #ffffff; padding: 1.8rem; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .widget-title { font-size: 0.9rem; color: #64748b; font-weight: 600; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .clock-display { font-size: 1.8rem; font-weight: 800; color: #0f172a; font-family: monospace; }
+        .stat-number { font-size: 2rem; font-weight: 800; color: #2563eb; }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        /* 히어로 섹션 */
+        .hero { background: #ffffff; padding: 4rem 3rem; border-radius: 16px; border: 1px solid #e2e8f0; text-align: center; margin-bottom: 3rem; }
+        .hero h1 { font-size: 2.8rem; color: #0f172a; margin-bottom: 1rem; font-weight: 800; }
+        .hero p { font-size: 1.2rem; color: #475569; max-width: 600px; margin: 0 auto 2rem; }
+        .btn { display: inline-block; background: #2563eb; color: #fff; padding: 0.8rem 1.8rem; border-radius: 8px; text-decoration: none; font-weight: 700; transition: 0.2s; }
+        .btn:hover { background: #1d4ed8; }
 
-        body {
-            background-color: #ffffff;
-            color: #222222;
-            line-height: 1.6;
-        }
-
-        /* 네비게이션 바 */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            border-bottom: 1px solid #eaeaea;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-            z-index: 1000;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-        }
-
-        .logo {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #1a2b4c;
-            text-decoration: none;
-            letter-spacing: -0.5px;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 1.8rem;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            color: #555555;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.2s ease;
-        }
-
-        .nav-menu a:hover {
-            color: #1a2b4c;
-            font-weight: 700;
-        }
-
-        /* 섹션 공통 스타일 */
-        section {
-            padding: 100px 2rem 80px 2rem;
-            max-width: 1100px;
-            margin: 0 auto;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #1a2b4c;
-            margin-bottom: 2rem;
-            position: relative;
-            padding-bottom: 0.5rem;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background-color: #1a2b4c;
-        }
-
-        /* 메인 히어로 섹션 */
-        #home {
-            min-height: 85vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(180deg, #f8fafd 0%, #ffffff 100%);
-            border-bottom: 1px solid #eaeaea;
-            padding-top: 140px;
-        }
-
-        #home .badge {
-            background-color: #eef3fb;
-            color: #1a2b4c;
-            font-weight: 600;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid #d0deef;
-        }
-
-        #home h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            color: #111;
-            margin-bottom: 1rem;
-            letter-spacing: -1px;
-        }
-
-        #home p {
-            font-size: 1.2rem;
-            color: #666;
-            max-width: 650px;
-            margin-bottom: 2.5rem;
-        }
-
-        .btn-primary {
-            display: inline-block;
-            background-color: #1a2b4c;
-            color: #ffffff;
-            padding: 0.9rem 2rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background-color 0.2s ease, transform 0.2s ease;
-        }
-
-        .btn-primary:hover {
-            background-color: #0f1a30;
-            transform: translateY(-2px);
-        }
-
-        /* 인사말 그리드 */
-        .greeting-box {
-            display: flex;
-            gap: 2.5rem;
-            align-items: center;
-            background-color: #fafafa;
-            padding: 2.5rem;
-            border-radius: 12px;
-            border: 1px solid #eaeaea;
-        }
-
-        .greeting-img {
-            width: 220px;
-            height: 280px;
-            background-color: #e2e8f0;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #718096;
-            font-weight: 600;
-            flex-shrink: 0;
-        }
-
-        .greeting-text p {
-            margin-bottom: 1rem;
-            color: #4a5568;
-            line-height: 1.8;
-        }
-
-        .greeting-text .signature {
-            margin-top: 1.5rem;
-            font-weight: 700;
-            color: #1a2b4c;
-            text-align: right;
-        }
-
-        /* 카드 그리드 스타일 (대대본부/중대본부) */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .card {
-            background-color: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 1.8rem;
-            transition: box-shadow 0.2s ease, transform 0.2s ease;
-        }
-
-        .card:hover {
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            transform: translateY(-3px);
-        }
-
-        .card h3 {
-            font-size: 1.25rem;
-            color: #1a2b4c;
-            margin-bottom: 0.8rem;
-        }
-
-        .card p {
-            color: #64748b;
-            font-size: 0.95rem;
-        }
-
-        /* 대대 약력 타임라인 */
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-            border-left: 2px solid #e2e8f0;
-            margin-left: 1rem;
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 2rem;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -2.55rem;
-            top: 0.2rem;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            background-color: #1a2b4c;
-            border: 3px solid #ffffff;
-        }
-
-        .timeline-date {
-            font-weight: 700;
-            color: #1a2b4c;
-            margin-bottom: 0.3rem;
-        }
-
-        .timeline-desc {
-            color: #4a5568;
-        }
-
-        /* 홍보 섹션 */
-        .promo-box {
-            background-color: #f8fafc;
-            border-left: 4px solid #1a2b4c;
-            padding: 2rem;
-            border-radius: 0 8px 8px 0;
-            margin-bottom: 1.5rem;
-        }
-
-        .promo-box h3 {
-            color: #1a2b4c;
-            margin-bottom: 0.5rem;
-        }
-
-        /* 푸터 */
-        footer {
-            background-color: #ffffff;
-            text-align: center;
-            padding: 2.5rem;
-            color: #a0aec0;
-            font-size: 0.85rem;
-            border-top: 1px solid #eaeaea;
-        }
-
-        /* 반응형 모바일 대응 */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none; /* 모바일 메뉴 간소화 가능 */
-            }
-            .greeting-box {
-                flex-direction: column;
-                text-align: center;
-            }
-            #home h1 {
-                font-size: 2.2rem;
-            }
-        }
+        footer { text-align: center; padding: 2rem; color: #94a3b8; font-size: 0.9rem; border-top: 1px solid #e2e8f0; }
     </style>
 </head>
 <body>
 
-    <!-- 헤더 / 네비게이션 -->
     <header>
         <div class="nav-container">
-            <a href="#home" class="logo">제3대항전술대대</a>
+            <a href="index.html" class="logo">🛡️ 제3대항전술대대</a>
             <ul class="nav-menu">
-                <li><a href="#home">홈</a></li>
-                <li><a href="#greeting">대대장 인사말</a></li>
-                <li><a href="#hq">대대본부 소개</a></li>
-                <li><a href="#history">대대약력</a></li>
-                <li><a href="#company">중대본부 소개</a></li>
-                <li><a href="#promo">홍보</a></li>
+                <li><a href="index.html" class="active">홈</a></li>
+                <li><a href="greeting.html">대대장 인사말</a></li>
+                <li><a href="organization.html">대대/중대 소개</a></li>
+                <li><a href="promo.html">홍보 & 소식</a></li>
             </ul>
         </div>
     </header>
 
-    <!-- 1. 메인 (홈) -->
-    <section id="home">
-        <span class="badge">실전적 훈련과 최정예 전술</span>
-        <h1>제3대항전술대대</h1>
-        <p>강한 훈련과 실전 전술을 바탕으로 완벽한 대항전술 임무를 수행하는 최정예 부대입니다.</p>
-        <a href="#greeting" class="btn-primary">대대 소개 보기</a>
-    </section>
+    <main>
+        <!-- 실시간 시계 및 대시보드 현황 -->
+        <div class="dashboard-grid">
+            <div class="widget">
+                <div class="widget-title">⏱️ 현재 시간 (KST)</div>
+                <div class="clock-display" id="clock">00:00:00</div>
+            </div>
+            <div class="widget">
+                <div class="widget-title">📊 누적 방문자 수</div>
+                <div class="stat-number">1,248 <span style="font-size: 1rem; color: #64748b; font-weight: 400;">명</span></div>
+            </div>
+            <div class="widget">
+                <div class="widget-title">🟢 부대 웹사이트 상태</div>
+                <div style="font-size: 1.3rem; font-weight: 700; color: #16a34a; margin-top: 0.3rem;">정상 운영 중</div>
+            </div>
+        </div>
 
-    <!-- 2. 대대장 인사말 -->
-    <section id="greeting">
-        <h2 class="section-title">대대장 인사말</h2>
-        <div class="greeting-box">
-            <div class="greeting-img">
-                대대장 사진
-            </div>
-            <div class="greeting-text">
-                <p>안녕하십니까. 제3대항전술대대 홈페이지 방문을 진심으로 환영합니다.</p>
-                <p>우리 대대는 최선의 실전적 전술 수행능력을 바탕으로, 상시 준비된 태세와 확고한 군기 확립을 통해 부여된 임무를 완벽히 완수하고 있습니다.</p>
-                <p>자유와 평화를 수호하는 정예 부대로서, 장장들의 안전과 사기를 최우선으로 생각하며 당당하고 자부심 넘치는 부대를 만들어 가겠습니다.</p>
-                <div class="signature">제3대항전술대대장 중령 ◯ ◯ ◯</div>
-            </div>
+        <!-- 메인 히어로 카드 -->
+        <div class="hero">
+            <h1>실전적 훈련과 최정예 전술</h1>
+            <p>자유와 평화를 수호하는 제3대항전술대대 공식 웹사이트에 오신 것을 환영합니다.</p>
+            <a href="greeting.html" class="btn">대대장 인사말 보러가기 →</a>
         </div>
-    </section>
+    </main>
 
-    <!-- 3. 대대본부 소개 -->
-    <section id="hq">
-        <h2 class="section-title">대대본부 소개</h2>
-        <div class="card-grid">
-            <div class="card">
-                <h3>인과과 ( 인사 / 과 )</h3>
-                <p>부대원들의 인사 관리, 사기 진작, 복지 및 사행 관리를 담당하여 안정적인 부대 운영을 지원합니다.</p>
-            </div>
-            <div class="card">
-                <h3>정보과</h3>
-                <p>적 정찰 정보 분석, 보안 유지를 담당하며 부대의 작전 수행을 위한 정확한 정보를 제공합니다.</p>
-            </div>
-            <div class="card">
-                <h3>작전과</h3>
-                <p>부대 훈련 계획 수립, 실전적 전술 교육 및 작전 통제를 통해 최강의 전투력을 유지합니다.</p>
-            </div>
-            <div class="card">
-                <h3>군수과</h3>
-                <p>장비 및 물자 보급, 시설 관리, 완벽한 물자 지원 체계를 구축하여 부대의 유지 및 전투 준비를 전담합니다.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. 대대약력 -->
-    <section id="history">
-        <h2 class="section-title">대대약력</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-date">2026년</div>
-                <div class="timeline-desc">제3대항전술대대 웹사이트 구축 및 디지털 홍보 체계 마련</div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-date">2020년</div>
-                <div class="timeline-desc">전군 대항전술 최우수 부대 표창 수상</div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-date">2015년</div>
-                <div class="timeline-desc">실전 전술훈련장 개설 및 첨단 전술 장비 도입</div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-date">2005년</div>
-                <div class="timeline-desc">제3대항전술대대 창설</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. 중대본부 소개 -->
-    <section id="company">
-        <h2 class="section-title">중대본부 소개</h2>
-        <div class="card-grid">
-            <div class="card">
-                <h3>제1중대</h3>
-                <p>선봉 중대로서 신속한 대응 능력과 최정예 수색 및 침투 전술을 보유하고 있습니다.</p>
-            </div>
-            <div class="card">
-                <h3>제2중대</h3>
-                <p>주력 공격 중대로서 화력 지원과 견고한 전술 진지 구축에 특화되어 있습니다.</p>
-            </div>
-            <div class="card">
-                <h3>제3중대</h3>
-                <p>입체적 야간 및 특수 전술 훈련을 전문으로 수행하는 부대입니다.</p>
-            </div>
-            <div class="card">
-                <h3>본부중대</h3>
-                <p>대대 전체의 지휘 통제 및 의무, 수송, 통신 등 전반적인 작전 지원을 담당합니다.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. 홍보 -->
-    <section id="promo" style="border-bottom: none;">
-        <h2 class="section-title">부대 홍보</h2>
-        <div class="promo-box">
-            <h3>🎬 부대 소개 영상</h3>
-            <p>제3대항전술대대의 생생한 훈련 모습과 전술 활동을 담은 홍보 영상입니다. (영상 업데이트 예정)</p>
-        </div>
-        <div class="promo-box">
-            <h3>📸 활동 갤러리</h3>
-            <p>자랑스러운 대대원들의 훈련 사진 및 부대 행사 소식을 전달합니다.</p>
-        </div>
-        <div class="promo-box">
-            <h3>📢 부대 소식 및 공지</h3>
-            <p>부대 면회 안내, 신병 교육 소식 및 주요 행사 일정을 지속적으로 공유합니다.</p>
-        </div>
-    </section>
-
-    <!-- 푸터 -->
     <footer>
-        <p>&copy; 2026 제3대항전술대대 (3rd Tactical Battalion). All rights reserved.</p>
+        &copy; 2026 제3대항전술대대. All rights reserved.
     </footer>
 
+    <script>
+        // 시계 스크립트
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').innerText = `${hours}:${minutes}:${seconds}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
 </body>
 </html>
