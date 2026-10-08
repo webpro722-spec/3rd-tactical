@@ -11,13 +11,12 @@
             --bg-card: #ffffff;
             --accent-navy: #0f172a;
             --accent-blue: #1e3a8a;
-            --accent-blue-hover: #1d4ed8;
             --accent-gold: #d97706;
             --text-main: #1e293b;
             --text-muted: #64748b;
             --border-color: #e2e8f0;
-            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
-            --shadow-md: 0 20px 25px -5px rgba(0, 0, 0, 0.07), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 20px 25px -5px rgba(0, 0, 0, 0.07);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif; }
@@ -31,10 +30,10 @@
             justify-content: space-between;
         }
 
-        /* 상단 네비게이션바 */
+        /* 상단 네비게이션바 (화이트) */
         header {
             position: fixed; top: 0; left: 0; width: 100%;
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
             z-index: 1000;
@@ -65,7 +64,7 @@
             box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
         }
         .admin-nav-btn {
-            background: #eff6ff !important; color: var(--accent-blue) !important; border: 1px solid #bfdbfe !important;
+            background: #0f172a !important; color: #38bdf8 !important; border: 1px solid #1e293b !important;
         }
 
         /* 메인 콘텐츠 영역 */
@@ -79,7 +78,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 공통 카드 스타일 */
+        /* 화이트 공통 카드 스타일 */
         .card-box {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -92,7 +91,7 @@
         h1 { font-size: 2.1rem; font-weight: 800; color: var(--accent-navy); margin-bottom: 2rem; letter-spacing: -0.5px; display: flex; align-items: center; gap: 0.8rem; }
         h1 i { color: var(--accent-blue); font-size: 1.7rem; }
 
-        /* 1. 홈페이지 디자인 */
+        /* 홈페이지 디자인 */
         .hero-home {
             background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
             border-radius: 24px; padding: 4.5rem 3rem; color: #fff;
@@ -115,7 +114,6 @@
         }
         .btn-action:hover { background: #b45309; transform: translateY(-2px); }
 
-        /* 대시보드 위젯 그리드 */
         .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
         .widget {
             background: var(--bg-card); border: 1px solid var(--border-color);
@@ -123,7 +121,7 @@
             display: flex; flex-direction: column; justify-content: space-between; transition: 0.25s;
         }
         .widget:hover { border-color: #cbd5e1; transform: translateY(-2px); box-shadow: var(--shadow-md); }
-        .widget-title { font-size: 0.82rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.8rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; letter-spacing: 0.5px; }
+        .widget-title { font-size: 0.82rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.8rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; }
         .clock-display { font-size: 1.8rem; font-weight: 800; font-family: monospace; color: var(--accent-navy); }
         .date-display { font-size: 0.95rem; color: var(--text-muted); font-weight: 600; margin-top: 0.3rem; }
         .server-status { font-size: 1.1rem; font-weight: 700; color: #059669; display: flex; align-items: center; gap: 0.5rem; margin-top: 0.4rem; }
@@ -136,7 +134,7 @@
         .home-card h3 { font-size: 1.25rem; font-weight: 800; color: var(--accent-navy); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; }
         .home-card p { font-size: 0.98rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.2rem; }
 
-        /* 2. 대대장 소개 페이지 */
+        /* 대대장 소개, 조직도, 약력 등 기타 화이트 페이지들 */
         .commander-hero-wrapper {
             background: var(--bg-card); border: 1px solid var(--border-color);
             border-radius: 24px; padding: 3.5rem; box-shadow: var(--shadow-md);
@@ -149,12 +147,10 @@
             width: 100%; height: 390px; background: #e2e8f0; border-radius: 16px;
             overflow: hidden; border: 4px solid #fff; box-shadow: var(--shadow-md);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            color: var(--text-muted); position: relative;
+            color: var(--text-muted);
         }
-        .commander-photo-box img { width: 100%; height: 100%; object-fit: cover; }
         .commander-photo-placeholder { display: flex; flex-direction: column; align-items: center; gap: 1rem; font-weight: 600; }
         .commander-photo-placeholder i { font-size: 4rem; color: var(--accent-blue); }
-
         .commander-title-area h2 { font-size: 2.2rem; font-weight: 900; color: var(--accent-navy); margin-bottom: 0.5rem; }
         .commander-rank-badge {
             display: inline-block; background: #eff6ff; color: var(--accent-blue);
@@ -166,7 +162,6 @@
             padding: 1.2rem 1.5rem; border-radius: 0 12px 12px 0; font-style: italic;
             color: #334155; font-size: 1.05rem; line-height: 1.6; margin-top: 1rem;
         }
-
         .commander-details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
         .detail-block h4 { font-size: 1.15rem; font-weight: 800; color: var(--accent-navy); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
         .detail-block p { font-size: 1.02rem; color: #475569; line-height: 1.8; margin-bottom: 1rem; }
@@ -178,7 +173,6 @@
         .career-year { font-weight: 800; color: var(--accent-blue); min-width: 90px; }
         .career-desc { color: #475569; font-size: 0.95rem; }
 
-        /* 3, 5. 조직도 및 본부 소개 그리드 */
         .org-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
         .org-card {
             background: var(--bg-card); border: 1px solid var(--border-color);
@@ -189,7 +183,6 @@
         .org-card h3 i { color: var(--accent-blue); }
         .org-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
 
-        /* 4. 대대약력 타임라인 */
         .timeline { position: relative; padding-left: 2rem; border-left: 3px solid var(--accent-blue); margin-top: 1rem; }
         .timeline-item { position: relative; margin-bottom: 2.5rem; }
         .timeline-item::before {
@@ -204,7 +197,6 @@
             box-shadow: var(--shadow-sm); font-size: 1rem;
         }
 
-        /* 6. 홍보 카드 */
         .promo-card {
             background: var(--bg-card); border: 1px solid var(--border-color);
             padding: 2.2rem; border-radius: 16px; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm);
@@ -213,9 +205,7 @@
         .promo-card h3 i { color: var(--accent-gold); }
         .promo-card p { color: var(--text-muted); line-height: 1.7; }
 
-        /* ==========================================================
-           관리자 로그인 및 패널 스타일
-           ========================================================== */
+        /* 관리자 로그인 화면 (화이트) */
         .login-wrapper {
             max-width: 460px; margin: 4rem auto; background: var(--bg-card);
             border: 1px solid var(--border-color); border-radius: 24px; padding: 3rem;
@@ -227,8 +217,7 @@
         .form-group label { display: block; font-size: 0.88rem; font-weight: 700; color: var(--accent-navy); margin-bottom: 0.5rem; }
         .form-group input {
             width: 100%; padding: 0.9rem 1rem; border: 1px solid var(--border-color);
-            border-radius: 10px; font-size: 1rem; background: #f8fafc; color: var(--text-main);
-            outline: none; transition: 0.2s;
+            border-radius: 10px; font-size: 1rem; background: #f8fafc; color: var(--text-main); outline: none; transition: 0.2s;
         }
         .form-group input:focus { border-color: var(--accent-blue); background: #fff; box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1); }
         .btn-submit {
@@ -237,28 +226,63 @@
             font-size: 1rem; box-shadow: 0 4px 15px rgba(15, 23, 42, 0.2);
         }
         .btn-submit:hover { background: var(--accent-blue); }
-        .login-error { color: #dc2626; font-size: 0.88rem; font-weight: 600; margin-top: 1rem; display: none; }
+        
+        /* 사이트 내 맞춤형 에러 박스 */
+        .site-alert-box {
+            background: #fef2f2; border: 1px solid #fecaca; color: #991b1b;
+            padding: 0.9rem 1rem; border-radius: 8px; font-size: 0.88rem; font-weight: 700;
+            margin-bottom: 1.5rem; display: none; text-align: left; align-items: center; gap: 0.6rem;
+        }
 
-        /* 관리자 패널 대시보드 */
+        /* ==========================================================
+           비밀스러운 관리자 패널 (눈이 편안한 초고급 다크 테마)
+           ========================================================== */
+        #page-admin {
+            background: #0b0f19; color: #f1f5f9; padding: 3rem; border-radius: 24px;
+            border: 1px solid #1e293b; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+        }
+        #page-admin h1 { color: #f8fafc; }
+        #page-admin h1 i { color: #38bdf8; }
+        .admin-dark-card {
+            background: #111827; border: 1px solid #1f2937; border-radius: 16px;
+            padding: 2rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+        }
+        .admin-dark-card h3 { font-size: 1.15rem; font-weight: 800; color: #f3f4f6; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; }
         .admin-panel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
-        .admin-box {
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            padding: 2rem; border-radius: 16px; box-shadow: var(--shadow-sm);
-        }
-        .admin-box h3 { font-size: 1.1rem; font-weight: 800; color: var(--accent-navy); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; }
+        
         .emergency-btn {
-            background: #dc2626; color: #fff; padding: 1rem 1.5rem; border-radius: 10px;
+            background: #ef4444; color: #fff; padding: 1rem 1.5rem; border-radius: 10px;
             font-weight: 800; border: none; cursor: pointer; width: 100%; font-size: 1.05rem;
-            transition: 0.2s; box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3); display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+            transition: 0.2s; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4); display: flex; align-items: center; justify-content: center; gap: 0.6rem;
         }
-        .emergency-btn:hover { background: #b91c1c; }
-        .emergency-btn.normal { background: #059669; box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3); }
+        .emergency-btn:hover { background: #dc2626; }
+        .emergency-btn.normal { background: #10b981; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4); }
 
-        /* 홈페이지 실시간 에디터 입력 폼 */
-        .edit-input {
-            width: 100%; padding: 0.7rem; margin-top: 0.5rem; border: 1px solid var(--border-color);
-            border-radius: 8px; font-size: 0.95rem; background: #f8fafc;
+        .edit-input-dark {
+            width: 100%; padding: 0.8rem 1rem; margin-top: 0.5rem; border: 1px solid #374151;
+            border-radius: 8px; font-size: 0.95rem; background: #1f2937; color: #fff; outline: none;
         }
+        .edit-input-dark:focus { border-color: #38bdf8; }
+
+        /* 로그인 성공 후 갈 곳 고르는 모달 오버레이 */
+        #login-choice-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(11, 15, 25, 0.85); backdrop-filter: blur(8px);
+            z-index: 99999; display: none; align-items: center; justify-content: center;
+        }
+        .choice-modal-box {
+            background: #111827; border: 1px solid #374151; border-radius: 20px;
+            padding: 3rem; max-width: 500px; width: 90%; text-align: center; color: #fff;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8);
+        }
+        .choice-btn-group { display: flex; gap: 1rem; margin-top: 2rem; }
+        .choice-btn {
+            flex: 1; padding: 1rem; border-radius: 12px; font-weight: 800; cursor: pointer; border: none; font-size: 0.95rem; transition: 0.2s;
+        }
+        .choice-btn.panel { background: #38bdf8; color: #0b0f19; }
+        .choice-btn.panel:hover { background: #0ea5e9; }
+        .choice-btn.home { background: #374151; color: #f3f4f6; }
+        .choice-btn.home:hover { background: #4b5563; }
 
         /* 긴급 폐쇄 오버레이 화면 */
         #emergency-overlay {
@@ -269,7 +293,6 @@
         #emergency-overlay i { font-size: 5rem; color: #dc2626; margin-bottom: 1.5rem; animation: pulse 1.5s infinite; }
         @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
-        /* 푸터 */
         footer {
             text-align: center; padding: 2.5rem; color: var(--text-muted);
             font-size: 0.85rem; border-top: 1px solid var(--border-color); background: #ffffff;
@@ -286,24 +309,36 @@
 </head>
 <body>
 
-    <!-- 긴급 폐쇄 시 노출되는 오버레이 화면 -->
+    <!-- 로그인 성공 후 어디로 갈지 선택하는 모달 -->
+    <div id="login-choice-modal">
+        <div class="choice-modal-box">
+            <i class="fa-solid fa-shield-cat" style="font-size: 3rem; color: #38bdf8; margin-bottom: 1rem;"></i>
+            <h2 style="font-size: 1.5rem; font-weight: 900; margin-bottom: 0.5rem;">관리자 인증 완료</h2>
+            <p style="color: #9ca3af; font-size: 0.95rem;">접속할 작업 공간을 선택해 주십시오.</p>
+            <div class="choice-btn-group">
+                <button onclick="goToLocation('admin')" class="choice-btn panel"><i class="fa-solid fa-gauge-high"></i> 관리자 패널</button>
+                <button onclick="goToLocation('home')" class="choice-btn home"><i class="fa-solid fa-house"></i> 홈페이지로 수정</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 긴급 폐쇄 오버레이 -->
     <div id="emergency-overlay">
         <i class="fa-solid fa-triangle-exclamation"></i>
-        <h1 style="color: #fff; font-size: 2.5rem; margin-bottom: 1rem;">시스템 보안 경고: 비정상 트래픽 감지</h1>
+        <h1 style="color: #fff; font-size: 2.5rem; margin-bottom: 1rem;">시스템 보안 경고: 비정상 트래픽 및 바이러스 감지</h1>
         <p style="font-size: 1.2rem; color: #94a3b8; max-width: 600px; line-height: 1.8; margin-bottom: 2rem;">
-            사이트 내 바이러스 공격 징후 및 외부 침투 시도가 감지되어, 현재 긴급 시스템 보안 점검 돌입 중입니다.<br>
-            데이터 보호 및 안정적인 전술망 유지를 위해 잠시 후 다시 시도해 주시기 바랍니다. 이용에 불편을 드려 죄송합니다.
+            전술망 보안 방화벽에 비정상적인 외부 침투 시도가 감지되어 긴급 시스템 보호 조치에 돌입했습니다.<br>
+            데이터 무결성 유지를 위해 잠시 접속이 제한됩니다. 죄송합니다.
         </p>
         <button onclick="toggleEmergency()" style="background: #334155; color: #fff; border: none; padding: 0.8rem 1.8rem; border-radius: 8px; font-weight: 700; cursor: pointer;">관리자 긴급 해제</button>
     </div>
 
     <header>
         <div class="nav-container">
-            <!-- 로고 클릭 시 관리자 로그인 화면으로 이동 -->
             <a onclick="switchPage('login')" class="logo-box" title="관리자 로그인으로 이동">
                 <div class="logo-icon"><i class="fa-solid fa-shield-halved"></i></div>
                 <div class="logo-text-group">
-                    <span class="logo-title" id="logo-text-view">제3대항전술대대</span>
+                    <span class="logo-title">제3대항전술대대</span>
                     <span class="logo-subtitle">3RD TACTICAL BATTALION</span>
                 </div>
             </a>
@@ -340,7 +375,7 @@
                 <div class="widget">
                     <div class="widget-title"><i class="fa-solid fa-server"></i> 서버 및 전술망 현황</div>
                     <div>
-                        <div class="server-status" id="server-status-text">
+                        <div class="server-status">
                             <span style="width: 10px; height: 10px; background: #059669; border-radius: 50%; display: inline-block;"></span>
                             정상 가동 중 (Optimal)
                         </div>
@@ -412,21 +447,20 @@
             </div>
         </section>
 
-        <!-- 3. 대대본부 소개 섹션 -->
+        <!-- 3. 대대본부 소개 -->
         <section id="page-battalion" class="page-section">
             <div class="card-box">
                 <h1><i class="fa-solid fa-sitemap"></i> 대대본부 조직 및 임무 소개</h1>
-                <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.05rem;">대대의 두뇌이자 중추 역할을 담당하는 대대본부의 4개 핵심 부서입니다.</p>
                 <div class="org-grid">
-                    <div class="org-card"><h3><i class="fa-solid fa-id-card"></i> 인사과</h3><p>투명하고 공정한 장병 인사 관리, 사기 진작 및 병영 복지 총괄</p></div>
-                    <div class="org-card"><h3><i class="fa-solid fa-brain"></i> 정보과</h3><p>실시간 전술 정보 수집 및 위협 분석, 철저한 부대 보안 태세 유지</p></div>
+                    <div class="org-card"><h3><i class="fa-solid fa-id-card"></i> 인사과</h3><p>투명하고 공정한 장병 인사 관리, 사기 진작 및 복지 총괄</p></div>
+                    <div class="org-card"><h3><i class="fa-solid fa-brain"></i> 정보과</h3><p>실시간 전술 정보 수집 및 위협 분석, 부대 보안 태세 유지</p></div>
                     <div class="org-card"><h3><i class="fa-solid fa-chess"></i> 작전과</h3><p>실전적 대항전술 훈련 계획 수립 및 입체적 작전 지휘 통제</p></div>
-                    <div class="org-card"><h3><i class="fa-solid fa-truck-field"></i> 군수과</h3><p>신속한 물자 보급 및 완벽한 상시 군수 지원 체계 구축</p></div>
+                    <div class="org-card"><h3><i class="fa-solid fa-truck-field"></i> 군수과</h3><p>신속한 물자 보급과 완벽한 상시 군수 지원 체계 구축</p></div>
                 </div>
             </div>
         </section>
 
-        <!-- 4. 대대약력 섹션 -->
+        <!-- 4. 대대약력 -->
         <section id="page-history" class="page-section">
             <div class="card-box">
                 <h1><i class="fa-solid fa-landmark"></i> 부대 주요 역사 및 약력</h1>
@@ -439,20 +473,20 @@
             </div>
         </section>
 
-        <!-- 5. 중대본부 소개 섹션 -->
+        <!-- 5. 중대본부 소개 -->
         <section id="page-company" class="page-section">
             <div class="card-box">
                 <h1><i class="fa-solid fa-shield-quartered"></i> 예하 중대본부 소개</h1>
                 <div class="org-grid">
                     <div class="org-card"><h3><i class="fa-solid fa-angles-right"></i> 제1중대</h3><p>선봉 정찰 및 신속한 기동력으로 적 동향 파악 및 타격</p></div>
-                    <div class="org-card"><h3><i class="fa-solid fa-shield"></i> 제2중대</h3><p>강력한 주력 화력 지원 및 철통같은 방어 진지 구축</p></div>
+                    <div class="org-card"><h3><i class="fa-solid fa-shield"></i> 제2중대</h3><p>강력한 주력 화력 지원과 철통같은 방어 진지 구축</p></div>
                     <div class="org-card"><h3><i class="fa-solid fa-bolt"></i> 제3중대</h3><p>특수 야간 침투 및 입체적인 전술 임무 완수</p></div>
                     <div class="org-card"><h3><i class="fa-solid fa-network-wired"></i> 본부중대</h3><p>지휘 통제 지원, 통신망 유지 및 전장 의무·수송 전담</p></div>
                 </div>
             </div>
         </section>
 
-        <!-- 6. 부대 홍보 섹션 -->
+        <!-- 6. 부대 홍보 -->
         <section id="page-promo" class="page-section">
             <div class="card-box">
                 <h1><i class="fa-solid fa-bullhorn"></i> 부대 홍보 및 알림마당</h1>
@@ -467,13 +501,18 @@
             </div>
         </section>
 
-        <!-- ==========================================================
-           7. 관리자 로그인 페이지 섹션
-           ========================================================== -->
+        <!-- 7. 관리자 로그인 페이지 -->
         <section id="page-login" class="page-section">
             <div class="login-wrapper">
                 <h2><i class="fa-solid fa-lock" style="color: var(--accent-blue);"></i> 관리자 인증</h2>
                 <p>제3대항전술대대 통합 지휘제어 시스템</p>
+                
+                <!-- 사이트 내 커스텀 에러 알림 박스 -->
+                <div id="site-error-box" class="site-alert-box">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <span id="site-error-text">아이디 또는 비밀번호가 일치하지 않습니다.</span>
+                </div>
+
                 <div class="form-group">
                     <label>관리자 ID</label>
                     <input type="text" id="admin-id" placeholder="아이디를 입력하세요">
@@ -483,57 +522,55 @@
                     <input type="password" id="admin-pw" placeholder="비밀번호를 입력하세요">
                 </div>
                 <button onclick="handleLogin()" class="btn-submit">로그인 및 시스템 접속</button>
-                <div id="login-error-msg" class="login-error">아이디 또는 비밀번호가 일치하지 않습니다.</div>
             </div>
         </section>
 
-        <!-- ==========================================================
-           8. 관리자 패널 (콘트롤 타워 & 수정 기능)
-           ========================================================== -->
+        <!-- 8. 관리자 패널 (다크 시크릿 테마 & 복잡한 시스템 현황) -->
         <section id="page-admin" class="page-section">
-            <div class="card-box" style="margin-bottom: 2rem;">
-                <h1><i class="fa-solid fa-gauge-high"></i> 관리자 패널 (콘트롤 타워)</h1>
-                <p style="color: var(--text-muted); margin-bottom: 2rem;">시스템 총괄 제어 및 홈페이지 실시간 콘텐츠 관리 모드입니다.</p>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <h1><i class="fa-solid fa-gauge-high"></i> 관리자 콘트롤 타워 (비밀 보안 구역)</h1>
+                <button onclick="switchPage('home')" style="background: #1f2937; color: #38bdf8; border: 1px solid #374151; padding: 0.6rem 1.2rem; border-radius: 8px; cursor: pointer; font-weight: 700;"><i class="fa-solid fa-house"></i> 홈페이지로 이동</button>
+            </div>
 
-                <div class="admin-panel-grid">
-                    <div class="admin-box">
-                        <h3><i class="fa-solid fa-power-off" style="color: #dc2626;"></i> 긴급 사이트 제어</h3>
-                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.2rem;">비상 상황 발생 시 사이트 전체를 긴급 점검 화면으로 전환합니다.</p>
-                        <button onclick="toggleEmergency()" id="emergency-toggle-btn" class="emergency-btn">
-                            <i class="fa-solid fa-triangle-exclamation"></i> 사이트 긴급 폐쇄 발동
-                        </button>
-                    </div>
-                    <div class="admin-box">
-                        <h3><i class="fa-solid fa-server"></i> 시스템 및 서버 상태</h3>
-                        <p style="font-size: 0.95rem; color: #059669; font-weight: 700; margin-bottom: 0.5rem;"><span style="width: 8px; height: 8px; background: #059669; border-radius: 50%; display: inline-block; margin-right: 4px;"></span> 전술망 서버 최적 구동 중</p>
-                        <p style="font-size: 0.88rem; color: var(--text-muted);">CPU 부하율: 14% / 메모리 사용량: 2.1GB</p>
-                    </div>
-                    <div class="admin-box">
-                        <h3><i class="fa-solid fa-user-shield"></i> 현재 접속 세션</h3>
-                        <p style="font-size: 0.95rem; color: var(--accent-navy); font-weight: 700;" id="current-admin-display">인증된 관리자</p>
-                        <button onclick="handleLogout()" style="margin-top: 1rem; background: none; border: 1px solid var(--border-color); padding: 0.4rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; font-weight: 600;">관리자 로그아웃</button>
-                    </div>
+            <div class="admin-panel-grid">
+                <div class="admin-dark-card">
+                    <h3><i class="fa-solid fa-power-off" style="color: #ef4444;"></i> 긴급 사이트 제어</h3>
+                    <p style="font-size: 0.88rem; color: #9ca3af; margin-bottom: 1.2rem;">사이버 위협 발생 시 즉시 점검 화면으로 전환합니다.</p>
+                    <button onclick="toggleEmergency()" id="emergency-toggle-btn" class="emergency-btn">
+                        <i class="fa-solid fa-triangle-exclamation"></i> 사이트 긴급 폐쇄 발동
+                    </button>
                 </div>
+                <div class="admin-dark-card">
+                    <h3><i class="fa-solid fa-microchip"></i> 실시간 시스템 현황</h3>
+                    <p style="font-size: 0.9rem; color: #10b981; font-weight: 700; margin-bottom: 0.5rem;"><span style="width: 8px; height: 8px; background: #10b981; border-radius: 50%; display: inline-block; margin-right: 4px;"></span> 전술망 안정 가동 중</p>
+                    <p style="font-size: 0.82rem; color: #9ca3af; line-height: 1.5;">CPU 점유율: 14.2% (Core i9)<br>RAM 사용량: 4.8GB / 32GB<br>방화벽 패킷 필터링: 정상 (0 차단)</p>
+                </div>
+                <div class="admin-dark-card">
+                    <h3><i class="fa-solid fa-shield-cat"></i> 세션 및 보안 상태</h3>
+                    <p style="font-size: 0.9rem; color: #f3f4f6; font-weight: 700; margin-bottom: 0.4rem;" id="current-admin-display">인증된 관리자</p>
+                    <p style="font-size: 0.82rem; color: #9ca3af; margin-bottom: 1rem;">비정상 로그인 차단 횟수: 0회</p>
+                    <button onclick="handleLogout()" style="background: #374151; color: #f3f4f6; border: none; padding: 0.4rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: 600;">로그아웃</button>
+                </div>
+            </div>
 
-                <!-- 홈페이지 실시간 수정 에디터 구역 -->
-                <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 16px; padding: 2rem; margin-top: 2rem;">
-                    <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--accent-navy); margin-bottom: 1rem;"><i class="fa-solid fa-pen-to-square" style="color: var(--accent-blue);"></i> 홈페이지 실시간 내용 수정 에디터</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">아래 입력창에서 문구를 변경하면 즉시 홈페이지 메인 화면에 반영됩니다.</p>
-                    
-                    <div class="form-group">
-                        <label>메인 히어로 타이틀 (대제목)</label>
-                        <input type="text" id="edit-title-input" class="edit-input" value="실전적 훈련과 최정예 전술의 중추">
-                    </div>
-                    <div class="form-group">
-                        <label>메인 히어로 서브 설명</label>
-                        <input type="text" id="edit-desc-input" class="edit-input" value="완벽한 전투태세와 철저한 임무 수행 능력으로 조국의 평화와 안전을 최선두에서 수호합니다.">
-                    </div>
-                    <div class="form-group">
-                        <label>지휘관 메시지 요약글</label>
-                        <input type="text" id="edit-msg-input" class="edit-input" value="&quot;어떠한 극한의 전장 환경에서도 즉각 임무를 완수할 수 있는 최강의 전투력을 구축하고 있습니다. 명예와 자부심으로 무장한 정예 부대로 거듭나겠습니다.&quot;">
-                    </div>
-                    <button onclick="applyEdits()" class="btn-action" style="margin-top: 0.5rem; font-size: 0.9rem; padding: 0.7rem 1.5rem;">수정 내용 실시간 반영</button>
+            <!-- 홈페이지 실시간 수정 구역 (다크 패널 안의 에디터) -->
+            <div class="admin-dark-card">
+                <h3><i class="fa-solid fa-pen-to-square" style="color: #38bdf8;"></i> 홈페이지 실시간 콘텐츠 수정 에디터</h3>
+                <p style="font-size: 0.88rem; color: #9ca3af; margin-bottom: 1.5rem;">패널에서 내용을 변경한 뒤 반영하면 즉시 메인 홈페이지에 적용됩니다.</p>
+                
+                <div class="form-group">
+                    <label style="color: #e5e7eb;">메인 히어로 타이틀</label>
+                    <input type="text" id="edit-title-input" class="edit-input-dark" value="실전적 훈련과 최정예 전술의 중추">
                 </div>
+                <div class="form-group">
+                    <label style="color: #e5e7eb;">메인 히어로 서브 설명</label>
+                    <input type="text" id="edit-desc-input" class="edit-input-dark" value="완벽한 전투태세와 철저한 임무 수행 능력으로 조국의 평화와 안전을 최선두에서 수호합니다.">
+                </div>
+                <div class="form-group">
+                    <label style="color: #e5e7eb;">지휘관 메시지 요약글</label>
+                    <input type="text" id="edit-msg-input" class="edit-input-dark" value="&quot;어떠한 극한의 전장 환경에서도 즉각 임무를 완수할 수 있는 최강의 전투력을 구축하고 있습니다. 명예와 자부심으로 무장한 정예 부대로 거듭나겠습니다.&quot;">
+                </div>
+                <button onclick="applyEdits()" class="btn-action" style="margin-top: 0.5rem; background: #38bdf8; color: #0b0f19;">수정 내용 실시간 반영</button>
             </div>
         </section>
     </main>
@@ -577,31 +614,52 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 관리자 로그인 로직
+        // 로그인 실패 횟수 카운터 및 보안 경고
+        let failCount = 0;
+
         function handleLogin() {
             const idInput = document.getElementById('admin-id').value.trim();
             const pwInput = document.getElementById('admin-pw').value.trim();
-            const errorMsg = document.getElementById('login-error-msg');
+            const errorBox = document.getElementById('site-error-box');
+            const errorText = document.getElementById('site-error-text');
 
             const admin1 = (idInput === 'uwgijegTV' && pwInput === '190852877351');
             const admin2 = (idInput === 'eoeowkdsla' && pwInput === 'qorrhf');
 
             if (admin1 || admin2) {
-                errorMsg.style.display = 'none';
+                errorBox.style.display = 'none';
+                failCount = 0;
                 document.getElementById('admin-nav-item').style.display = 'block';
                 document.getElementById('current-admin-display').innerText = '로그인 계정 ID: ' + idInput;
-                alert('관리자 인증이 성공적으로 완료되었습니다. 관리자 패널로 이동합니다.');
+                
+                // 로그인 성공 시 어디로 갈지 선택하는 모달 띄우기
+                document.getElementById('login-choice-modal').style.display = 'flex';
+            } else {
+                failCount++;
+                errorBox.style.display = 'flex';
+                if (failCount >= 3) {
+                    errorText.innerText = `[보안경고] 비정상 로그인 시도가 ${failCount}회 감지되었습니다! IP가 임시 주시됩니다.`;
+                } else {
+                    errorText.innerText = `아이디 또는 비밀번호가 일치하지 않습니다. (실패: ${failCount}/3)`;
+                }
+            }
+        }
+
+        // 로그인 성공 후 모달에서 선택한 위치로 이동
+        function goToLocation(target) {
+            document.getElementById('login-choice-modal').style.display = 'none';
+            document.getElementById('admin-id').value = '';
+            document.getElementById('admin-pw').value = '';
+            if (target === 'admin') {
                 switchPage('admin');
             } else {
-                errorMsg.style.display = 'block';
+                switchPage('home');
             }
         }
 
         function handleLogout() {
             document.getElementById('admin-nav-item').style.display = 'none';
-            document.getElementById('admin-id').value = '';
-            document.getElementById('admin-pw').value = '';
-            alert('관리자 계정에서 로그아웃 되었습니다.');
+            alert('관리자 계정에서 안전하게 로그아웃 되었습니다.');
             switchPage('home');
         }
 
@@ -619,7 +677,7 @@
             switchPage('home');
         }
 
-        // 긴급 폐쇄 발동 / 해제 토글
+        // 긴급 폐쇄 토글
         let isEmergency = false;
         function toggleEmergency() {
             isEmergency = !isEmergency;
