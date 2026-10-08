@@ -115,7 +115,7 @@
             padding: 2px 6px; border-radius: 4px; pointer-events: none;
         }
 
-        /* 홈페이지 디자인 */
+        /* 홈페이지 중앙 파란색 히어로 배너 */
         .hero-home {
             background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
             border-radius: 24px; padding: 4.5rem 3rem; color: #fff;
@@ -138,7 +138,7 @@
         }
         .btn-action:hover { background: #b45309; transform: translateY(-2px); }
 
-        /* 대시보드 그리드 확장 */
+        /* 대시보드 위젯 그리드 */
         .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
         .widget {
             background: var(--bg-card); border: 1px solid var(--border-color);
@@ -151,16 +151,17 @@
         .date-display { font-size: 0.95rem; color: var(--text-muted); font-weight: 600; margin-top: 0.3rem; }
         .server-status { font-size: 1.1rem; font-weight: 700; color: #059669; display: flex; align-items: center; gap: 0.5rem; margin-top: 0.4rem; }
 
-        /* 홈페이지 현황 섹션들 */
-        .home-sections-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+        /* 하단 컨텐츠 그리드 보강 */
+        .home-sections-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
         .home-card {
             background: var(--bg-card); border: 1px solid var(--border-color);
             padding: 2.2rem; border-radius: 16px; box-shadow: var(--shadow-sm);
+            display: flex; flex-direction: column; justify-content: space-between;
         }
         .home-card h3 { font-size: 1.25rem; font-weight: 800; color: var(--accent-navy); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.6rem; }
         .home-card p { font-size: 0.98rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.2rem; }
 
-        /* 공지사항 테이블 리스트 */
+        /* 공지사항 리스트 스타일 */
         .notice-list { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
         .notice-item {
             display: flex; justify-content: space-between; align-items: center;
@@ -171,7 +172,7 @@
         .notice-title { font-size: 0.95rem; font-weight: 700; color: var(--accent-navy); display: flex; align-items: center; gap: 0.5rem; }
         .notice-date { font-size: 0.8rem; color: var(--text-muted); }
 
-        /* 통신 상태 리스트 */
+        /* 통신 상태 리스트 스타일 */
         .status-badge-list { display: flex; flex-direction: column; gap: 0.8rem; }
         .status-row {
             display: flex; justify-content: space-between; align-items: center;
@@ -179,6 +180,17 @@
         }
         .status-indicator { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; font-weight: 700; color: var(--accent-navy); }
         .dot-green { width: 9px; height: 9px; background: #059669; border-radius: 50%; box-shadow: 0 0 8px rgba(5, 150, 105, 0.4); }
+
+        /* 프로모션 카드 그리드 (부대 홍보 연계 강화) */
+        .promo-highlight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
+        .promo-highlight-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid var(--border-color); border-left: 4px solid var(--accent-blue);
+            padding: 2rem; border-radius: 16px; box-shadow: var(--shadow-sm); transition: 0.25s;
+        }
+        .promo-highlight-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: #cbd5e1; }
+        .promo-highlight-card h4 { font-size: 1.15rem; font-weight: 800; color: var(--accent-navy); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.6rem; }
+        .promo-highlight-card p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.2rem; }
 
         /* 대대장 소개, 조직도, 약력 */
         .commander-hero-wrapper {
@@ -440,11 +452,14 @@
                 </div>
             </div>
 
+            <!-- 중앙 파란색 히어로 배너 (클릭 시 부대 홍보 페이지로 즉시 이동하도록 연결) -->
             <div class="hero-home">
                 <div class="hero-badge"><i class="fa-solid fa-star"></i> REPUBLIC OF KOREA ARMY</div>
                 <h1 id="editable-hero-title" class="editable-target">실전적 훈련과 최정예 전술의 중추</h1>
                 <p id="editable-hero-desc" class="editable-target">완벽한 전투태세와 철저한 임무 수행 능력으로 조국의 평화와 안전을 최선두에서 수호합니다.</p>
-                <button onclick="switchPage('greeting')" class="btn-action">대대장 소개 및 인사말 보기 <i class="fa-solid fa-arrow-right"></i></button>
+                <button onclick="switchPage('promo')" class="btn-action">
+                    <i class="fa-solid fa-bullhorn"></i> 부대 홍보관 및 훈련 갤러리 바로가기 <i class="fa-solid fa-arrow-right"></i>
+                </button>
             </div>
 
             <!-- 대시보드 위젯 -->
@@ -475,43 +490,66 @@
                 </div>
             </div>
 
-            <!-- 하단 종합 현황 및 공지 게시판 그리드 -->
+            <!-- 부대 홍보 바로가기 연계 하이라이트 카드 섹션 (내용 대폭 강화) -->
+            <div class="promo-highlight-grid">
+                <div class="promo-highlight-card">
+                    <h4><i class="fa-solid fa-crosshairs" style="color: var(--accent-blue);"></i> 가상 적대군(OPFOR) 전술</h4>
+                    <p class="editable-target">전군의 전투력 극대화를 위해 적의 전술과 교리를 완벽히 체득하고 실전과 동일한 훈련 환경을 선도합니다.</p>
+                    <button onclick="switchPage('promo')" style="background: none; border: none; color: var(--accent-blue); font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.9rem;">홍보관에서 영상 보기 <i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+                <div class="promo-highlight-card">
+                    <h4><i class="fa-solid fa-medal" style="color: var(--accent-blue);"></i> 최우수 전투부대 위상</h4>
+                    <p class="editable-target">수많은 작전 성공과 과학화 훈련 검증을 통해 대한민국 육군 최고의 정예 부대로 명성을 떨치고 있습니다.</p>
+                    <button onclick="switchPage('history')" style="background: none; border: none; color: var(--accent-blue); font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.9rem;">부대 역사 확인하기 <i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+                <div class="promo-highlight-card">
+                    <h4><i class="fa-solid fa-calendar-check" style="color: var(--accent-blue);"></i> 영외 면회 및 방문 안내</h4>
+                    <p class="editable-target">부대를 방문하시는 가족 및 민원인분들을 위한 투명하고 신속한 출입 절차와 편의 정보를 제공합니다.</p>
+                    <button onclick="switchPage('promo')" style="background: none; border: none; color: var(--accent-blue); font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.9rem;">방문 예약 안내 <i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <!-- 하단 종합 현황 및 공지 게시판 그리드 (내용 보강) -->
             <div class="home-sections-grid">
                 <div class="home-card">
-                    <h3><i class="fa-solid fa-bullhorn" style="color: var(--accent-blue);"></i> 최근 부대 소식 및 공지사항</h3>
-                    <ul class="notice-list">
-                        <li class="notice-item">
-                            <span class="notice-title editable-target"><i class="fa-solid fa-circle-chevron-right" style="color: var(--accent-blue); font-size: 0.75rem;"></i> 2026년도 하반기 전술 종합평가 안내</span>
-                            <span class="notice-date">2026.10.05</span>
-                        </li>
-                        <li class="notice-item">
-                            <span class="notice-title editable-target"><i class="fa-solid fa-circle-chevron-right" style="color: var(--accent-blue); font-size: 0.75rem;"></i> 장병 영내 복지 및 시설 개선 공사 일정</span>
-                            <span class="notice-date">2026.09.28</span>
-                        </li>
-                        <li class="notice-item">
-                            <span class="notice-title editable-target"><i class="fa-solid fa-circle-chevron-right" style="color: var(--accent-blue); font-size: 0.75rem;"></i> 주말 영외 면회 및 방문 신청 절차 안내</span>
-                            <span class="notice-date">2026.09.15</span>
-                        </li>
-                    </ul>
+                    <div>
+                        <h3><i class="fa-solid fa-bullhorn" style="color: var(--accent-blue);"></i> 최근 부대 소식 및 공지사항</h3>
+                        <ul class="notice-list" style="margin-top: 1rem;">
+                            <li class="notice-item">
+                                <span class="notice-title editable-target"><i class="fa-solid fa-circle-chevron-right" style="color: var(--accent-blue); font-size: 0.75rem;"></i> 2026년도 하반기 전술 종합평가 안내</span>
+                                <span class="notice-date">2026.10.05</span>
+                            </li>
+                            <li class="notice-item">
+                                <span class="notice-title editable-target"><i class="fa-solid fa-circle-chevron-right" style="color: var(--accent-blue); font-size: 0.75rem;"></i> 장병 영내 복지 및 시설 개선 공사 일정</span>
+                                <span class="notice-date">2026.09.28</span>
+                            </li>
+                            <li class="notice-item">
+                                <span class="notice-title editable-target"><i class="fa-solid fa-circle-chevron-right" style="color: var(--accent-blue); font-size: 0.75rem;"></i> 주말 영외 면회 및 방문 신청 절차 안내</span>
+                                <span class="notice-date">2026.09.15</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="home-card">
-                    <h3><i class="fa-solid fa-satellite-dish" style="color: var(--accent-blue);"></i> 예하 중대 통신 및 작전망 상태</h3>
-                    <div class="status-badge-list">
-                        <div class="status-row">
-                            <span class="status-indicator editable-target"><span class="dot-green"></span> 제1중대 전술통신망</span>
-                            <span style="font-size: 0.85rem; color: #059669; font-weight: 700;">양호 (99.8%)</span>
-                        </div>
-                        <div class="status-row">
-                            <span class="status-indicator editable-target"><span class="dot-green"></span> 제2중대 화력지원망</span>
-                            <span style="font-size: 0.85rem; color: #059669; font-weight: 700;">양호 (100%)</span>
-                        </div>
-                        <div class="status-row">
-                            <span class="status-indicator editable-target"><span class="dot-green"></span> 제3중대 야간침투망</span>
-                            <span style="font-size: 0.85rem; color: #059669; font-weight: 700;">양호 (99.5%)</span>
-                        </div>
-                        <div class="status-row">
-                            <span class="status-indicator editable-target"><span class="dot-green"></span> 본부중대 지휘통제시스템</span>
-                            <span style="font-size: 0.85rem; color: #059669; font-weight: 700;">안정 (Optimal)</span>
+                    <div>
+                        <h3><i class="fa-solid fa-satellite-dish" style="color: var(--accent-blue);"></i> 예하 중대 통신 및 작전망 상태</h3>
+                        <div class="status-badge-list" style="margin-top: 1rem;">
+                            <div class="status-row">
+                                <span class="status-indicator editable-target"><span class="dot-green"></span> 제1중대 전술통신망</span>
+                                <span style="font-size: 0.85rem; color: #059669; font-weight: 700;">양호 (99.8%)</span>
+                            </div>
+                            <div class="status-row">
+                                <span class="status-indicator editable-target"><span class="dot-green"></span> 제2중대 화력지원망</span>
+                                <span style="font-size: 0.85rem; color: #059669; font-weight: 700;">양호 (100%)</span>
+                            </div>
+                            <div class="status-row">
+                                <span class="status-indicator editable-target"><span class="dot-green"></span> 제3중대 야간침투망</span>
+                                <span style="font-size: 0.85rem; color: #059669; font-weight: 700;">양호 (99.5%)</span>
+                            </div>
+                            <div class="status-row">
+                                <span class="status-indicator editable-target"><span class="dot-green"></span> 본부중대 지휘통제시스템</span>
+                                <span style="font-size: 0.85rem; color: #059669; font-weight: 700;">안정 (Optimal)</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -520,14 +558,18 @@
             <!-- 지휘관 메시지 요약 및 부대 소개 바로가기 카드 -->
             <div class="home-sections-grid">
                 <div class="home-card">
-                    <h3><i class="fa-solid fa-user-tie" style="color: var(--accent-blue);"></i> 지휘관 메시지 요약</h3>
-                    <p id="editable-msg-summary" class="editable-target">"어떠한 극한의 전장 환경에서도 즉각 임무를 완수할 수 있는 최강의 전투력을 구축하고 있습니다. 명예와 자부심으로 무장한 정예 부대로 거듭나겠습니다."</p>
-                    <button onclick="switchPage('greeting')" style="background: none; border: none; color: var(--accent-blue); font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;">대대장 프로필 및 약력 자세히 보기 <i class="fa-solid fa-angle-right"></i></button>
+                    <div>
+                        <h3><i class="fa-solid fa-user-tie" style="color: var(--accent-blue);"></i> 지휘관 메시지 요약</h3>
+                        <p id="editable-msg-summary" class="editable-target" style="margin-top: 1rem;">"어떠한 극한의 전장 환경에서도 즉각 임무를 완수할 수 있는 최강의 전투력을 구축하고 있습니다. 명예와 자부심으로 무장한 정예 부대로 거듭나겠습니다."</p>
+                    </div>
+                    <button onclick="switchPage('greeting')" style="background: none; border: none; color: var(--accent-blue); font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1rem;">대대장 프로필 및 약력 자세히 보기 <i class="fa-solid fa-angle-right"></i></button>
                 </div>
                 <div class="home-card">
-                    <h3><i class="fa-solid fa-sitemap" style="color: var(--accent-blue);"></i> 대대본부 핵심 개요</h3>
-                    <p class="editable-target">인사·정보·작전·군수 4대 핵심 과를 중심으로 빈틈없는 작전 지원 태세를 완비하고 있으며, 과학화 모의 전투 훈련 체계를 선도합니다.</p>
-                    <button onclick="switchPage('battalion')" style="background: none; border: none; color: var(--accent-blue); font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;">대대본부 조직도 확인하기 <i class="fa-solid fa-angle-right"></i></button>
+                    <div>
+                        <h3><i class="fa-solid fa-sitemap" style="color: var(--accent-blue);"></i> 대대본부 핵심 개요</h3>
+                        <p class="editable-target" style="margin-top: 1rem;">인사·정보·작전·군수 4대 핵심 과를 중심으로 빈틈없는 작전 지원 태세를 완비하고 있으며, 과학화 모의 전투 훈련 체계를 선도합니다.</p>
+                    </div>
+                    <button onclick="switchPage('battalion')" style="background: none; border: none; color: var(--accent-blue); font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1rem;">대대본부 조직도 확인하기 <i class="fa-solid fa-angle-right"></i></button>
                 </div>
             </div>
         </section>
