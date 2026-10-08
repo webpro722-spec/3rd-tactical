@@ -10,12 +10,13 @@
             --bg-primary: #f8fafc;
             --bg-card: #ffffff;
             --accent-blue: #1e3a8a;
+            --accent-blue-hover: #1d4ed8;
             --accent-gold: #b45309;
             --text-main: #1e293b;
             --text-muted: #64748b;
             --border-color: #e2e8f0;
-            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+            --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', sans-serif; }
         body {
@@ -28,118 +29,8 @@
         }
         header {
             position: fixed; top: 0; left: 0; width: 100%;
-            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color); z-index: 1000;
         }
         .nav-container {
-            max-width: 1400px; margin: 0 auto; display: flex;
-            justify-content: space-between; align-items: center; padding: 1.2rem 2rem;
-        }
-        .logo-box { display: flex; align-items: center; gap: 0.8rem; text-decoration: none; color: var(--text-main); }
-        .logo-icon {
-            width: 38px; height: 38px; background: linear-gradient(135deg, #1e3a8a, #3b82f6);
-            border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff;
-            box-shadow: 0 4px 10px rgba(30, 58, 138, 0.2);
-        }
-        .logo-text { font-size: 1.15rem; font-weight: 700; letter-spacing: 0.5px; color: #0f172a; }
-        .nav-menu { display: flex; list-style: none; gap: 1.5rem; flex-wrap: wrap; }
-        .nav-menu a {
-            text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.9rem; transition: 0.3s;
-        }
-        .nav-menu a:hover, .nav-menu a.active { color: var(--accent-blue); }
-
-        main { max-width: 1200px; margin: 140px auto 60px; padding: 0 2rem; width: 100%; }
-        .dashboard-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem;
-        }
-        .widget {
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            padding: 1.8rem; border-radius: 16px; position: relative; overflow: hidden;
-            box-shadow: var(--shadow-sm); transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .widget:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-        .widget::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent-blue); }
-        .widget-title { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.8rem; font-weight: 600; }
-        .clock-display { font-size: 1.8rem; font-weight: 700; font-family: monospace; color: #0f172a; }
-        .stat-number { font-size: 2rem; font-weight: 800; color: var(--accent-blue); }
-
-        .hero {
-            background: linear-gradient(135deg, #ffffff, #f1f5f9);
-            border: 1px solid var(--border-color); border-radius: 24px; padding: 5rem 3rem; text-align: center;
-            box-shadow: var(--shadow-md);
-        }
-        .hero-badge {
-            display: inline-block; background: rgba(30, 58, 138, 0.08); color: var(--accent-blue);
-            border: 1px solid rgba(30, 58, 138, 0.2); padding: 0.4rem 1.2rem; border-radius: 30px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1.5rem;
-        }
-        .hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 1.2rem; color: #0f172a; letter-spacing: -1px; }
-        .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 650px; margin: 0 auto 2.5rem; line-height: 1.7; }
-        .btn-blue {
-            display: inline-flex; align-items: center; gap: 0.8rem;
-            background: linear-gradient(135deg, #1e3a8a, #1d4ed8); color: #fff;
-            padding: 1rem 2.2rem; border-radius: 10px; font-weight: 700; text-decoration: none; transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
-        }
-        .btn-blue:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(30, 58, 138, 0.4); }
-
-        footer { text-align: center; padding: 2.5rem; color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border-color); background: #ffffff; }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="nav-container">
-            <a href="index.html" class="logo-box">
-                <div class="logo-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                <span class="logo-text">제3대항전술대대</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="active">1. 홈페이지</a></li>
-                <li><a href="greeting.html">2. 대대장 인사말</a></li>
-                <li><a href="battalion_hq.html">3. 대대본부 소개</a></li>
-                <li><a href="history.html">4. 대대약력</a></li>
-                <li><a href="company_hq.html">5. 중대본부 소개</a></li>
-                <li><a href="promo.html">6. 홍보</a></li>
-            </ul>
-        </div>
-    </header>
-
-    <main>
-        <div class="dashboard-grid">
-            <div class="widget">
-                <div class="widget-title"><i class="fa-regular fa-clock"></i> 표준시각 (KST)</div>
-                <div class="clock-display" id="clock">00:00:00</div>
-            </div>
-            <div class="widget">
-                <div class="widget-title"><i class="fa-solid fa-chart-line"></i> 누적 방문자 현황</div>
-                <div class="stat-number">4,128 <span style="font-size: 1rem; color: var(--text-muted); font-weight: 400;">명</span></div>
-            </div>
-            <div class="widget">
-                <div class="widget-title"><i class="fa-solid fa-circle-check"></i> 시스템 상태</div>
-                <div style="font-size: 1.1rem; font-weight: 700; color: #059669; margin-top: 0.4rem; display: flex; align-items: center; gap: 0.5rem;">
-                    <span style="width: 10px; height: 10px; background: #10b981; border-radius: 50%; display: inline-block;"></span>
-                    보안 및 통신 원활
-                </div>
-            </div>
-        </div>
-
-        <div class="hero">
-            <div class="hero-badge">3RD TACTICAL BATTALION</div>
-            <h1>실전적 훈련과 최정예 전술의 중추</h1>
-            <p>완벽한 전투태세와 철저한 임무 수행 능력으로 조국의 평화와 안전을 최선두에서 수호합니다.</p>
-            <a href="greeting.html" class="btn-blue">대대장 인사말 확인하기 <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-    </main>
-
-    <footer>&copy; 2026 제3대항전술대대 (3rd Tactical Battalion). All Rights Reserved.</footer>
-
-    <script>
-        function updateClock() {
-            const now = new Date();
-            document.getElementById('clock').innerText = String(now.getHours()).padStart(2, '0') + ':' + 
-                String(now.getMinutes()).padStart(2, '0') + ':' + String(now.getSeconds()).padStart(2, '0');
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-    </script>
-</body>
-</html>
+            max-
