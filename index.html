@@ -376,11 +376,11 @@
         .form-group { text-align: left; margin-bottom: 1.6rem; }
         .form-group label { display: block; font-size: 0.9rem; font-weight: 800; color: var(--accent-navy); margin-bottom: 0.6rem; }
         body.dark-mode .form-group label { color: #fff; }
-        .form-group input {
+        .form-group input, .form-group select, .form-group textarea {
             width: 100%; padding: 1rem 1.2rem; border: 2px solid var(--border-color);
             border-radius: 12px; font-size: 1.02rem; background: var(--bg-primary); color: var(--text-main); outline: none;
         }
-        .form-group input:focus { border-color: var(--accent-blue); background: var(--bg-card); box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.1); transform: scale(1.01); }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent-blue); background: var(--bg-card); box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.1); transform: scale(1.01); }
         .btn-submit {
             width: 100%; background: var(--accent-navy); color: #fff; padding: 1.05rem;
             border-radius: 12px; font-weight: 900; border: none; cursor: pointer;
@@ -407,7 +407,7 @@
         .admin-dark-card h3 { font-size: 1.2rem; font-weight: 900; color: #f3f4f6; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.7rem; }
         .admin-panel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; margin-bottom: 2.2rem; }
 
-        #login-choice-modal {
+        #login-choice-modal, #media-upload-modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(5, 8, 17, 0.85); backdrop-filter: blur(12px);
             z-index: 9999; display: none; align-items: center; justify-content: center;
@@ -442,6 +442,7 @@
 </head>
 <body>
 
+    <!-- 관리자 인증 선택 모달 -->
     <div id="login-choice-modal">
         <div class="choice-modal-box">
             <i class="fa-solid fa-shield-cat" style="font-size: 3.5rem; color: #38bdf8; margin-bottom: 1.2rem;"></i>
@@ -456,6 +457,42 @@
                     <i class="fa-solid fa-pen-to-square"></i>
                     <span>전체 직접 수정모드</span>
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 사이트 내 홍보 콘텐츠 등록 모달 -->
+    <div id="media-upload-modal">
+        <div class="choice-modal-box" style="text-align: left; max-width: 580px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h3 style="font-size: 1.4rem; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 0.6rem;">
+                    <i class="fa-solid fa-cloud-arrow-up" style="color: #38bdf8;"></i> 새 부대 홍보 콘텐츠 등록
+                </h3>
+                <button onclick="closeMediaModal()" style="background: transparent; border: none; color: #9ca3af; font-size: 1.3rem; cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <div class="form-group">
+                <label>콘텐츠 유형 선택</label>
+                <select id="modal-media-type">
+                    <option value="image">부대 훈련 사진 (이미지)</option>
+                    <option value="youtube">부대 홍보 영상 (유튜브)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>콘텐츠 제목</label>
+                <input type="text" id="modal-media-title" placeholder="예: 2026년 하반기 과학화 전투 훈련">
+            </div>
+            <div class="form-group">
+                <label>링크 주소 (URL)</label>
+                <input type="text" id="modal-media-url" placeholder="이미지 주소 또는 유튜브 임베드/시청 주소 입력">
+            </div>
+            <div class="form-group">
+                <label>간단 설명</label>
+                <textarea id="modal-media-desc" rows="3" placeholder="목록에 표시될 간단한 요약 설명을 입력하세요." style="resize: none;"></textarea>
+            </div>
+            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                <button onclick="closeMediaModal()" style="flex: 1; background: #374151; color: #fff; border: none; padding: 1rem; border-radius: 12px; font-weight: 800; cursor: pointer;">취소</button>
+                <button onclick="submitMediaUpload()" style="flex: 1; background: #38bdf8; color: #050811; border: none; padding: 1rem; border-radius: 12px; font-weight: 900; cursor: pointer;">등록하기</button>
             </div>
         </div>
     </div>
@@ -632,7 +669,6 @@
                         <h4 class="edit-all" data-key="greet_title_1"><i class="fa-solid fa-book-open"></i> 인사말 및 대대소개</h4>
                         <p class="edit-all" data-key="greet_desc_1">안녕하십니까. 제3대항전술대대 홈페이지에 찾아주신 분들께 진심으로 감사의 말씀을 드립니다.</p>
                         
-                        <!-- 빈공간 채우기용 미니 디지털 시계 위젯 (텍스트 추가 없음) -->
                         <div style="margin-top: 1.8rem; background: var(--bg-primary); border: 2px solid var(--border-color); padding: 1.2rem 1.5rem; border-radius: 14px; display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow-sm);">
                             <div style="display: flex; align-items: center; gap: 0.8rem; font-weight: 800; font-size: 0.95rem; color: var(--text-muted);">
                                 <i class="fa-regular fa-clock" style="color: var(--accent-blue); font-size: 1.2rem;"></i>
@@ -714,27 +750,19 @@
             </div>
         </section>
 
-        <!-- 부대대장 상세 페이지 (중대장과 동일한 카드 레이아웃) -->
+        <!-- 부대대장 상세 페이지 -->
         <section id="page-vcl-vicedeer" class="page-section">
             <div class="commander-hero-wrapper">
                 <h1 class="edit-all" data-key="vicedeer_header"><i class="fa-solid fa-user-gear"></i> 부대대장 프로필 및 소개</h1>
                 <div class="commander-top-layout">
                     <div class="commander-photo-box profile-photo-editable" data-profile-key="vicedeer_photo">
-                        <div class="commander-photo-placeholder">
-                            <i class="fa-solid fa-user-tie"></i>
-                            <span class="edit-all" data-key="vicedeer_photo_text">부대대장 프로필 사진</span>
-                        </div>
+                        <div class="commander-photo-placeholder"><i class="fa-solid fa-user-tie"></i><span class="edit-all" data-key="vicedeer_photo_text">부대대장 프로필 사진</span></div>
                     </div>
                     <div class="commander-title-area">
                         <h2 class="edit-all" data-key="vicedeer_name">소령 ◯ ◯ ◯</h2>
                         <div class="commander-rank-badge edit-all" data-key="vicedeer_rank">제3대항전술대대 부대대장</div>
-                        <p class="edit-all" data-key="vicedeer_catchphrase" style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">
-                            "지휘관을 굳건히 보좌하고 각 참모부와 예하 중대 간의 유기적인 소통을 주도합니다."
-                        </p>
-                        <div class="commander-quote-box edit-all" data-key="vicedeer_quote">
-                            <i class="fa-solid fa-quote-left" style="color: var(--accent-gold); margin-right: 8px;"></i>
-                            철저한 사전 준비와 실전 같은 팀워크로 대대의 모든 임무 완수에 중추적인 역할을 다하겠습니다.
-                        </div>
+                        <p class="edit-all" data-key="vicedeer_catchphrase" style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">"지휘관을 굳건히 보좌하고 각 참모부와 예하 중대 간의 유기적인 소통을 주도합니다."</p>
+                        <div class="commander-quote-box edit-all" data-key="vicedeer_quote"><i class="fa-solid fa-quote-left" style="color: var(--accent-gold); margin-right: 8px;"></i>철저한 사전 준비와 실전 같은 팀워크로 대대의 모든 임무 완수에 중추적인 역할을 다하겠습니다.</div>
                     </div>
                 </div>
                 <div class="commander-details-grid">
@@ -749,27 +777,19 @@
             </div>
         </section>
 
-        <!-- 대대주임원사 상세 페이지 (중대장과 동일한 카드 레이아웃) -->
+        <!-- 대대주임원사 상세 페이지 -->
         <section id="page-vcl-mastersergeant" class="page-section">
             <div class="commander-hero-wrapper">
                 <h1 class="edit-all" data-key="master_header"><i class="fa-solid fa-medal"></i> 대대주임원사 프로필 및 소개</h1>
                 <div class="commander-top-layout">
                     <div class="commander-photo-box profile-photo-editable" data-profile-key="master_photo">
-                        <div class="commander-photo-placeholder">
-                            <i class="fa-solid fa-user-tie"></i>
-                            <span class="edit-all" data-key="master_photo_text">대대주임원사 프로필 사진</span>
-                        </div>
+                        <div class="commander-photo-placeholder"><i class="fa-solid fa-user-tie"></i><span class="edit-all" data-key="master_photo_text">대대주임원사 프로필 사진</span></div>
                     </div>
                     <div class="commander-title-area">
                         <h2 class="edit-all" data-key="master_name">원사 ◯ ◯ ◯</h2>
                         <div class="commander-rank-badge edit-all" data-key="master_rank">제3대항전술대대 주임원사</div>
-                        <p class="edit-all" data-key="master_catchphrase" style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">
-                            "전우애로 똘똘 뭉친 활기찬 병영문화와 빈틈없는 기강 확립을 위해 노력합니다."
-                        </p>
-                        <div class="commander-quote-box edit-all" data-key="master_quote">
-                            <i class="fa-solid fa-quote-left" style="color: var(--accent-gold); margin-right: 8px;"></i>
-                            용사들의 목소리에 귀 기울이고 부모님의 마음으로 돌보며, 전투력 발휘의 든든한 버팀목이 되겠습니다.
-                        </div>
+                        <p class="edit-all" data-key="master_catchphrase" style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">"전우애로 똘똘 뭉친 활기찬 병영문화와 빈틈없는 기강 확립을 위해 노력합니다."</p>
+                        <div class="commander-quote-box edit-all" data-key="master_quote"><i class="fa-solid fa-quote-left" style="color: var(--accent-gold); margin-right: 8px;"></i>용사들의 목소리에 귀 기울이고 부모님의 마음으로 돌보며, 전투력 발휘의 든든한 버팀목이 되겠습니다.</div>
                     </div>
                 </div>
                 <div class="commander-details-grid">
@@ -929,7 +949,7 @@
             </div>
         </section>
 
-        <!-- 제5필사중대 부중대장 상세 페이지 (카드 레이아웃 적용) -->
+        <!-- 제5필사중대 부중대장 상세 페이지 -->
         <section id="page-c5-lieutenant" class="page-section">
             <div class="commander-hero-wrapper">
                 <h1 class="edit-all" data-key="c5_l_h">제5필사중대 부중대장 프로필 및 소개</h1>
@@ -956,7 +976,7 @@
             </div>
         </section>
 
-        <!-- 제5필사중대 행보관 상세 페이지 (카드 레이아웃 적용) -->
+        <!-- 제5필사중대 행보관 상세 페이지 -->
         <section id="page-c5-firstsergeant" class="page-section">
             <div class="commander-hero-wrapper">
                 <h1 class="edit-all" data-key="c5_f_h">제5필사중대 행보관 프로필 및 소개</h1>
@@ -1010,7 +1030,7 @@
             </div>
         </section>
 
-        <!-- 제6철혈중대 부중대장 상세 페이지 (카드 레이아웃 적용) -->
+        <!-- 제6철혈중대 부중대장 상세 페이지 -->
         <section id="page-c6-lieutenant" class="page-section">
             <div class="commander-hero-wrapper">
                 <h1 class="edit-all" data-key="c6_l_h">제6철혈중대 부중대장 프로필 및 소개</h1>
@@ -1037,7 +1057,7 @@
             </div>
         </section>
 
-        <!-- 제6철혈중대 행보관 상세 페이지 (카드 레이아웃 적용) -->
+        <!-- 제6철혈중대 행보관 상세 페이지 -->
         <section id="page-c6-firstsergeant" class="page-section">
             <div class="commander-hero-wrapper">
                 <h1 class="edit-all" data-key="c6_f_h">제6철혈중대 행보관 프로필 및 소개</h1>
@@ -1075,7 +1095,7 @@
             <div class="card-box">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
                     <h1 class="edit-all" data-key="promo_main_title" style="margin-bottom:0;"><i class="fa-solid fa-film"></i> 부대 홍보 및 훈련 갤러리</h1>
-                    <button onclick="openMediaAddModal()" id="admin-add-media-btn" class="floating-action-btn" style="display:none; background: #38bdf8; color: #050811; padding: 0.8rem 1.4rem; font-weight: 900;"><i class="fa-solid fa-plus"></i> 새 홍보 콘텐츠 추가</button>
+                    <button onclick="openMediaUploadModal()" id="admin-add-media-btn" class="floating-action-btn" style="display:none; background: #38bdf8; color: #050811; padding: 0.8rem 1.4rem; font-weight: 900;"><i class="fa-solid fa-plus"></i> 새 홍보 콘텐츠 등록</button>
                 </div>
                 <p class="edit-all" data-key="promo_main_desc" style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.05rem;">제3대항전술대대의 실전과 같은 훈련 현장 및 주요 활동 사진/영상 아카이브입니다. 아래 카드를 클릭하면 상세 페이지로 이동합니다.</p>
                 
@@ -1103,7 +1123,10 @@
             <div class="card-box">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
                     <h1><i class="fa-solid fa-video"></i> 부대 홍보 영상 목록</h1>
-                    <button onclick="safeSwitchPage('promo', event)" class="btn-action" style="background: var(--accent-navy); padding: 0.7rem 1.4rem; font-size: 0.9rem;"><i class="fa-solid fa-arrow-left"></i> 홍보관 메인으로</button>
+                    <div style="display: flex; gap: 1rem;">
+                        <button onclick="openMediaUploadModal()" id="admin-add-media-btn-2" class="floating-action-btn" style="display:none; background: #38bdf8; color: #050811; padding: 0.7rem 1.2rem; font-weight: 900;"><i class="fa-solid fa-plus"></i> 콘텐츠 등록</button>
+                        <button onclick="safeSwitchPage('promo', event)" class="btn-action" style="background: var(--accent-navy); padding: 0.7rem 1.4rem; font-size: 0.9rem;"><i class="fa-solid fa-arrow-left"></i> 홍보관 메인으로</button>
+                    </div>
                 </div>
                 <div id="video-list-container" class="media-list-grid"></div>
             </div>
@@ -1113,7 +1136,10 @@
             <div class="card-box">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
                     <h1><i class="fa-solid fa-camera"></i> 부대 훈련 사진 갤러리</h1>
-                    <button onclick="safeSwitchPage('promo', event)" class="btn-action" style="background: var(--accent-navy); padding: 0.7rem 1.4rem; font-size: 0.9rem;"><i class="fa-solid fa-arrow-left"></i> 홍보관 메인으로</button>
+                    <div style="display: flex; gap: 1rem;">
+                        <button onclick="openMediaUploadModal()" id="admin-add-media-btn-3" class="floating-action-btn" style="display:none; background: #38bdf8; color: #050811; padding: 0.7rem 1.2rem; font-weight: 900;"><i class="fa-solid fa-plus"></i> 콘텐츠 등록</button>
+                        <button onclick="safeSwitchPage('promo', event)" class="btn-action" style="background: var(--accent-navy); padding: 0.7rem 1.4rem; font-size: 0.9rem;"><i class="fa-solid fa-arrow-left"></i> 홍보관 메인으로</button>
+                    </div>
                 </div>
                 <div id="photo-list-container" class="media-list-grid"></div>
             </div>
@@ -1518,29 +1544,51 @@
             switchPage('media-detail');
         }
 
-        function openMediaAddModal() {
-            const title = prompt("추가할 콘텐츠 제목을 입력하세요:");
-            if (!title) return;
-            const typeInput = prompt("콘텐츠 종류를 입력하세요 ('youtube' 또는 'photo'):", "photo");
-            if (!typeInput) return;
-            const type = typeInput.toLowerCase().includes('you') ? 'youtube' : 'image';
-            const url = prompt("이미지 또는 유튜브 영상 링크(URL)를 입력하세요:");
-            if (!url) return;
-            const desc = prompt("간단한 설명을 입력하세요:", "훈련 현장 생생한 기록입니다.");
+        function openMediaUploadModal() {
+            if (!isAdminLoggedIn) {
+                alert("관리자 로그인 후 이용 가능합니다.");
+                return;
+            }
+            document.getElementById('media-upload-modal').style.display = 'flex';
+        }
+
+        function closeMediaModal() {
+            document.getElementById('media-upload-modal').style.display = 'none';
+        }
+
+        function submitMediaUpload() {
+            const type = document.getElementById('modal-media-type').value;
+            const title = document.getElementById('modal-media-title').value.trim();
+            const url = document.getElementById('modal-media-url').value.trim();
+            const desc = document.getElementById('modal-media-desc').value.trim();
+
+            if (!title || !url) {
+                alert("제목과 링크 주소는 필수 입력 사항입니다.");
+                return;
+            }
 
             let items = getStoredMediaItems();
             const newItem = {
                 id: 'media-' + Date.now(),
                 type: type,
-                url: url.trim(),
-                title: title.trim(),
-                desc: desc || '',
-                detail: '세부 설명 내용입니다.',
-                publisher: '대대 지휘부'
+                url: url,
+                title: title,
+                desc: desc || '등록된 상세 설명이 없습니다.',
+                detail: desc || '상세 내용입니다.',
+                publisher: '지휘통제실 관리자'
             };
+
             items.push(newItem);
             localStorage.setItem('custom_media_items', JSON.stringify(items));
+            
+            // 입력폼 초기화 및 모달 닫기
+            document.getElementById('modal-media-title').value = '';
+            document.getElementById('modal-media-url').value = '';
+            document.getElementById('modal-media-desc').value = '';
+            closeMediaModal();
+
             loadSavedMediaItems();
+            alert("홍보 콘텐츠가 성공적으로 등록되었습니다!");
         }
 
         function switchBackToCategory() { switchPage(lastActiveCategory); }
@@ -1623,8 +1671,14 @@
             document.getElementById('admin-id').value = '';
             document.getElementById('admin-pw').value = '';
             
-            const addMediaBtn = document.getElementById('admin-add-media-btn');
-            if (addMediaBtn) addMediaBtn.style.display = 'inline-flex';
+            // 관리자 로그인 시 홍보 콘텐츠 등록 버튼들 활성화
+            const btn1 = document.getElementById('admin-add-media-btn');
+            const btn2 = document.getElementById('admin-add-media-btn-2');
+            const btn3 = document.getElementById('admin-add-media-btn-3');
+            if (btn1) btn1.style.display = 'inline-flex';
+            if (btn2) btn2.style.display = 'inline-flex';
+            if (btn3) btn3.style.display = 'inline-flex';
+
             loadSavedMediaItems();
 
             if (target === 'admin') switchPage('admin');
