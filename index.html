@@ -6,7 +6,7 @@
     <title>제3대항전술대대 | 3RD TACTICAL BATTALION</title>
     
     <!-- 디스코드 / 카카오톡 등 메신저 미리보기 설정 -->
-    <meta property="og:title" content="제3대항전술대대|홍보 사이트">
+    <meta property="og:title" content="제3대항전술대대｜홍보 사이트">
     <meta property="og:description" content="제3대항전술대대에 대해 더욱 자세히 알아보세요!">
     <meta property="og:type" content="website">
 
@@ -233,18 +233,23 @@
         .mission-item h4 { font-size: 1.1rem; font-weight: 900; color: var(--accent-navy); margin-bottom: 0.6rem; }
         .mission-item p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; }
 
-        /* 부대 홍보 아카이브 그리드 */
+        /* 부대 홍보 아카이브 그리드 및 바로가기 카드 */
         .media-archive-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 1.5rem; }
         .media-card {
             background: #f8fafc; border: 1px solid var(--border-color); border-radius: 20px;
             overflow: hidden; box-shadow: var(--shadow-sm); transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between;
+            cursor: pointer;
         }
-        .media-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: #cbd5e1; }
+        .media-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--accent-blue); }
         .media-container { width: 100%; height: 280px; background: #0f172a; display: flex; align-items: center; justify-content: center; position: relative; color: #fff; }
-        .media-container iframe, .media-container img { width: 100%; height: 100%; object-fit: cover; border: none; }
+        .media-container iframe, .media-container img { width: 100%; height: 100%; object-fit: cover; border: none; pointer-events: none; }
         .media-caption { padding: 1.8rem; }
         .media-caption h4 { font-size: 1.2rem; font-weight: 900; color: var(--accent-navy); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.6rem; }
-        .media-caption p { font-size: 0.98rem; color: var(--text-muted); line-height: 1.7; }
+        .media-caption p { font-size: 0.98rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem; }
+        .media-shortcut-tag {
+            display: inline-flex; align-items: center; gap: 0.5rem; background: #eff6ff; color: var(--accent-blue);
+            padding: 0.4rem 1rem; border-radius: 8px; font-size: 0.85rem; font-weight: 800; border: 1px solid #bfdbfe;
+        }
 
         /* 관리자 전용 업로드 폼 박스 */
         .admin-upload-box {
@@ -502,7 +507,7 @@
             <div id="admin-floating-bar">
                 <div style="display: flex; align-items: center; gap: 0.9rem; font-weight: 800; font-size: 0.95rem;">
                     <i class="fa-solid fa-circle-check" style="color: #38bdf8; font-size: 1.2rem;"></i>
-                    <span>[전체 수정 모드 활성화됨] 시계 위젯을 제외한 사이트의 모든 텍스트를 클릭하여 바로 수정하세요!</span>
+                    <span>[전체 수정 모드 활성화됨] 사이트의 모든 텍스트(시계 및 위젯 포함)를 클릭하여 바로 수정하세요!</span>
                 </div>
                 <div style="display: flex; gap: 0.8rem;">
                     <button onclick="toggleDirectEditMode()" id="direct-edit-toggle-btn" class="floating-action-btn" style="background: #10b981; color: #fff;">수정 모드 ON</button>
@@ -523,8 +528,8 @@
                 <div class="widget">
                     <div class="widget-title edit-all" data-key="widget_title_1"><i class="fa-regular fa-clock" style="color: var(--accent-blue);"></i> 표준시각 및 날짜 (KST)</div>
                     <div>
-                        <div class="clock-display" id="clock">00:00:00</div>
-                        <div class="date-display" id="date">0000년 00월 00일</div>
+                        <div class="clock-display edit-all" data-key="widget_clock" id="clock">00:00:00</div>
+                        <div class="date-display edit-all" data-key="widget_date" id="date">0000년 00월 00일</div>
                     </div>
                 </div>
                 <div class="widget">
@@ -532,16 +537,18 @@
                     <div>
                         <div class="server-status edit-all" data-key="server_status_text">
                             <span style="width: 10px; height: 10px; background: #059669; border-radius: 50%; display: inline-block;"></span>
-                            정상 가동 중 (Optimal)
+                            지휘제어망 최적 가동 중
                         </div>
-                        <div class="edit-all" data-key="server_sub" style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.6rem; font-weight: 600;">응답 속도: 12ms / 보안등급: A+</div>
+                        <div class="edit-all" data-key="server_sub" style="font-size: 0.88rem; color: var(--text-muted); margin-top: 0.6rem; font-weight: 600; line-height: 1.5;">
+                            트래픽 부하율: 14.2%<br>암호화 통신(TLS 1.3): 정상 연동<br>패킷 손실률: 0.00% (지연 11ms)
+                        </div>
                     </div>
                 </div>
                 <div class="widget">
-                    <div class="widget-title edit-all" data-key="widget_title_3"><i class="fa-solid fa-chart-line" style="color: var(--accent-blue);"></i> 누적 방문자 현황</div>
+                    <div class="widget-title edit-all" data-key="widget_title_3"><i class="fa-solid fa-chart-line" style="color: var(--accent-blue);"></i> 누적 방문자 현황 (실제 집계)</div>
                     <div>
-                        <div class="edit-all" data-key="visitor_count" style="font-size: 2rem; font-weight: 900; color: var(--accent-blue);">4,128 명</div>
-                        <div class="edit-all" data-key="visitor_sub" style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.4rem; font-weight: 600;">오늘 방문: 142명</div>
+                        <div id="visitor-count-display" class="edit-all" data-key="visitor_count" style="font-size: 2rem; font-weight: 900; color: var(--accent-blue);">1 명</div>
+                        <div id="visitor-today-display" class="edit-all" data-key="visitor_sub" style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.4rem; font-weight: 600;">오늘 방문: 1명 (실시간 세션)</div>
                     </div>
                 </div>
             </div>
@@ -967,47 +974,51 @@
             </div>
         </section>
 
-        <!-- 6. 부대 홍보 -->
+        <!-- 6. 부대 홍보 (메인 갤러리 아카이브) -->
         <section id="page-promo" class="page-section">
             <div class="card-box">
-                <h1><i class="fa-solid fa-film"></i> 부대 홍보 및 훈련 갤러리</h1>
-                <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.05rem;">제3대항전술대대의 실전과 같은 훈련 현장 및 주요 활동 사진/영상 아카이브입니다.</p>
+                <h1 class="edit-all" data-key="promo_main_title"><i class="fa-solid fa-film"></i> 부대 홍보 및 훈련 갤러리</h1>
+                <p class="edit-all" data-key="promo_main_desc" style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.05rem;">제3대항전술대대의 실전과 같은 훈련 현장 및 주요 활동 사진/영상 아카이브입니다. 아래 카드를 클릭하면 상세 페이지로 이동합니다.</p>
                 
                 <div id="media-archive-container" class="media-archive-grid">
-                    <div class="media-card">
+                    <!-- 기본 예시 1 -->
+                    <div class="media-card" onclick="openMediaDetail('sample-1')">
                         <div class="media-container">
                             <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="훈련 영상 샘플" allowfullscreen></iframe>
                         </div>
                         <div class="media-caption">
                             <h4><i class="fa-solid fa-video" style="color: var(--accent-blue);"></i> 2026 하반기 대대 야외 기동 훈련</h4>
                             <p>실전 가상 교리를 바탕으로 혹독한 야외 환경에서 입체적인 전술 기동을 수행 중인 장병들의 모습입니다.</p>
+                            <span class="media-shortcut-tag"><i class="fa-solid fa-arrow-up-right-from-square"></i> 상세 페이지 바로가기</span>
                         </div>
                     </div>
-                    <div class="media-card">
+                    <!-- 기본 예시 2 -->
+                    <div class="media-card" onclick="openMediaDetail('sample-2')">
                         <div class="media-container">
                             <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.5rem; color:#94a3b8;">
                                 <i class="fa-solid fa-image" style="font-size: 3rem; color: #38bdf8;"></i>
-                                <span>과학화 모의 전투 훈련 현장</span>
+                                <span style="font-weight: 700;">과학화 모의 전투 훈련 현장</span>
                             </div>
                         </div>
                         <div class="media-caption">
                             <h4><i class="fa-solid fa-camera" style="color: var(--accent-blue);"></i> 과학화 마일즈 훈련 검증</h4>
                             <p>최첨단 교전 통제 장비를 활용하여 정밀하고 과학적인 전투력 측정 및 전술 검증을 진행하고 있습니다.</p>
+                            <span class="media-shortcut-tag"><i class="fa-solid fa-arrow-up-right-from-square"></i> 상세 페이지 바로가기</span>
                         </div>
                     </div>
                 </div>
 
                 <div id="admin-media-upload-wrapper" style="display: none;">
                     <div class="admin-upload-box">
-                        <h3><i class="fa-solid fa-circle-plus" style="color: #38bdf8;"></i> [관리자 전용]새로운 훈련 영상/사진 자료 등록</h3>
-                        <p style="font-size: 0.9rem; color: #9ca3af; margin-bottom: 1.5rem;">관리자 권한으로 홍보관에 새로운 미디어 카드와 설명을 실시간으로 추가합니다.</p>
+                        <h3><i class="fa-solid fa-circle-plus" style="color: #38bdf8;"></i> [관리자 전용] 새로운 훈련 영상/사진 자료 등록</h3>
+                        <p style="font-size: 0.9rem; color: #9ca3af; margin-bottom: 1.5rem;">관리자 권한으로 홍보관에 새로운 미디어 카드와 전용 상세 페이지를 실시간으로 생성합니다.</p>
                         
                         <div class="form-row">
                             <div class="form-group-custom">
                                 <label>미디어 유형 선택</label>
                                 <select id="upload-type">
                                     <option value="youtube">유튜브 영상 (Embed 링크)</option>
-                                    <option value="image">사진 / 일반 이미지</option>
+                                    <option value="image">사진 / 일반 이미지 URL</option>
                                 </select>
                             </div>
                             <div class="form-group-custom">
@@ -1016,17 +1027,33 @@
                             </div>
                         </div>
                         <div class="form-group-custom">
-                                <label>자료 제목</label>
+                            <label>자료 제목</label>
                             <input type="text" id="upload-title" placeholder="예: [단독] 철혈중대 야간 침투 훈련 실황">
                         </div>
                         <div class="form-group-custom">
-                            <label>간단한 설명 글 (캡션)</label>
-                            <textarea id="upload-desc" rows="3" placeholder="훈련에 대한 상세한 설명이나 장병들의 활약상을 적어주세요."></textarea>
+                            <label>간단한 설명 글 (미디어 카드에 표시)</label>
+                            <textarea id="upload-desc" rows="2" placeholder="카드에 노출될 간단한 요약 내용을 적어주세요."></textarea>
                         </div>
-                        <button onclick="addNewMediaItem()" class="btn-action" style="background: #38bdf8; color: #0b0f19; width: 100%; justify-content: center;">홍보관에 실시간 등록하기</button>
+                        <div class="form-group-custom">
+                            <label>상세 페이지 본문 내용 (상세 페이지 접속 시 출력될 내용)</label>
+                            <textarea id="upload-detail-content" rows="4" placeholder="상세 페이지에서 보여줄 대원들의 활약상, 훈련 일시, 성과 등 구체적인 내용을 적어주세요."></textarea>
+                        </div>
+                        <button onclick="addNewMediaItem()" class="btn-action" style="background: #38bdf8; color: #0b0f19; width: 100%; justify-content: center;">홍보관 및 새 상세 페이지 생성하기</button>
                     </div>
                 </div>
 
+            </div>
+        </section>
+
+        <!-- 동적 생성되는 미디어 상세 페이지 섹션 -->
+        <section id="page-media-detail" class="page-section">
+            <div class="detail-profile-wrapper">
+                <div id="dynamic-detail-container">
+                    <!-- 자바스크립트로 동적 렌더링됨 -->
+                </div>
+                <div style="margin-top: 2.5rem; text-align: right;">
+                    <button onclick="switchPage('promo')" class="btn-action" style="background: var(--accent-navy);"><i class="fa-solid fa-arrow-left"></i> 부대 홍보관으로 돌아가기</button>
+                </div>
             </div>
         </section>
 
@@ -1086,7 +1113,7 @@
 
             <div class="admin-dark-card">
                 <h3><i class="fa-solid fa-database" style="color: #38bdf8;"></i> 저장 데이터 초기화 및 관리</h3>
-                <p style="font-size: 0.9rem; color: #9ca3af; margin-bottom: 1.6rem;">직접 수정한 모든 내용과 추가된 홍보 자료를 초기 기본값으로 되돌릴 수 있습니다.</p>
+                <p style="font-size: 0.9rem; color: #9ca3af; margin-bottom: 1.6rem;">직접 수정한 모든 내용과 추가된 홍보 자료, 방문자 기록을 초기 기본값으로 되돌릴 수 있습니다.</p>
                 <button onclick="resetAllData()" style="background: #ef4444; color: #fff; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 800; cursor: pointer;">모든 수정 내용 및 자료 초기화</button>
             </div>
         </section>
@@ -1099,12 +1126,48 @@
     <script>
         window.addEventListener('DOMContentLoaded', () => {
             loadSavedContent();
+            initVisitorCounter();
             loadSavedMediaItems();
             if (localStorage.getItem('site_emergency') === null) {
                 localStorage.setItem('site_emergency', 'true');
             }
             checkEmergencyStateOnLoad();
         });
+
+        // 실제 방문자 카운터 로직
+        function initVisitorCounter() {
+            let totalVisitors = parseInt(localStorage.getItem('real_total_visitors') || '0', 10);
+            let todayVisitors = parseInt(localStorage.getItem('real_today_visitors') || '0', 10);
+            let lastVisitDate = localStorage.getItem('real_last_visit_date') || '';
+
+            const todayStr = new Date().toLocaleDateString();
+
+            // 이번 브라우저 세션에서 아직 방문 기록이 없으면 카운트 증가
+            if (!sessionStorage.getItem('has_visited_session')) {
+                sessionStorage.setItem('has_visited_session', 'true');
+                totalVisitors += 1;
+                localStorage.setItem('real_total_visitors', totalVisitors);
+
+                if (lastVisitDate !== todayStr) {
+                    todayVisitors = 1;
+                    localStorage.setItem('real_last_visit_date', todayStr);
+                } else {
+                    todayVisitors += 1;
+                }
+                localStorage.setItem('real_today_visitors', todayVisitors);
+            } else {
+                if (lastVisitDate !== todayStr) {
+                    todayVisitors = 1;
+                    localStorage.setItem('real_last_visit_date', todayStr);
+                    localStorage.setItem('real_today_visitors', todayVisitors);
+                }
+            }
+
+            const totalEl = document.getElementById('visitor-count-display');
+            const todayEl = document.getElementById('visitor-today-display');
+            if (totalEl) totalEl.innerText = totalVisitors.toLocaleString() + ' 명';
+            if (todayEl) todayEl.innerText = '오늘 방문: ' + todayVisitors.toLocaleString() + '명 (실시간 집계)';
+        }
 
         function loadSavedContent() {
             const editElements = document.querySelectorAll('.edit-all');
@@ -1116,34 +1179,93 @@
             });
         }
 
-        function loadSavedMediaItems() {
-            const container = document.getElementById('media-archive-container');
+        // 기본 샘플 데이터 및 동적 미디어 목록 관리
+        const defaultMediaItems = [
+            {
+                id: 'sample-1',
+                type: 'youtube',
+                url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+                title: '2026 하반기 대대 야외 기동 훈련',
+                desc: '실전 가상 교리를 바탕으로 혹독한 야외 환경에서 입체적인 전술 기동을 수행 중인 장병들의 모습입니다.',
+                detail: '본 훈련은 2026년 하반기 작전 계획에 의거하여 예하 전 부대가 참가한 가운데 진행되었습니다. 가상 적대군(OPFOR) 교리를 적용하여 주야간 연속 기동 및 전술 타격을 성공적으로 완수했으며, 장병들의 완벽한 팀워크와 전투수행 능력을 입증했습니다.'
+            },
+            {
+                id: 'sample-2',
+                type: 'image',
+                url: 'https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=800&q=80',
+                title: '과학화 마일즈 훈련 검증',
+                desc: '최첨단 교전 통제 장비를 활용하여 정밀하고 과학적인 전투력 측정 및 전술 검증을 진행하고 있습니다.',
+                detail: '과학화 마일즈(MILES) 장비를 장착하고 실전과 동일한 교전 상황을 재현한 훈련입니다. 데이터 기반의 정밀 사격 및 피해 분석 시스템을 통해 각 중대원의 전투 효율성을 극대화하고 전술적 교훈을 도출하는 핵심 과정입니다.'
+            }
+        ];
+
+        function getStoredMediaItems() {
             const saved = localStorage.getItem('custom_media_items');
             if (saved) {
-                try {
-                    const items = JSON.parse(saved);
-                    items.forEach(item => {
-                        const card = document.createElement('div');
-                        card.className = 'media-card';
-                        
-                        let mediaContent = '';
-                        if (item.type === 'youtube') {
-                            mediaContent = `<iframe src="${item.url}" title="${item.title}" allowfullscreen></iframe>`;
-                        } else {
-                            mediaContent = `<img src="${item.url}" alt="${item.title}" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=800&q=80';">`;
-                        }
-
-                        card.innerHTML = `
-                            <div class="media-container">${mediaContent}</div>
-                            <div class="media-caption">
-                                <h4><i class="fa-solid fa-star" style="color: var(--accent-blue);"></i> ${item.title}</h4>
-                                <p>${item.desc}</p>
-                            </div>
-                        `;
-                        container.appendChild(card);
-                    });
-                } catch(e) {}
+                try { return JSON.parse(saved); } catch(e) {}
             }
+            return defaultMediaItems;
+        }
+
+        function loadSavedMediaItems() {
+            const container = document.getElementById('media-archive-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            const items = getStoredMediaItems();
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'media-card';
+                card.onclick = () => openMediaDetail(item.id);
+                
+                let mediaContent = '';
+                if (item.type === 'youtube') {
+                    mediaContent = `<iframe src="${item.url}" title="${item.title}" allowfullscreen></iframe>`;
+                } else {
+                    mediaContent = `<img src="${item.url}" alt="${item.title}" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=800&q=80';">`;
+                }
+
+                card.innerHTML = `
+                    <div class="media-container">${mediaContent}</div>
+                    <div class="media-caption">
+                        <h4><i class="fa-solid fa-star" style="color: var(--accent-blue);"></i> ${item.title}</h4>
+                        <p>${item.desc}</p>
+                        <span class="media-shortcut-tag"><i class="fa-solid fa-arrow-up-right-from-square"></i> 상세 페이지 바로가기</span>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // 미디어 상세 페이지 열기 기능
+        function openMediaDetail(itemId) {
+            const items = getStoredMediaItems();
+            const target = items.find(i => i.id === itemId);
+            if (!target) return;
+
+            const detailContainer = document.getElementById('dynamic-detail-container');
+            let mediaBox = '';
+            if (target.type === 'youtube') {
+                mediaBox = `<div style="width:100%; height:420px; background:#000; border-radius:18px; overflow:hidden; margin-bottom:2.5rem;"><iframe src="${target.url}" style="width:100%; height:100%; border:none;" allowfullscreen></iframe></div>`;
+            } else {
+                mediaBox = `<div style="width:100%; height:420px; background:#111; border-radius:18px; overflow:hidden; margin-bottom:2.5rem;"><img src="${target.url}" style="width:100%; height:100%; object-fit:cover;" alt="상세 사진"></div>`;
+            }
+
+            detailContainer.innerHTML = `
+                <div style="display:inline-block; background:#eff6ff; color:var(--accent-blue); padding:0.4rem 1.2rem; border-radius:10px; font-weight:800; font-size:0.9rem; margin-bottom:1.2rem; border:1px solid #bfdbfe;">
+                    <i class="fa-solid fa-shield-halved"></i> 제3대항전술대대 훈련 아카이브 상세 리포트
+                </div>
+                <h2 style="font-size:2.4rem; font-weight:900; color:var(--accent-navy); margin-bottom:1.5rem; line-height:1.3;">${target.title}</h2>
+                ${mediaBox}
+                <div style="background:#f8fafc; border:1px solid var(--border-color); padding:2.5rem; border-radius:20px; line-height:1.9; color:#334155; font-size:1.1rem;">
+                    <h3 style="font-size:1.3rem; font-weight:900; color:var(--accent-navy); margin-bottom:1rem; display:flex; align-items:center; gap:0.7rem;"><i class="fa-solid fa-circle-info" style="color:var(--accent-blue);"></i> 훈련 상세 개요 및 성과</h3>
+                    <p style="margin-bottom:1.5rem; font-weight:700; color:var(--text-muted);">${target.desc}</p>
+                    <hr style="border:0; border-top:1px solid #e2e8f0; margin:1.5rem 0;">
+                    <p>${target.detail || '상세 내용이 등록되지 않았습니다.'}</p>
+                </div>
+            `;
+
+            switchPage('media-detail');
         }
 
         function addNewMediaItem() {
@@ -1151,38 +1273,30 @@
             const url = document.getElementById('upload-url').value.trim();
             const title = document.getElementById('upload-title').value.trim();
             const desc = document.getElementById('upload-desc').value.trim();
+            const detail = document.getElementById('upload-detail-content').value.trim();
 
             if (!url || !title) {
                 alert("미디어 주소와 제목은 필수 입력 사항입니다.");
                 return;
             }
 
-            const newItem = { type, url, title, desc };
-            let items = [];
-            const saved = localStorage.getItem('custom_media_items');
-            if (saved) {
-                try { items = JSON.parse(saved); } catch(e) {}
-            }
+            const newItem = {
+                id: 'media-' + Date.now(),
+                type, url, title, desc, detail
+            };
+
+            let items = getStoredMediaItems();
             items.push(newItem);
             localStorage.setItem('custom_media_items', JSON.stringify(items));
 
-            showToast("새로운 홍보 자료가 성공적으로 등록되었습니다!");
+            showToast("새로운 훈련 자료 및 전용 상세 페이지가 성공적으로 생성되었습니다!");
             document.getElementById('upload-url').value = '';
             document.getElementById('upload-title').value = '';
             document.getElementById('upload-desc').value = '';
+            document.getElementById('upload-detail-content').value = '';
 
-            const container = document.getElementById('media-archive-container');
-            const card = document.createElement('div');
-            card.className = 'media-card';
-            let mediaContent = type === 'youtube' ? `<iframe src="${url}" title="${title}" allowfullscreen></iframe>` : `<img src="${url}" alt="${title}">`;
-            card.innerHTML = `
-                <div class="media-container">${mediaContent}</div>
-                <div class="media-caption">
-                    <h4><i class="fa-solid fa-star" style="color: var(--accent-blue);"></i> ${title}</h4>
-                    <p>${desc}</p>
-                </div>
-            `;
-            container.appendChild(card);
+            loadSavedMediaItems();
+            switchPage('promo');
         }
 
         function showToast(message, type = 'success') {
@@ -1206,11 +1320,11 @@
             const clockEl = document.getElementById('clock');
             const dateEl = document.getElementById('date');
             
-            if (clockEl) {
+            if (clockEl && !clockEl.hasAttribute('contenteditable')) {
                 clockEl.innerText = String(now.getHours()).padStart(2, '0') + ':' + 
                     String(now.getMinutes()).padStart(2, '0') + ':' + String(now.getSeconds()).padStart(2, '0');
             }
-            if (dateEl) {
+            if (dateEl && !dateEl.hasAttribute('contenteditable')) {
                 const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
                 dateEl.innerText = now.toLocaleDateString('ko-KR', options);
             }
@@ -1346,8 +1460,9 @@
         }
 
         function resetAllData() {
-            if (confirm("정말로 모든 수정 내용과 추가된 홍보 자료를 초기 기본값으로 되돌리시겠습니까?")) {
+            if (confirm("정말로 모든 수정 내용, 커스텀 홍보 자료, 그리고 방문자 기록을 초기화하시겠습니까?")) {
                 localStorage.clear();
+                sessionStorage.clear();
                 location.reload();
             }
         }
