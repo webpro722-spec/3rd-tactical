@@ -629,9 +629,17 @@
                 </div>
                 <div class="commander-details-grid">
                     <div class="detail-block">
-                        <h4 class="edit-all" data-key="greet_title_1"><i class="fa-solid fa-book-open"></i> 지휘 철학 및 인사말</h4>
-                        <p class="edit-all" data-key="greet_desc_1">안녕하십니까. 제3대항전술대대 공식 홈페이지를 찾아주신 모든 분들께 진심으로 감사의 말씀을 드립니다.</p>
-                        <p class="edit-all" data-key="greet_desc_2">우리 대대는 국군의 최선두에서 가상 시나리오를 연구하고 적용하며, 전군의 전투력 향상을 견인하는 중책을 맡고 있습니다.</p>
+                        <h4 class="edit-all" data-key="greet_title_1"><i class="fa-solid fa-book-open"></i> 인사말 및 대대소개</h4>
+                        <p class="edit-all" data-key="greet_desc_1">안녕하십니까. 제3대항전술대대 홈페이지에 찾아주신 분들께 진심으로 감사의 말씀을 드립니다.</p>
+                        
+                        <!-- 빈공간 채우기용 미니 디지털 시계 위젯 (텍스트 추가 없음) -->
+                        <div style="margin-top: 1.8rem; background: var(--bg-primary); border: 2px solid var(--border-color); padding: 1.2rem 1.5rem; border-radius: 14px; display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow-sm);">
+                            <div style="display: flex; align-items: center; gap: 0.8rem; font-weight: 800; font-size: 0.95rem; color: var(--text-muted);">
+                                <i class="fa-regular fa-clock" style="color: var(--accent-blue); font-size: 1.2rem;"></i>
+                                <span>표준 지휘 시각 (KST)</span>
+                            </div>
+                            <div id="sub-widget-clock" style="font-size: 1.25rem; font-weight: 900; font-family: 'Courier New', Courier, monospace; color: var(--accent-blue);">00:00:00</div>
+                        </div>
                     </div>
                     <div class="detail-block">
                         <h4 class="edit-all" data-key="greet_title_2"><i class="fa-solid fa-award"></i> 주요 경력 및 약력</h4>
@@ -706,39 +714,73 @@
             </div>
         </section>
 
-        <!-- 부대대장 상세 페이지 -->
+        <!-- 부대대장 상세 페이지 (중대장과 동일한 카드 레이아웃) -->
         <section id="page-vcl-vicedeer" class="page-section">
-            <div class="detail-profile-wrapper">
+            <div class="commander-hero-wrapper">
                 <h1 class="edit-all" data-key="vicedeer_header"><i class="fa-solid fa-user-gear"></i> 부대대장 프로필 및 소개</h1>
-                
-                <div class="commander-top-layout" style="margin-top: 1rem; margin-bottom: 2rem;">
-                    <div class="commander-photo-box profile-photo-editable" data-profile-key="vicedeer_photo"><div class="commander-photo-placeholder"><i class="fa-solid fa-user-tie"></i><span class="edit-all" data-key="vicedeer_photo_text">부대대장 프로필 사진</span></div></div>
+                <div class="commander-top-layout">
+                    <div class="commander-photo-box profile-photo-editable" data-profile-key="vicedeer_photo">
+                        <div class="commander-photo-placeholder">
+                            <i class="fa-solid fa-user-tie"></i>
+                            <span class="edit-all" data-key="vicedeer_photo_text">부대대장 프로필 사진</span>
+                        </div>
+                    </div>
                     <div class="commander-title-area">
                         <h2 class="edit-all" data-key="vicedeer_name">소령 ◯ ◯ ◯</h2>
                         <div class="commander-rank-badge edit-all" data-key="vicedeer_rank">제3대항전술대대 부대대장</div>
-                        <p class="edit-all" data-key="vicedeer_catchphrase" style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">"지휘관을 굳건히 보좌하고 각 참모부와 예하 중대 간의 유기적인 소통을 주도합니다."</p>
-                        <div class="commander-quote-box edit-all" data-key="vicedeer_quote"><i class="fa-solid fa-quote-left" style="color: var(--accent-gold); margin-right: 8px;"></i>철저한 사전 준비와 실전 같은 팀워크로 대대의 모든 임무 완수에 중추적인 역할을 다하겠습니다.</div>
+                        <p class="edit-all" data-key="vicedeer_catchphrase" style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">
+                            "지휘관을 굳건히 보좌하고 각 참모부와 예하 중대 간의 유기적인 소통을 주도합니다."
+                        </p>
+                        <div class="commander-quote-box edit-all" data-key="vicedeer_quote">
+                            <i class="fa-solid fa-quote-left" style="color: var(--accent-gold); margin-right: 8px;"></i>
+                            철저한 사전 준비와 실전 같은 팀워크로 대대의 모든 임무 완수에 중추적인 역할을 다하겠습니다.
+                        </div>
                     </div>
                 </div>
-                <div style="margin-top: 3rem; text-align: right;"><button onclick="safeSwitchPage('battalion', event)" class="btn-action" style="background: var(--accent-navy);"><i class="fa-solid fa-arrow-left"></i> 대대본부로 돌아가기</button></div>
+                <div class="commander-details-grid">
+                    <div class="detail-block">
+                        <h4 class="edit-all" data-key="vicedeer_title_1"><i class="fa-solid fa-book-open"></i> 임무 및 소개</h4>
+                        <p class="edit-all" data-key="vicedeer_desc_1">대대장을 측면에서 보좌하며 참모부의 원활한 업무 조율과 작전 지원을 철저히 수행합니다.</p>
+                    </div>
+                    <div class="detail-block" style="text-align: right; display: flex; align-items: flex-end; justify-content: flex-end;">
+                        <button onclick="safeSwitchPage('battalion', event)" class="btn-action" style="background: var(--accent-navy);"><i class="fa-solid fa-arrow-left"></i> 대대본부로 돌아가기</button>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- 대대주임원사 상세 페이지 -->
+        <!-- 대대주임원사 상세 페이지 (중대장과 동일한 카드 레이아웃) -->
         <section id="page-vcl-mastersergeant" class="page-section">
-            <div class="detail-profile-wrapper">
+            <div class="commander-hero-wrapper">
                 <h1 class="edit-all" data-key="master_header"><i class="fa-solid fa-medal"></i> 대대주임원사 프로필 및 소개</h1>
-                
-                <div class="commander-top-layout" style="margin-top: 1rem; margin-bottom: 2rem;">
-                    <div class="commander-photo-box profile-photo-editable" data-profile-key="master_photo"><div class="commander-photo-placeholder"><i class="fa-solid fa-user-tie"></i><span class="edit-all" data-key="master_photo_text">대대주임원사 프로필 사진</span></div></div>
+                <div class="commander-top-layout">
+                    <div class="commander-photo-box profile-photo-editable" data-profile-key="master_photo">
+                        <div class="commander-photo-placeholder">
+                            <i class="fa-solid fa-user-tie"></i>
+                            <span class="edit-all" data-key="master_photo_text">대대주임원사 프로필 사진</span>
+                        </div>
+                    </div>
                     <div class="commander-title-area">
                         <h2 class="edit-all" data-key="master_name">원사 ◯ ◯ ◯</h2>
                         <div class="commander-rank-badge edit-all" data-key="master_rank">제3대항전술대대 주임원사</div>
-                        <p class="edit-all" data-key="master_catchphrase" style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">"전우애로 똘똘 뭉친 활기찬 병영문화와 빈틈없는 기강 확립을 위해 노력합니다."</p>
-                        <div class="commander-quote-box edit-all" data-key="master_quote"><i class="fa-solid fa-quote-left" style="color: var(--accent-gold); margin-right: 8px;"></i>용사들의 목소리에 귀 기울이고 부모님의 마음으로 돌보며, 전투력 발휘의 든든한 버팀목이 되겠습니다.</div>
+                        <p class="edit-all" data-key="master_catchphrase" style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">
+                            "전우애로 똘똘 뭉친 활기찬 병영문화와 빈틈없는 기강 확립을 위해 노력합니다."
+                        </p>
+                        <div class="commander-quote-box edit-all" data-key="master_quote">
+                            <i class="fa-solid fa-quote-left" style="color: var(--accent-gold); margin-right: 8px;"></i>
+                            용사들의 목소리에 귀 기울이고 부모님의 마음으로 돌보며, 전투력 발휘의 든든한 버팀목이 되겠습니다.
+                        </div>
                     </div>
                 </div>
-                <div style="margin-top: 3rem; text-align: right;"><button onclick="safeSwitchPage('battalion', event)" class="btn-action" style="background: var(--accent-navy);"><i class="fa-solid fa-arrow-left"></i> 대대본부로 돌아가기</button></div>
+                <div class="commander-details-grid">
+                    <div class="detail-block">
+                        <h4 class="edit-all" data-key="master_title_1"><i class="fa-solid fa-book-open"></i> 임무 및 소개</h4>
+                        <p class="edit-all" data-key="master_desc_1">장병들의 병영 생활 만족도 향상과 부대 기강 확립에 앞장서고 있습니다.</p>
+                    </div>
+                    <div class="detail-block" style="text-align: right; display: flex; align-items: flex-end; justify-content: flex-end;">
+                        <button onclick="safeSwitchPage('battalion', event)" class="btn-action" style="background: var(--accent-navy);"><i class="fa-solid fa-arrow-left"></i> 대대본부로 돌아가기</button>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -862,11 +904,12 @@
 
         <!-- 중대장 상세 페이지 -->
         <section id="page-c5-captain" class="page-section">
-            <div class="detail-profile-wrapper">
+            <div class="commander-hero-wrapper">
                 <h1 class="edit-all" data-key="c5_c_h">제5필사중대장 프로필 및 소개</h1>
-                
-                <div class="commander-top-layout" style="margin-top: 1rem; margin-bottom: 2rem;">
-                    <div class="commander-photo-box profile-photo-editable" data-profile-key="c5_cap_photo"><div class="commander-photo-placeholder"><i class="fa-solid fa-user-tie"></i><span class="edit-all" data-key="c5_c_img">중대장 사진</span></div></div>
+                <div class="commander-top-layout">
+                    <div class="commander-photo-box profile-photo-editable" data-profile-key="c5_cap_photo">
+                        <div class="commander-photo-placeholder"><i class="fa-solid fa-user-tie"></i><span class="edit-all" data-key="c5_c_img">중대장 사진</span></div>
+                    </div>
                     <div class="commander-title-area">
                         <h2 class="edit-all" data-key="c5_c_name">대위 ◯ ◯ ◯</h2>
                         <div class="commander-rank-badge edit-all" data-key="c5_c_rank">제5필사중대장</div>
@@ -874,16 +917,152 @@
                         <div class="commander-quote-box edit-all" data-key="c5_c_quote"><i class="fa-solid fa-quote-left" style="color: var(--accent-gold); margin-right: 8px;"></i>거친 훈련 속에서 단련된 전투력만이 실전에서 승리하는 유일한 길입니다. 부하를 아끼고 임무에 철저한 중대를 만들겠습니다.</div>
                     </div>
                 </div>
-                <div style="margin-top: 3rem; text-align: right;"><button onclick="safeSwitchPage('company', event)" class="btn-action" style="background: var(--accent-navy);"><i class="fa-solid fa-arrow-left"></i> 중대본부로 돌아가기</button></div>
+                <div class="commander-details-grid">
+                    <div class="detail-block">
+                        <h4 class="edit-all" data-key="c5_c_t1"><i class="fa-solid fa-book-open"></i> 임무 및 소개</h4>
+                        <p class="edit-all" data-key="c5_c_d1">중대의 모든 전술 훈련과 전투 지휘를 총괄하며 최선두 타격 임무를 수행합니다.</p>
+                    </div>
+                    <div class="detail-block" style="text-align: right; display: flex; align-items: flex-end; justify-content: flex-end;">
+                        <button onclick="safeSwitchPage('company', event)" class="btn-action" style="background: var(--accent-navy);"><i class="fa-solid fa-arrow-left"></i> 중대본부로 돌아가기</button>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- 나머지 간부 상세 페이지들 -->
-        <section id="page-c5-lieutenant" class="page-section"><div class="detail-profile-wrapper"><h1 class="edit-all" data-key="c5_l_h">제5필사중대 부중대장 소개</h1><div style="margin-top:2rem; line-height:1.8; color:var(--text-muted); font-size:1.05rem;">중대장을 보좌하여 행정 및 군수 지원을 총괄하며, 용사들의 실무 교육과 안전 관리에 만전을 기하고 있습니다.</div><div style="margin-top: 3rem; text-align: right;"><button onclick="safeSwitchPage('company', event)" class="btn-action" style="background: var(--accent-navy);">돌아가기</button></div></div></section>
-        <section id="page-c5-firstsergeant" class="page-section"><div class="detail-profile-wrapper"><h1 class="edit-all" data-key="c5_f_h">제5필사중대 행보관 소개</h1><div style="margin-top:2rem; line-height:1.8; color:var(--text-muted); font-size:1.05rem;">중대의 어머니 같은 존재로서 장비 정비 상태를 점검하고 용사들의 고충을 적극 수렴하여 화합하는 병영을 이끕니다.</div><div style="margin-top: 3rem; text-align: right;"><button onclick="safeSwitchPage('company', event)" class="btn-action" style="background: var(--accent-navy);">돌아가기</button></div></div></section>
-        <section id="page-c6-captain" class="page-section"><div class="detail-profile-wrapper"><h1 class="edit-all" data-key="c6_c_h">제6철혈중대장 소개</h1><div style="margin-top:2rem; line-height:1.8; color:var(--text-muted); font-size:1.05rem;">철통같은 방어력과 강력한 화력 지원 태세를 확립하여 거점 사수 임무를 완벽히 수행하는 철혈의 지휘관입니다.</div><div style="margin-top: 3rem; text-align: right;"><button onclick="safeSwitchPage('company', event)" class="btn-action" style="background: var(--accent-navy);">돌아가기</button></div></div></section>
-        <section id="page-c6-lieutenant" class="page-section"><div class="detail-profile-wrapper"><h1 class="edit-all" data-key="c6_l_h">제6철혈중대 부중대장 소개</h1><div style="margin-top:2rem; line-height:1.8; color:var(--text-muted); font-size:1.05rem;">중대 행정 및 작전 실무를 조율하며 빈틈없는 지원 태세로 철혈중대의 전투력 발휘를 든든히 뒷받침합니다.</div><div style="margin-top: 3rem; text-align: right;"><button onclick="safeSwitchPage('company', event)" class="btn-action" style="background: var(--accent-navy);">돌아가기</button></div></div></section>
-        <section id="page-c6-firstsergeant" class="page-section"><div class="detail-profile-wrapper"><h1 class="edit-all" data-key="c6_f_h">제6철혈중대 행보관 소개</h1><div style="margin-top:2rem; line-height:1.8; color:var(--text-muted); font-size:1.05rem;">부대 기강을 확립하고 용사들의 병영 생활 만족도를 높이기 위해 늘 현장에서 발로 뛰는 베테랑 부사관입니다.</div><div style="margin-top: 3rem; text-align: right;"><button onclick="safeSwitchPage('company', event)" class="btn-action" style="background: var(--accent-navy);">돌아가기</button></div></div></section>
+        <!-- 제5필사중대 부중대장 상세 페이지 (카드 레이아웃 적용) -->
+        <section id="page-c5-lieutenant" class="page-section">
+            <div class="commander-hero-wrapper">
+                <h1 class="edit-all" data-key="c5_l_h">제5필사중대 부중대장 프로필 및 소개</h1>
+                <div class="commander-top-layout">
+                    <div class="commander-photo-box profile-photo-editable" data-profile-key="c5_lieut_photo">
+                        <div class="commander-photo-placeholder"><i class="fa-solid fa-user-gear"></i><span class="edit-all" data-key="c5_l_img">부중대장 사진</span></div>
+                    </div>
+                    <div class="commander-title-area">
+                        <h2 class="edit-all" data-key="c5_l_name">중위 ◯ ◯ ◯</h2>
+                        <div class="commander-rank-badge edit-all" data-key="c5_l_rank">제5필사중대 부중대장</div>
+                        <p class="edit-all" data-key="c5_l_desc" style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">"철저한 행정 지원과 작전 보좌로 필사중대의 완벽한 팀워크를 뒷받침합니다."</p>
+                        <div class="commander-quote-box edit-all" data-key="c5_l_quote"><i class="fa-solid fa-quote-left" style="color: var(--accent-gold); margin-right: 8px;"></i>중대장을 적극 보좌하고 용사들의 실무 교육과 안전 관리에 만전을 기하겠습니다.</div>
+                    </div>
+                </div>
+                <div class="commander-details-grid">
+                    <div class="detail-block">
+                        <h4 class="edit-all" data-key="c5_l_t1"><i class="fa-solid fa-book-open"></i> 임무 및 소개</h4>
+                        <p class="edit-all" data-key="c5_l_d1">중대 행정 및 군수 지원을 총괄하며 빈틈없는 작전 보좌를 수행합니다.</p>
+                    </div>
+                    <div class="detail-block" style="text-align: right; display: flex; align-items: flex-end; justify-content: flex-end;">
+                        <button onclick="safeSwitchPage('company', event)" class="btn-action" style="background: var(--accent-navy);"><i class="fa-solid fa-arrow-left"></i> 중대본부로 돌아가기</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 제5필사중대 행보관 상세 페이지 (카드 레이아웃 적용) -->
+        <section id="page-c5-firstsergeant" class="page-section">
+            <div class="commander-hero-wrapper">
+                <h1 class="edit-all" data-key="c5_f_h">제5필사중대 행보관 프로필 및 소개</h1>
+                <div class="commander-top-layout">
+                    <div class="commander-photo-box profile-photo-editable" data-profile-key="c5_fs_photo">
+                        <div class="commander-photo-placeholder"><i class="fa-solid fa-medal"></i><span class="edit-all" data-key="c5_f_img">행보관 사진</span></div>
+                    </div>
+                    <div class="commander-title-area">
+                        <h2 class="edit-all" data-key="c5_f_name">상사 ◯ ◯ ◯</h2>
+                        <div class="commander-rank-badge edit-all" data-key="c5_f_rank">제5필사중대 행보관</div>
+                        <p class="edit-all" data-key="c5_f_desc" style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">"용사들의 든든한 버팀목이 되어 활기차고 화합하는 병영을 이끕니다."</p>
+                        <div class="commander-quote-box edit-all" data-key="c5_f_quote"><i class="fa-solid fa-quote-left" style="color: var(--accent-gold); margin-right: 8px;"></i>장비 정비와 병영 생활 지도에 최선을 다해 전투력 발휘의 기초를 다지겠습니다.</div>
+                    </div>
+                </div>
+                <div class="commander-details-grid">
+                    <div class="detail-block">
+                        <h4 class="edit-all" data-key="c5_f_t1"><i class="fa-solid fa-book-open"></i> 임무 및 소개</h4>
+                        <p class="edit-all" data-key="c5_f_d1">중대 장비 관리와 용사들의 고충 수렴 및 생활 지도를 담당합니다.</p>
+                    </div>
+                    <div class="detail-block" style="text-align: right; display: flex; align-items: flex-end; justify-content: flex-end;">
+                        <button onclick="safeSwitchPage('company', event)" class="btn-action" style="background: var(--accent-navy);"><i class="fa-solid fa-arrow-left"></i> 중대본부로 돌아가기</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 제6철혈중대장 상세 페이지 -->
+        <section id="page-c6-captain" class="page-section">
+            <div class="commander-hero-wrapper">
+                <h1 class="edit-all" data-key="c6_c_h">제6철혈중대장 프로필 및 소개</h1>
+                <div class="commander-top-layout">
+                    <div class="commander-photo-box profile-photo-editable" data-profile-key="c6_cap_photo">
+                        <div class="commander-photo-placeholder"><i class="fa-solid fa-user-tie"></i><span class="edit-all" data-key="c6_c_img">중대장 사진</span></div>
+                    </div>
+                    <div class="commander-title-area">
+                        <h2 class="edit-all" data-key="c6_c_name">대위 ◯ ◯ ◯</h2>
+                        <div class="commander-rank-badge edit-all" data-key="c6_c_rank">제6철혈중대장</div>
+                        <p class="edit-all" data-key="c6_c_desc" style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">"철통같은 방어력과 강력한 화력으로 거점을 완벽히 사수하겠습니다."</p>
+                        <div class="commander-quote-box edit-all" data-key="c6_c_quote"><i class="fa-solid fa-quote-left" style="color: var(--accent-gold); margin-right: 8px;"></i>철혈의 투지로 무장하여 어떠한 상황에서도 흔들리지 않는 최정예 중대를 이끌겠습니다.</div>
+                    </div>
+                </div>
+                <div class="commander-details-grid">
+                    <div class="detail-block">
+                        <h4 class="edit-all" data-key="c6_c_t1"><i class="fa-solid fa-book-open"></i> 임무 및 소개</h4>
+                        <p class="edit-all" data-key="c6_c_d1">철혈중대의 전술 지휘와 거점 방어 화력 운용을 총괄합니다.</p>
+                    </div>
+                    <div class="detail-block" style="text-align: right; display: flex; align-items: flex-end; justify-content: flex-end;">
+                        <button onclick="safeSwitchPage('company', event)" class="btn-action" style="background: var(--accent-navy);"><i class="fa-solid fa-arrow-left"></i> 중대본부로 돌아가기</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 제6철혈중대 부중대장 상세 페이지 (카드 레이아웃 적용) -->
+        <section id="page-c6-lieutenant" class="page-section">
+            <div class="commander-hero-wrapper">
+                <h1 class="edit-all" data-key="c6_l_h">제6철혈중대 부중대장 프로필 및 소개</h1>
+                <div class="commander-top-layout">
+                    <div class="commander-photo-box profile-photo-editable" data-profile-key="c6_lieut_photo">
+                        <div class="commander-photo-placeholder"><i class="fa-solid fa-user-gear"></i><span class="edit-all" data-key="c6_l_img">부중대장 사진</span></div>
+                    </div>
+                    <div class="commander-title-area">
+                        <h2 class="edit-all" data-key="c6_l_name">중위 ◯ ◯ ◯</h2>
+                        <div class="commander-rank-badge edit-all" data-key="c6_l_rank">제6철혈중대 부중대장</div>
+                        <p class="edit-all" data-key="c6_l_desc" style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">"빈틈없는 행정 조율과 지원으로 철혈중대의 전투력 발휘를 뒷받침합니다."</p>
+                        <div class="commander-quote-box edit-all" data-key="c6_l_quote"><i class="fa-solid fa-quote-left" style="color: var(--accent-gold); margin-right: 8px;"></i>중대장의 지시를 받들어 실무 전반을 책임지고 안전한 부대 운영을 완수하겠습니다.</div>
+                    </div>
+                </div>
+                <div class="commander-details-grid">
+                    <div class="detail-block">
+                        <h4 class="edit-all" data-key="c6_l_t1"><i class="fa-solid fa-book-open"></i> 임무 및 소개</h4>
+                        <p class="edit-all" data-key="c6_l_d1">중대 행정 및 군수 실무를 조율하며 든든한 지원 태세를 유지합니다.</p>
+                    </div>
+                    <div class="detail-block" style="text-align: right; display: flex; align-items: flex-end; justify-content: flex-end;">
+                        <button onclick="safeSwitchPage('company', event)" class="btn-action" style="background: var(--accent-navy);"><i class="fa-solid fa-arrow-left"></i> 중대본부로 돌아가기</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 제6철혈중대 행보관 상세 페이지 (카드 레이아웃 적용) -->
+        <section id="page-c6-firstsergeant" class="page-section">
+            <div class="commander-hero-wrapper">
+                <h1 class="edit-all" data-key="c6_f_h">제6철혈중대 행보관 프로필 및 소개</h1>
+                <div class="commander-top-layout">
+                    <div class="commander-photo-box profile-photo-editable" data-profile-key="c6_fs_photo">
+                        <div class="commander-photo-placeholder"><i class="fa-solid fa-medal"></i><span class="edit-all" data-key="c6_f_img">행보관 사진</span></div>
+                    </div>
+                    <div class="commander-title-area">
+                        <h2 class="edit-all" data-key="c6_f_name">상사 ◯ ◯ ◯</h2>
+                        <div class="commander-rank-badge edit-all" data-key="c6_f_rank">제6철혈중대 행보관</div>
+                        <p class="edit-all" data-key="c6_f_desc" style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">"철저한 기강 확립과 용사 복지로 철혈중대의 든든한 중심이 됩니다."</p>
+                        <div class="commander-quote-box edit-all" data-key="c6_f_quote"><i class="fa-solid fa-quote-left" style="color: var(--accent-gold); margin-right: 8px;"></i>늘 현장에서 장병들과 소통하며 모범적인 병영 환경을 조성하겠습니다.</div>
+                    </div>
+                </div>
+                <div class="commander-details-grid">
+                    <div class="detail-block">
+                        <h4 class="edit-all" data-key="c6_f_t1"><i class="fa-solid fa-book-open"></i> 임무 및 소개</h4>
+                        <p class="edit-all" data-key="c6_f_d1">중대 기강 유지 및 장병 병영 생활 환경 개선을 담당합니다.</p>
+                    </div>
+                    <div class="detail-block" style="text-align: right; display: flex; align-items: flex-end; justify-content: flex-end;">
+                        <button onclick="safeSwitchPage('company', event)" class="btn-action" style="background: var(--accent-navy);"><i class="fa-solid fa-arrow-left"></i> 중대본부로 돌아가기</button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- 6. 부대 홍보 메인 -->
         <section id="page-promo" class="page-section">
@@ -1370,12 +1549,14 @@
             const now = new Date();
             const clockEl = document.getElementById('clock');
             const dateEl = document.getElementById('date');
+            const subClockEl = document.getElementById('sub-widget-clock');
 
             const timeStr = now.toTimeString().split(' ')[0];
             const dateStr = now.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
 
             if (clockEl && !clockEl.hasAttribute('contenteditable')) clockEl.innerText = timeStr;
             if (dateEl && !dateEl.hasAttribute('contenteditable')) dateEl.innerText = dateStr;
+            if (subClockEl) subClockEl.innerText = timeStr;
         }
         setInterval(updateDateTime, 1000);
         updateDateTime();
