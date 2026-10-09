@@ -276,27 +276,6 @@
         .media-caption p { font-size: 0.98rem; color: var(--text-muted); line-height: 1.7; }
         .media-publisher { font-size: 0.85rem; color: var(--accent-sky); font-weight: 800; margin-top: 0.5rem; }
 
-        .admin-delete-item-btn {
-            position: absolute; top: 15px; right: 15px; background: #ef4444; color: #fff; border: none;
-            padding: 0.4rem 0.9rem; border-radius: 8px; font-weight: 900; font-size: 0.8rem; cursor: pointer; z-index: 50;
-            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4); display: none;
-        }
-        .admin-delete-item-btn:hover { background: #dc2626; transform: scale(1.05); }
-
-        .admin-upload-box {
-            background: #0b0f19; border: 1px solid #38bdf8; border-radius: 20px;
-            padding: 2.5rem; margin-top: 3rem; color: #f8fafc; display: none; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
-        .admin-upload-box h3 { color: #38bdf8; font-size: 1.3rem; font-weight: 900; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.7rem; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.2rem; }
-        .form-group-custom { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.2rem; }
-        .form-group-custom label { font-size: 0.9rem; font-weight: 800; color: #e2e8f0; }
-        .form-group-custom input, .form-group-custom textarea, .form-group-custom select {
-            width: 100%; padding: 0.9rem 1.2rem; background: #111827; border: 1px solid #374151;
-            border-radius: 10px; color: #fff; font-size: 0.98rem; outline: none;
-        }
-        .form-group-custom input:focus, .form-group-custom textarea:focus, .form-group-custom select:focus { border-color: #38bdf8; transform: scale(1.01); }
-
         .detail-profile-wrapper, .commander-hero-wrapper {
             background: var(--bg-card); border: 1px solid var(--border-color);
             border-radius: 28px; padding: 3.5rem 4rem; box-shadow: var(--shadow-lg); width: 100%;
@@ -491,7 +470,7 @@
         </div>
     </div>
 
-    <!-- 1초마다 자동 동기화되는 실시간 보안 차단 오버레이 -->
+    <!-- 실시간 자동 동기화 보안 차단 오버레이 -->
     <div id="emergency-overlay" style="display:none;">
         <div class="radar-box">
             <i class="fa-solid fa-shield-halved"></i>
@@ -977,44 +956,6 @@
             </div>
         </section>
 
-        <div id="admin-media-upload-wrapper" style="display: none; max-width: 1560px; margin: 0 auto 4rem auto;">
-            <div class="admin-upload-box" style="display: block;">
-                <h3><i class="fa-solid fa-circle-plus" style="color: #38bdf8;"></i> [관리자 전용] 훈련 영상 및 사진 등록</h3>
-                <div class="form-row">
-                    <div class="form-group-custom">
-                        <label>미디어 유형 선택</label>
-                        <select id="upload-type">
-                            <option value="youtube">유튜브 영상 -> 영상 목록</option>
-                            <option value="image">사진 이미지 URL -> 사진 갤러리</option>
-                        </select>
-                    </div>
-                    <div class="form-group-custom">
-                        <label>미디어 주소 (링크 입력)</label>
-                        <input type="text" id="upload-url" placeholder="예: https://www.youtube.com/embed/...">
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group-custom">
-                        <label>자료 제목</label>
-                        <input type="text" id="upload-title" placeholder="제목 입력">
-                    </div>
-                    <div class="form-group-custom">
-                        <label>게시자</label>
-                        <input type="text" id="upload-publisher" placeholder="정훈공보실">
-                    </div>
-                </div>
-                <div class="form-group-custom">
-                    <label>간단한 설명 글</label>
-                    <textarea id="upload-desc" rows="2" placeholder="요약 내용"></textarea>
-                </div>
-                <div class="form-group-custom">
-                    <label>상세 페이지 본문 내용</label>
-                    <textarea id="upload-detail-content" rows="4" placeholder="상세 내용"></textarea>
-                </div>
-                <button onclick="addNewMediaItem()" class="btn-action" style="background: #38bdf8; color: #0b0f19; width: 100%; justify-content: center;">자료 추가하기</button>
-            </div>
-        </div>
-
         <section id="page-media-detail" class="page-section">
             <div class="detail-profile-wrapper">
                 <div id="dynamic-detail-container"></div>
@@ -1047,7 +988,7 @@
             </div>
         </section>
 
-        <!-- 8. 관리자 패널 -->
+        <!-- 8. 관리자 패널 (깔끔하게 정돈됨) -->
         <section id="page-admin" class="page-section">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.2rem;">
                 <h1><i class="fa-solid fa-gauge-high"></i> 관리자 콘트롤 타워</h1>
@@ -1055,6 +996,15 @@
                     <button onclick="switchPage('home'); enableAdminMode();" style="background: #38bdf8; color: #0b0f19; border: none; padding: 0.7rem 1.4rem; border-radius: 10px; cursor: pointer; font-weight: 900;"><i class="fa-solid fa-pen-to-square"></i> 전체 직접 수정모드</button>
                     <button onclick="switchPage('home')" style="background: #1f2937; color: #38bdf8; border: 1px solid #374151; padding: 0.7rem 1.4rem; border-radius: 10px; cursor: pointer; font-weight: 800;"><i class="fa-solid fa-house"></i> 홈페이지 이동</button>
                 </div>
+            </div>
+
+            <!-- 최고 관리자 전용: 실수로 잠긴 사이트 복구 카드 -->
+            <div class="admin-dark-card" id="supreme-restore-card" style="display: none; margin-bottom: 2.2rem; border-color: #38bdf8; background: rgba(56, 189, 248, 0.05);">
+                <h3 style="color: #38bdf8;"><i class="fa-solid fa-shield-cat"></i> 최고 관리자 긴급 복구 콘솔</h3>
+                <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 1rem;">서브 관리자의 실수 등으로 사이트가 긴급 차단되었을 때, 이곳에서 즉시 정상 상태로 복구할 수 있습니다.</p>
+                <button onclick="supremeRestoreSite()" style="background: #38bdf8; color: #0b0f19; border: none; padding: 0.9rem 1.8rem; border-radius: 10px; font-weight: 900; cursor: pointer; display: flex; align-items: center; gap: 0.6rem;">
+                    <i class="fa-solid fa-rotate-left"></i> 사이트 잠금 해제 및 완전 복구 실행
+                </button>
             </div>
 
             <div class="admin-panel-grid">
@@ -1088,9 +1038,9 @@
             <!-- 페이크 사이트 삭제 버튼 (오직 eoeowkdsla 계정에만 표시됨) -->
             <div class="admin-dark-card" id="fake-delete-section" style="display: none; margin-bottom: 2.2rem; border-color: #ef4444;">
                 <h3 style="color: #ef4444;"><i class="fa-solid fa-triangle-exclamation"></i> 시스템 관리 도구 (위험)</h3>
-                <p style="font-size: 0.9rem; color: #9ca3af; margin-bottom: 1rem;">시스템 데이터베이스를 완전히 정리하거나 사이트를 폐기할 수 있습니다.</p>
+                <p style="font-size: 0.9rem; color: #9ca3af; margin-bottom: 1rem;">실수로 누를 경우 모든 사용자의 접속이 차단되니 주의하십시오.</p>
                 <button onclick="triggerHackerTrap()" style="background: #dc2626; color: #fff; border: none; padding: 0.9rem 1.8rem; border-radius: 10px; font-weight: 900; cursor: pointer; display: flex; align-items: center; gap: 0.6rem;">
-                    <i class="fa-solid fa-bomb"></i> 사이트 완전 삭제 (클릭 시 주의)
+                    <i class="fa-solid fa-bomb"></i> 사이트 긴급 차단 (실수 방지용)
                 </button>
             </div>
 
@@ -1155,10 +1105,9 @@
             checkEmergencyStateOnLoad();
             checkAllSectionLocks();
             checkSubAdminBlockedState();
-            checkHackerTrapState();
         });
 
-        // [핵심] 1초마다 실시간으로 브라우저 간 상태를 체크하여 다른 PC에서도 즉시 튕기게 함
+        // 1초마다 실시간으로 브라우저 간 상태를 체크하여 다른 PC에서도 즉시 연동
         setInterval(() => {
             checkEmergencyStateOnLoad();
             checkAllSectionLocks();
@@ -1204,12 +1153,18 @@
             updateSubAdminUI(isBlocked);
         }
 
-        // 해커 함정(페이크 사이트 삭제 버튼) 실시간 발동 로직
         function triggerHackerTrap() {
             localStorage.setItem('hacker_trap_triggered', 'true');
-            localStorage.setItem('sub_admin_blocked', 'true');
             checkEmergencyStateOnLoad();
-            showToast("긴급 보안 프로트콜 발동 완료!", "error");
+            showToast("사이트가 긴급 차단되었습니다.", "error");
+        }
+
+        // [최고 관리자 전용] 서브 관리자가 실수로 잠근 것을 해제하고 복구하는 함수
+        function supremeRestoreSite() {
+            localStorage.removeItem('hacker_trap_triggered');
+            localStorage.setItem('site_emergency', 'false');
+            checkEmergencyStateOnLoad();
+            showToast("최고 관리자에 의해 사이트가 정상 상태로 완벽히 복구되었습니다.");
         }
 
         const sectionsList = ['home', 'greeting', 'battalion', 'history', 'company', 'promo'];
@@ -1338,7 +1293,6 @@
                     `<img src="${item.url}" alt="${item.title}" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=800&q=80';">`;
 
                 card.innerHTML = `
-                    <button class="admin-delete-item-btn" onclick="event.stopPropagation(); deleteMediaItem('${item.id}')"><i class="fa-solid fa-trash"></i> 삭제</button>
                     <div class="media-container">${mediaContent}</div>
                     <div class="media-caption">
                         <h4><i class="fa-solid fa-${item.type === 'youtube' ? 'video' : 'camera'}" style="color: var(--accent-blue);"></i> ${item.title}</h4>
@@ -1350,19 +1304,6 @@
                 if (item.type === 'youtube') videoContainer.appendChild(card);
                 else photoContainer.appendChild(card);
             });
-
-            if (isAdminLoggedIn && isDirectEditActive) {
-                document.querySelectorAll('.admin-delete-item-btn').forEach(b => b.style.display = 'block');
-            }
-        }
-
-        function deleteMediaItem(itemId) {
-            if (confirm("정말로 이 홍보 자료를 삭제하시겠습니까?")) {
-                let items = getStoredMediaItems().filter(i => i.id !== itemId);
-                localStorage.setItem('custom_media_items', JSON.stringify(items));
-                loadSavedMediaItems();
-                showToast("삭제되었습니다.");
-            }
         }
 
         function openMediaDetail(itemId) {
@@ -1391,30 +1332,6 @@
         }
 
         function switchBackToCategory() { switchPage(lastActiveCategory); }
-
-        function addNewMediaItem() {
-            const type = document.getElementById('upload-type').value;
-            const url = document.getElementById('upload-url').value.trim();
-            const title = document.getElementById('upload-title').value.trim();
-            const publisher = document.getElementById('upload-publisher').value.trim() || '제3대항전술대대';
-            const desc = document.getElementById('upload-desc').value.trim();
-            const detail = document.getElementById('upload-detail-content').value.trim();
-
-            if (!url || !title) { alert("주소와 제목을 입력하세요."); return; }
-
-            let finalUrl = url;
-            if (type === 'youtube' && url.includes('watch?v=')) finalUrl = `https://www.youtube.com/embed/${url.split('watch?v=')[1].split('&')[0]}`;
-
-            let items = getStoredMediaItems();
-            items.push({ id: 'media-' + Date.now(), type, url: finalUrl, title, desc, detail, publisher });
-            localStorage.setItem('custom_media_items', JSON.stringify(items));
-
-            showToast("자료가 추가되었습니다.");
-            document.getElementById('upload-url').value = '';
-            document.getElementById('upload-title').value = '';
-            loadSavedMediaItems();
-            switchPage(type === 'youtube' ? 'promo-videos' : 'promo-photos');
-        }
 
         function showToast(message, type = 'success') {
             const container = document.getElementById('site-toast-container');
@@ -1446,6 +1363,7 @@
         }
 
         let isAdminLoggedIn = false;
+        let currentLoggedInUser = '';
 
         function handleLogin() {
             const idInput = document.getElementById('admin-id').value.trim();
@@ -1464,24 +1382,27 @@
                 }
 
                 isAdminLoggedIn = true;
+                currentLoggedInUser = idInput;
                 errorBox.style.display = 'none';
                 document.getElementById('admin-nav-item').style.display = 'block';
 
                 const welcomeMsg = document.getElementById('login-welcome-msg');
                 const supremeCard = document.getElementById('supreme-control-card');
+                const supremeRestoreCard = document.getElementById('supreme-restore-card');
                 const fakeDeleteSection = document.getElementById('fake-delete-section');
 
                 if (idInput === 'uwgijegTV') {
                     if (welcomeMsg) welcomeMsg.innerText = "최고 관리자(uwgijegTV)님 환영합니다.";
                     if (supremeCard) supremeCard.style.display = 'block';
+                    if (supremeRestoreCard) supremeRestoreCard.style.display = 'block'; // 최고 관리자만 복구 카드 보임
                     if (fakeDeleteSection) fakeDeleteSection.style.display = 'none';
                 } else {
                     if (welcomeMsg) welcomeMsg.innerText = "서브 관리자(eoeowkdsla)님 환영합니다.";
                     if (supremeCard) supremeCard.style.display = 'none';
+                    if (supremeRestoreCard) supremeRestoreCard.style.display = 'none';
                     if (fakeDeleteSection) fakeDeleteSection.style.display = 'block';
                 }
 
-                document.getElementById('admin-media-upload-wrapper').style.display = 'block';
                 document.getElementById('login-choice-modal').style.display = 'flex';
             } else {
                 errorBox.style.display = 'flex';
@@ -1502,18 +1423,15 @@
         function enableAdminMode() {
             if (!isAdminLoggedIn) return;
             document.getElementById('admin-floating-bar').style.display = 'flex';
-            document.getElementById('admin-media-upload-wrapper').style.display = 'block';
         }
 
         function toggleDirectEditMode() {
             isDirectEditActive = !isDirectEditActive;
             const targets = document.querySelectorAll('.edit-all');
             const toggleBtn = document.getElementById('direct-edit-toggle-btn');
-            const deleteBtns = document.querySelectorAll('.admin-delete-item-btn');
 
             if (isDirectEditActive) {
                 targets.forEach(el => { el.setAttribute('contenteditable', 'true'); el.classList.add('editable-active'); });
-                deleteBtns.forEach(b => b.style.display = 'block');
                 
                 document.querySelectorAll('.profile-photo-editable').forEach(area => {
                     area.style.cursor = 'pointer';
@@ -1531,7 +1449,6 @@
                 showToast("직접 수정 모드가 켜졌습니다.");
             } else {
                 targets.forEach(el => { el.removeAttribute('contenteditable'); el.classList.remove('editable-active'); });
-                deleteBtns.forEach(b => b.style.display = 'none');
                 toggleBtn.innerText = "수정 모드 ON";
                 toggleBtn.style.background = "#10b981";
 
@@ -1573,9 +1490,14 @@
 
             if (isHackerTrap) {
                 overlay.style.display = 'flex';
-                if (title) title.innerText = "관리자 권한 탈취 감지 // 긴급 보안 프로트콜 작동 중";
-                if (desc) desc.innerText = "여러분들께선 본 사태가 수습될때까지 접속을 하실수 없습니다. 양해부탁드립니다";
-                if (dismissBtn) dismissBtn.style.display = 'none';
+                if (title) title.innerText = "시스템 긴급 차단 작동 중";
+                if (desc) desc.innerText = "관리자에 의해 사이트가 일시 차단되었습니다. 최고 관리자의 복구를 기다려주세요.";
+                // 최고 관리자(uwgijegTV)로 로그인한 상태라면 오버레이에서도 직접 해제 가능하도록 허용
+                if (currentLoggedInUser === 'uwgijegTV') {
+                    if (dismissBtn) { dismissBtn.style.display = 'block'; dismissBtn.innerText = "최고 관리자 권한으로 즉시 복구"; }
+                } else {
+                    if (dismissBtn) dismissBtn.style.display = 'none';
+                }
             } else if (isEmergency) {
                 overlay.style.display = 'flex';
                 if (dismissBtn) dismissBtn.style.display = 'block';
