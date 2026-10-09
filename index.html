@@ -10,6 +10,10 @@
     <meta property="og:type" content="website">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Firebase 실시간 동기화 라이브러리 추가 -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
     <style>
         :root {
             --bg-primary: #f8fafc;
@@ -333,7 +337,6 @@
             padding: 1.6rem 2rem; border-radius: 16px; color: var(--text-muted); line-height: 1.8; box-shadow: var(--shadow-sm); font-size: 1.02rem;
         }
 
-        /* 화려한 군사 통제실 스타일 로그인 페이지 전용 레이아웃 (독립형으로 겹침 방지) */
         .login-control-room-layout {
             display: grid;
             grid-template-columns: 340px 1fr 340px;
@@ -525,7 +528,7 @@
             <i class="fa-solid fa-shield-halved"></i>
         </div>
         <div style="background: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; color: #fca5a5; padding: 0.5rem 1.2rem; border-radius: 20px; font-weight: 800; font-size: 0.85rem; margin-bottom: 1.2rem; letter-spacing: 1px;">
-            DEFCON 2 // REAL-TIME SYNC PROTOCOL ACTIVE
+            DEFCON 2 // REAL-TIME CLOUD SYNC ACTIVE
         </div>
         <h1 id="emergency-title" style="color: #fff; font-size: 2.1rem; margin-bottom: 1rem; font-weight: 900;">시스템 보안 경고: 비정상 트래픽 및 침투 시도 감지</h1>
         <p id="emergency-desc" style="font-size: 1rem; color: #94a3b8; max-width: 820px; line-height: 1.6; margin-bottom: 2.2rem;">
@@ -1014,10 +1017,9 @@
             </div>
         </section>
 
-        <!-- 7. 관리자 로그인 페이지 (좌우 화려한 군사 통제실 스타일 적용) -->
+        <!-- 7. 관리자 로그인 페이지 -->
         <section id="page-login" class="page-section">
             <div class="login-control-room-layout">
-                <!-- 왼쪽 모니터 패널 -->
                 <div class="side-monitor-panel">
                     <div>
                         <div class="monitor-header"><i class="fa-solid fa-wave-square"></i> QUANTUM FREQUENCY</div>
@@ -1036,7 +1038,6 @@
                     </div>
                 </div>
 
-                <!-- 중앙 로그인 박스 -->
                 <div class="login-wrapper">
                     <h2><i class="fa-solid fa-lock" style="color: #38bdf8;"></i> 통제실 암호화 인증</h2>
                     <p>제3대항전술대대 | 통합 지휘제어 시스템</p>
@@ -1057,7 +1058,6 @@
                     <button onclick="handleLogin()" class="btn-submit">인증 및 통제실 접속</button>
                 </div>
 
-                <!-- 오른쪽 모니터 패널 -->
                 <div class="side-monitor-panel">
                     <div>
                         <div class="monitor-header"><i class="fa-solid fa-microchip"></i> CPU & MEM LOAD</div>
@@ -1131,7 +1131,7 @@
                 </div>
             </div>
 
-            <!-- 페이크 사이트 삭제 버튼 (오직 eoeowkdsla 계정에만 표시됨) -->
+            <!-- 페이크 사이트 삭제 버튼 -->
             <div class="admin-dark-card" id="fake-delete-section" style="display: none; margin-bottom: 2.2rem; border-color: #ef4444;">
                 <h3 style="color: #ef4444;"><i class="fa-solid fa-triangle-exclamation"></i> 시스템 관리 도구 (위험)</h3>
                 <p style="font-size: 0.9rem; color: #9ca3af; margin-bottom: 1rem;">실수로 누를 경우 모든 사용자의 접속이 차단되니 주의하십시오.</p>
@@ -1188,6 +1188,15 @@
     </footer>
 
     <script>
+        // Firebase 무료 실시간 데이터베이스 연동 설정 (모든 사용자 화면 실시간 공유용)
+        const firebaseConfig = {
+            databaseURL: "https://opfor-3rd-default-rtdb.firebaseio.com/"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const dbRef = firebase.database().ref('site_control');
+
+        let isEmergencyActive = false;
+
         window.addEventListener('DOMContentLoaded', () => {
             loadSavedTheme();
             loadSavedContent();
@@ -1195,29 +1204,22 @@
             initVisitorCounter();
             loadSavedMediaItems();
             
-            if (localStorage.getItem('site_emergency') === null) {
-                localStorage.setItem('site_emergency', 'false');
-            }
-            checkEmergencyStateOnLoad();
-            checkAllSectionLocks();
-            checkSubAdminBlockedState();
+            // Firebase 실시간 리스너 연결 (다른 사용자가 접속해 있어도 상태 변경 즉시 반영)
+            dbRef.on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    isEmergencyActive = data.emergency === true;
+                    applyEmergencyState(isEmergencyActive);
+                } else {
+                    // 초기 데이터가 없으면 기본값 세팅
+                    dbRef.set({ emergency: false });
+                }
+            });
         });
 
-        // 1초마다 실시간으로 터미널 로그 및 CPU 부하 애니메이션 갱신
         setInterval(() => {
-            checkEmergencyStateOnLoad();
-            checkAllSectionLocks();
             updateRandomTerminalLogs();
         }, 1000);
-
-        window.addEventListener('storage', function(e) {
-            if (e.key === 'site_emergency' || e.key === 'hacker_trap_triggered') {
-                checkEmergencyStateOnLoad();
-            }
-            if (e.key && e.key.startsWith('sec_lock_')) {
-                checkAllSectionLocks();
-            }
-        });
 
         function updateRandomTerminalLogs() {
             const logBox = document.getElementById('left-terminal-log');
@@ -1227,8 +1229,8 @@
                 `[SYS] SECURE_NODE_OK`,
                 `[NET] PING ${Math.floor(Math.random()*15 + 8)}ms`,
                 `[AUTH] TOKEN_VERIFIED_${randHex}`,
-                `[SEC] FIREWALL_SHIELD_ACTIVE`,
-                `[SYNC] MULTI_PC_CONNECTED`
+                `[SEC] CLOUD_SYNC_ONLINE`,
+                `[SYNC] MULTI_USER_CONNECTED`
             ];
             logBox.innerHTML = logs.join('<br>');
 
@@ -1271,15 +1273,12 @@
         }
 
         function triggerHackerTrap() {
-            localStorage.setItem('hacker_trap_triggered', 'true');
-            checkEmergencyStateOnLoad();
+            dbRef.update({ emergency: true });
             showToast("사이트가 긴급 차단되었습니다.", "error");
         }
 
         function supremeRestoreSite() {
-            localStorage.removeItem('hacker_trap_triggered');
-            localStorage.setItem('site_emergency', 'false');
-            checkEmergencyStateOnLoad();
+            dbRef.update({ emergency: false });
             showToast("최고 관리자에 의해 사이트가 정상 상태로 완벽히 복구되었습니다.");
         }
 
@@ -1312,13 +1311,6 @@
                     btn.style.background = "#ef4444";
                 }
             }
-        }
-
-        function checkAllSectionLocks() {
-            sectionsList.forEach(secKey => {
-                let isLocked = localStorage.getItem('sec_lock_' + secKey) === 'true';
-                applySectionLockState(secKey, isLocked);
-            });
         }
 
         function setThemeMode(mode) {
@@ -1479,7 +1471,6 @@
         }
 
         let isAdminLoggedIn = false;
-        let currentLoggedInUser = '';
 
         function handleLogin() {
             const idInput = document.getElementById('admin-id').value.trim();
@@ -1498,7 +1489,6 @@
                 }
 
                 isAdminLoggedIn = true;
-                currentLoggedInUser = idInput;
                 errorBox.style.display = 'none';
                 document.getElementById('admin-nav-item').style.display = 'block';
 
@@ -1585,30 +1575,21 @@
         }
 
         function toggleEmergency() {
-            let currentState = localStorage.getItem('site_emergency') === 'true';
-            let newState = !currentState;
-            localStorage.setItem('site_emergency', newState ? 'true' : 'false');
-            if(newState === false) {
-                localStorage.removeItem('hacker_trap_triggered');
-            }
-            checkEmergencyStateOnLoad();
+            let newState = !isEmergencyActive;
+            dbRef.update({ emergency: newState });
         }
 
-        function checkEmergencyStateOnLoad() {
+        function applyEmergencyState(isEmergency) {
             const overlay = document.getElementById('emergency-overlay');
             const btn = document.getElementById('emergency-toggle-btn');
-            const title = document.getElementById('emergency-title');
-            const desc = document.getElementById('emergency-desc');
             const dismissBtn = document.getElementById('emergency-dismiss-btn');
 
-            let isEmergency = localStorage.getItem('site_emergency') === 'true';
-            let isHackerTrap = localStorage.getItem('hacker_trap_triggered') === 'true';
-
-            if (isHackerTrap || isEmergency) {
+            if (isEmergency) {
                 overlay.style.display = 'flex';
+                if (btn) { btn.innerText = "긴급 폐쇄 해제하기"; btn.className = "emergency-btn normal"; }
                 if (dismissBtn) {
                     dismissBtn.style.display = 'block';
-                    dismissBtn.innerText = "최고 관리자 권한으로 즉시 복구";
+                    dismissBtn.innerText = "관리자 권한으로 즉시 복구";
                     dismissBtn.onclick = supremeRestoreSite;
                 }
             } else {
