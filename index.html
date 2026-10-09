@@ -12,22 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-primary: #070b14;
-            --bg-card: #0f172a;
-            --bg-card-hover: #1e293b;
-            --accent-navy: #0f172a;
-            --accent-blue: #38bdf8;
-            --accent-sky: #38bdf8;
-            --accent-gold: #fbbf24;
-            --text-main: #f1f5f9;
-            --text-muted: #94a3b8;
-            --border-color: #1e293b;
-            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-            --shadow-md: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
-        }
-
-        body.light-mode {
             --bg-primary: #f8fafc;
             --bg-card: #ffffff;
             --bg-card-hover: #f1f5f9;
@@ -43,6 +27,22 @@
             --shadow-lg: 0 25px 50px -12px rgba(15, 23, 42, 0.1);
         }
 
+        body.dark-mode {
+            --bg-primary: #070b14;
+            --bg-card: #0f172a;
+            --bg-card-hover: #1e293b;
+            --accent-navy: #0f172a;
+            --accent-blue: #38bdf8;
+            --accent-sky: #38bdf8;
+            --accent-gold: #fbbf24;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border-color: #1e293b;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif; transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.2s ease, box-shadow 0.2s ease; }
         
         body {
@@ -56,12 +56,12 @@
 
         header {
             position: fixed; top: 0; left: 0; width: 100%;
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-color);
             z-index: 1000;
         }
-        body.light-mode header { background: rgba(255, 255, 255, 0.95); }
+        body.dark-mode header { background: rgba(15, 23, 42, 0.9); }
         .nav-container {
             max-width: 1650px; margin: 0 auto; display: flex;
             justify-content: space-between; align-items: center; padding: 1.1rem 3rem;
@@ -74,8 +74,8 @@
         }
         .logo-icon:hover { transform: scale(1.05); }
         .logo-text-group { display: flex; flex-direction: column; }
-        .logo-title { font-size: 1.15rem; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
-        body.light-mode .logo-title { color: var(--accent-navy); }
+        .logo-title { font-size: 1.15rem; font-weight: 800; color: var(--accent-navy); letter-spacing: -0.5px; }
+        body.dark-mode .logo-title { color: #fff; }
         .logo-subtitle { font-size: 0.68rem; color: var(--accent-gold); font-weight: 700; letter-spacing: 1.5px; }
 
         .nav-menu { display: flex; list-style: none; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
@@ -84,11 +84,11 @@
             color: var(--text-muted); font-weight: 600; font-size: 0.88rem; padding: 0.55rem 1.1rem;
             border-radius: 10px;
         }
-        .nav-menu button:hover { color: #fff; background: var(--bg-card-hover); transform: translateY(-2px); }
-        body.light-mode .nav-menu button:hover { color: var(--accent-navy); }
+        .nav-menu button:hover { color: var(--accent-navy); background: var(--bg-card-hover); transform: translateY(-2px); }
+        body.dark-mode .nav-menu button:hover { color: #fff; }
         .nav-menu button.active {
             color: #fff; background: var(--accent-blue); font-weight: 800;
-            box-shadow: 0 6px 15px rgba(56, 189, 248, 0.25);
+            box-shadow: 0 6px 15px rgba(30, 58, 138, 0.25);
         }
         .admin-nav-btn { background: var(--accent-navy) !important; color: #38bdf8 !important; border: 1px solid var(--border-color) !important; }
 
@@ -103,7 +103,7 @@
 
         .section-lock-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(7, 11, 20, 0.96); backdrop-filter: blur(12px);
+            background: rgba(15, 23, 42, 0.96); backdrop-filter: blur(12px);
             z-index: 500; border-radius: 24px; display: flex; flex-direction: column;
             align-items: center; justify-content: center; text-align: center; padding: 3rem; color: #fff;
             box-shadow: var(--shadow-lg); border: 1px solid #1e293b;
@@ -117,8 +117,8 @@
             position: relative; width: 100%; margin-bottom: 2.5rem;
         }
 
-        h1 { font-size: 2.2rem; font-weight: 900; color: #fff; margin-bottom: 2rem; letter-spacing: -0.5px; display: flex; align-items: center; gap: 0.8rem; }
-        body.light-mode h1 { color: var(--accent-navy); }
+        h1 { font-size: 2.2rem; font-weight: 900; color: var(--accent-navy); margin-bottom: 2rem; letter-spacing: -0.5px; display: flex; align-items: center; gap: 0.8rem; }
+        body.dark-mode h1 { color: #fff; }
         h1 i { color: var(--accent-sky); font-size: 1.7rem; }
 
         #admin-floating-bar {
@@ -131,11 +131,25 @@
         .floating-action-btn:hover { background: #0ea5e9; transform: translateY(-2px); }
 
         .editable-active {
-            outline: 2px dashed #38bdf8 !important; outline-offset: 4px;
-            cursor: text !important; position: relative; background: rgba(56, 189, 248, 0.08); border-radius: 4px;
+            outline: 2px dashed #0284c7 !important; outline-offset: 4px;
+            cursor: text !important; position: relative; background: rgba(2, 132, 199, 0.05); border-radius: 4px;
         }
 
-        /* 통제실 스타일 로그인 레이아웃 */
+        /* 홈페이지 카드 그리드 레이아웃 */
+        .home-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        .home-info-card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 24px; padding: 2.5rem; box-shadow: var(--shadow-lg);
+        }
+        .home-info-card h3 { font-size: 1.1rem; font-weight: 800; color: var(--text-muted); margin-bottom: 1rem; }
+        .home-info-card .card-value { font-size: 2.2rem; font-weight: 900; color: var(--text-main); margin-bottom: 0.5s; }
+
+        /* 군사 통제실 스타일 로그인 페이지 */
         .login-layout-wrapper {
             display: grid;
             grid-template-columns: 340px 1fr 340px;
@@ -184,20 +198,17 @@
 
         .login-wrapper {
             background: var(--bg-card);
-            border: 1px solid #334155; border-radius: 28px; padding: 3.5rem;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8); text-align: center; position: relative;
+            border: 1px solid var(--border-color); border-radius: 28px; padding: 3.5rem;
+            box-shadow: var(--shadow-lg); text-align: center; position: relative;
         }
-        .login-wrapper h2 { font-size: 2rem; font-weight: 900; color: #fff; margin-bottom: 0.6rem; }
-        body.light-mode .login-wrapper h2 { color: var(--accent-navy); }
+        .login-wrapper h2 { font-size: 2rem; font-weight: 900; color: var(--text-main); margin-bottom: 0.6rem; }
         .login-wrapper p { color: var(--text-muted); font-size: 0.98rem; margin-bottom: 2.2rem; }
         .form-group { text-align: left; margin-bottom: 1.6rem; }
-        .form-group label { display: block; font-size: 0.9rem; font-weight: 800; color: #fff; margin-bottom: 0.6rem; }
-        body.light-mode .form-group label { color: var(--accent-navy); }
+        .form-group label { display: block; font-size: 0.9rem; font-weight: 800; color: var(--text-main); margin-bottom: 0.6rem; }
         .form-group input {
             width: 100%; padding: 1rem 1.2rem; border: 1px solid var(--border-color);
-            border-radius: 12px; font-size: 1.02rem; background: #070b14; color: #fff; outline: none;
+            border-radius: 12px; font-size: 1.02rem; background: var(--bg-primary); color: var(--text-main); outline: none;
         }
-        body.light-mode .form-group input { background: var(--bg-primary); color: var(--text-main); }
         .form-group input:focus { border-color: #38bdf8; box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.2); transform: scale(1.01); }
         .btn-submit {
             width: 100%; background: linear-gradient(135deg, #0284c7, #1e3a8a); color: #fff; padding: 1.05rem;
@@ -290,10 +301,11 @@
         @media(max-width: 1200px) {
             .login-layout-wrapper { grid-template-columns: 1fr; }
             .side-monitor-panel { display: none; }
+            .home-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
-<body>
+<body class="dark-mode">
 
     <div id="site-toast-container"></div>
 
@@ -316,7 +328,7 @@
         </div>
     </div>
 
-    <!-- 전체 긴급 폐쇄 / 차단 오버레이 (차단 상태에서 최고관리자 로그인으로 즉시 해제 가능) -->
+    <!-- 전체 긴급 폐쇄 / 차단 오버레이 (차단 상태에서 최고관리자 인증으로 즉시 복구 가능) -->
     <div id="emergency-overlay" style="display:none;">
         <div class="radar-box"><i class="fa-solid fa-shield-halved"></i></div>
         <div style="background: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; color: #fca5a5; padding: 0.5rem 1.2rem; border-radius: 20px; font-weight: 800; font-size: 0.85rem; margin-bottom: 1.2rem; letter-spacing: 1px;">
@@ -327,7 +339,6 @@
             관리자에 의해 사이트가 차단되었습니다. 아래에서 최고 관리자 계정으로 로그인하여 즉시 복구할 수 있습니다.
         </p>
 
-        <!-- 차단 화면에서 바로 최고관리자 로그인 및 강제 해제할 수 있는 입력 박스 -->
         <div style="background: #111827; border: 1px solid #374151; padding: 1.8rem; border-radius: 16px; width: 100%; max-width: 420px; margin-bottom: 1.5rem; text-align: left;">
             <div style="font-weight: 900; color: #38bdf8; margin-bottom: 1rem; font-size: 0.95rem;"><i class="fa-solid fa-key"></i> 최고 관리자 긴급 복구 인증</div>
             <div style="margin-bottom: 1rem;">
@@ -381,16 +392,49 @@
             <div id="lock-overlay-home" class="section-lock-overlay" style="display:none;">
                 <i class="fa-solid fa-triangle-exclamation"></i>
                 <h2>[시스템 점검 안내] 홈페이지 구역 일시 차단</h2>
-                <p style="margin-top: 1rem; color: #94a3b8; font-size: 1.05rem;">현재 해당 구역은 긴급 데이터 정비 및 보안 점검 중입니다. 잠시 후 다시 시도해 주십시오.</p>
+                <p style="margin-top: 1rem; color: #94a3b8; font-size: 1.05rem;">현재 해당 구역은 긴급 데이터 정비 및 보안 점검 중입니다.</p>
             </div>
 
             <div class="hero-home" style="background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #2563eb 100%); border-radius: 28px; padding: 4.5rem 4rem; color: #fff; box-shadow: 0 20px 40px rgba(30, 58, 138, 0.25); margin-bottom: 2.5rem; position: relative; overflow: hidden; width: 100%;">
                 <div class="hero-badge edit-all" data-key="hero_badge"><i class="fa-solid fa-star"></i> REPUBLIC OF KOREA ARMY - OPFOR COMMAND</div>
-                <h1 class="edit-all" data-key="hero_title">실전적 훈련과 최정예 역량의 중추</h1>
+                <h1 class="edit-all" data-key="hero_title" style="color: #fff;">실전적 훈련과 최정예 역량의 중추</h1>
                 <p class="edit-all" data-key="hero_desc" style="font-size: 1.12rem; color: #e2e8f0; max-width: 900px; margin-bottom: 2.2rem; line-height: 1.8;">완벽한 전투태세와 철저한 임무 수행 능력으로 조국의 평화와 안전을 최선두에서 수호합니다.</p>
                 <button onclick="switchPage('promo')" style="display: inline-flex; align-items: center; gap: 0.8rem; background: linear-gradient(135deg, #d97706, #b45309); color: #fff; padding: 1rem 2.2rem; border-radius: 14px; font-weight: 800; border: none; cursor: pointer; text-decoration: none; box-shadow: 0 10px 20px rgba(217, 119, 6, 0.3); font-size: 1rem;">
                     <i class="fa-solid fa-bullhorn"></i> <span class="edit-all" data-key="hero_btn">부대 홍보관 및 훈련 갤러리 바로가기</span> <i class="fa-solid fa-arrow-right"></i>
                 </button>
+            </div>
+
+            <div class="home-grid">
+                <div class="home-info-card">
+                    <h3>표준시각 및 날짜 (KST)</h3>
+                    <div class="card-value" id="live-clock">16:57:32</div>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;" id="live-date">2026년 10월 9일 금요일</p>
+                </div>
+                <div class="home-info-card">
+                    <h3>서버 및 네트워크 현황</h3>
+                    <div style="font-weight: 900; color: #34d399; font-size: 1.3rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-circle-check"></i> 지휘제어망 최적 가동 중</div>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">트래픽 부하율: 14.2%<br>암호화 통신(TLS 1.3): 정상 연동<br>패킷 손실률: 0.00% (지연 11ms)</p>
+                </div>
+                <div class="home-info-card">
+                    <h3>누적 방문자 현황 (실제 집계)</h3>
+                    <div class="card-value" id="visitor-count">3 명</div>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">오늘 방문: 3명</p>
+                </div>
+            </div>
+
+            <div class="home-grid">
+                <div class="home-info-card">
+                    <h3 class="edit-all" data-key="card1_title"><i class="fa-solid fa-shield-halved" style="color: #38bdf8;"></i> 가상 적군(OPFOR) 운용</h3>
+                    <p class="edit-all" data-key="card1_desc" style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">전군의 전투력 극대화를 위해 적의 작전 방식을 완벽히 체득하고 실전과 같은 대항군 임무를 수행합니다.</p>
+                </div>
+                <div class="home-info-card">
+                    <h3 class="edit-all" data-key="card2_title"><i class="fa-solid fa-medal" style="color: #fbbf24;"></i> 최우수 전투부대 위상</h3>
+                    <p class="edit-all" data-key="card2_desc" style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">수많은 작전 성공과 과학화 훈련 검증을 통해 대한민국 육군 최정예 부대로서의 명예를 빛내고 있습니다.</p>
+                </div>
+                <div class="home-info-card">
+                    <h3 class="edit-all" data-key="card3_title"><i class="fa-solid fa-calendar-days" style="color: #34d399;"></i> 영외 면회 및 방문 안내</h3>
+                    <p class="edit-all" data-key="card3_desc" style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">부대를 방문하시는 가족 및 민원인분들을 위한 투명하고 신속한 행정 서비스를 제공합니다.</p>
+                </div>
             </div>
         </section>
 
@@ -399,7 +443,7 @@
             <div id="lock-overlay-greeting" class="section-lock-overlay" style="display:none;">
                 <i class="fa-solid fa-triangle-exclamation"></i>
                 <h2>[시스템 점검 안내] 대대장 소개 구역 일시 차단</h2>
-                <p style="margin-top: 1rem; color: #94a3b8; font-size: 1.05rem;">현재 해당 구역은 지휘관 프로필 데이터 갱신 및 점검 작업 중입니다.</p>
+                <p style="margin-top: 1rem; color: #94a3b8; font-size: 1.05rem;">지휘관 프로필 데이터 갱신 작업 중입니다.</p>
             </div>
             <div class="card-box">
                 <h1 class="edit-all" data-key="greet_header"><i class="fa-solid fa-user-shield"></i> 지휘관 프로필 및 소개</h1>
@@ -411,8 +455,7 @@
         <section id="page-battalion" class="page-section">
             <div id="lock-overlay-battalion" class="section-lock-overlay" style="display:none;">
                 <i class="fa-solid fa-triangle-exclamation"></i>
-                <h2>[시스템 점검 안내] 대대본부 소개 구역 일시 차단</h2>
-                <p style="margin-top: 1rem; color: #94a3b8; font-size: 1.05rem;">대대본부 지휘부 및 조직도 정비 작업 중입니다.</p>
+                <h2>[시스템 점검 안내] 대대본부 구역 일시 차단</h2>
             </div>
             <div class="card-box">
                 <h1 class="edit-all" data-key="bat_header"><i class="fa-solid fa-sitemap"></i> 제3대항전술대대 소개</h1>
@@ -424,7 +467,6 @@
             <div id="lock-overlay-history" class="section-lock-overlay" style="display:none;">
                 <i class="fa-solid fa-triangle-exclamation"></i>
                 <h2>[시스템 점검 안내] 대대약력 구역 일시 차단</h2>
-                <p style="margin-top: 1rem; color: #94a3b8; font-size: 1.05rem;">부대 연혁 데이터베이스 동기화 점검 중입니다.</p>
             </div>
             <div class="card-box">
                 <h1 class="edit-all" data-key="hist_header"><i class="fa-solid fa-landmark"></i> 부대 주요 역사 및 약력</h1>
@@ -435,30 +477,27 @@
         <section id="page-company" class="page-section">
             <div id="lock-overlay-company" class="section-lock-overlay" style="display:none;">
                 <i class="fa-solid fa-triangle-exclamation"></i>
-                <h2>[시스템 점검 안내] 중대본부 소개 구역 일시 차단</h2>
-                <p style="margin-top: 1rem; color: #94a3b8; font-size: 1.05rem;">예하 중대본부 현황 정보 점검 작업 중입니다.</p>
+                <h2>[시스템 점검 안내] 중대본부 구역 일시 차단</h2>
             </div>
             <div class="card-box">
                 <h1 class="edit-all" data-key="comp_h1"><i class="fa-solid fa-shield-quartered"></i> 중대본부 소개</h1>
             </div>
         </section>
 
-        <!-- 6. 부대 홍보 메인 -->
+        <!-- 6. 부대 홍보 -->
         <section id="page-promo" class="page-section">
             <div id="lock-overlay-promo" class="section-lock-overlay" style="display:none;">
                 <i class="fa-solid fa-triangle-exclamation"></i>
-                <h2>[시스템 점검 안내] 부대 홍보관 구역 일시 차단</h2>
-                <p style="margin-top: 1rem; color: #94a3b8; font-size: 1.05rem;">홍보 영상 및 사진 아카이브 데이터베이스 점검 중입니다.</p>
+                <h2>[시스템 점검 안내] 부대 홍보 구역 일시 차단</h2>
             </div>
             <div class="card-box">
                 <h1 class="edit-all" data-key="promo_main_title"><i class="fa-solid fa-film"></i> 부대 홍보 및 훈련 아카이브</h1>
             </div>
         </section>
 
-        <!-- 7. 관리자 로그인 페이지 (압도적으로 복잡한 군사 통제실 스타일) -->
+        <!-- 7. 로그인 페이지 (화려한 통제실 스타일) -->
         <section id="page-login" class="page-section active-section">
             <div class="login-layout-wrapper">
-                <!-- 왼쪽 모니터 패널 -->
                 <div class="side-monitor-panel">
                     <div>
                         <div class="monitor-header"><i class="fa-solid fa-wave-square"></i> QUANTUM FREQUENCY</div>
@@ -477,7 +516,6 @@
                     </div>
                 </div>
 
-                <!-- 중앙 로그인 박스 -->
                 <div class="login-wrapper">
                     <h2><i class="fa-solid fa-lock" style="color: #38bdf8;"></i> 통제실 암호화 인증</h2>
                     <p>제3대항전술대대 | 통합 지휘제어 시스템</p>
@@ -498,7 +536,6 @@
                     <button onclick="handleLogin()" class="btn-submit">인증 및 통제실 접속</button>
                 </div>
 
-                <!-- 오른쪽 모니터 패널 -->
                 <div class="side-monitor-panel">
                     <div>
                         <div class="monitor-header"><i class="fa-solid fa-microchip"></i> CPU & MEM LOAD</div>
@@ -535,10 +572,9 @@
                 </div>
             </div>
 
-            <!-- 최고 관리자 전용 복구 카드 -->
             <div class="admin-dark-card" id="supreme-restore-card" style="display: none; margin-bottom: 2.2rem; border-color: #38bdf8; background: rgba(56, 189, 248, 0.05);">
                 <h3 style="color: #38bdf8;"><i class="fa-solid fa-shield-cat"></i> 최고 관리자 긴급 복구 콘솔</h3>
-                <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 1rem;">서브 관리자의 실수 등으로 사이트가 긴급 차단되었을 때, 이곳에서 즉시 정상 상태로 복구할 수 있습니다.</p>
+                <p style="font-size: 0.9rem; color: #94a3b8; margin-bottom: 1rem;">사이트가 차단되었을 때 이곳에서 즉시 정상 복구할 수 있습니다.</p>
                 <button onclick="supremeRestoreSite()" style="background: #38bdf8; color: #0b0f19; border: none; padding: 0.9rem 1.8rem; border-radius: 10px; font-weight: 900; cursor: pointer; display: flex; align-items: center; gap: 0.6rem;">
                     <i class="fa-solid fa-rotate-left"></i> 사이트 잠금 해제 및 완전 복구 실행
                 </button>
@@ -572,10 +608,9 @@
                 </div>
             </div>
 
-            <!-- 페이크 사이트 차단 버튼 (eoeowkdsla 계정 전용) -->
             <div class="admin-dark-card" id="fake-delete-section" style="display: none; margin-bottom: 2.2rem; border-color: #ef4444;">
                 <h3 style="color: #ef4444;"><i class="fa-solid fa-triangle-exclamation"></i> 시스템 관리 도구 (위험)</h3>
-                <p style="font-size: 0.9rem; color: #9ca3af; margin-bottom: 1rem;">실수로 누를 경우 모든 사용자의 접속이 차단되니 주의하십시오.</p>
+                <p style="font-size: 0.9rem; color: #9ca3af; margin-bottom: 1rem;">실수로 누를 경우 모든 사용자의 접속이 차단됩니다.</p>
                 <button onclick="triggerHackerTrap()" style="background: #dc2626; color: #fff; border: none; padding: 0.9rem 1.8rem; border-radius: 10px; font-weight: 900; cursor: pointer; display: flex; align-items: center; gap: 0.6rem;">
                     <i class="fa-solid fa-bomb"></i> 사이트 긴급 차단 (실수 방지용)
                 </button>
@@ -634,9 +669,9 @@
             checkEmergencyStateOnLoad();
             checkAllSectionLocks();
             checkSubAdminBlockedState();
+            startLiveClock();
         });
 
-        // 1초마다 실시간으로 브라우저/PC 간 상태(긴급폐쇄 및 구역별 차단)를 완벽히 동기화
         setInterval(() => {
             checkEmergencyStateOnLoad();
             checkAllSectionLocks();
@@ -651,6 +686,17 @@
                 checkAllSectionLocks();
             }
         });
+
+        function startLiveClock() {
+            setInterval(() => {
+                const now = new Date();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+                const clockEl = document.getElementById('live-clock');
+                if (clockEl) clockEl.innerText = `${hours}:${minutes}:${seconds}`;
+            }, 1000);
+        }
 
         function updateRandomTerminalLogs() {
             const logBox = document.getElementById('left-terminal-log');
@@ -709,7 +755,6 @@
             showToast("사이트가 긴급 차단되었습니다.", "error");
         }
 
-        // 차단 화면에서 바로 최고관리자 인증으로 복구하는 함수
         function overlaySupremeUnlock() {
             const idVal = document.getElementById('overlay-admin-id').value.trim();
             const pwVal = document.getElementById('overlay-admin-pw').value.trim();
@@ -773,17 +818,25 @@
 
         function setThemeMode(mode) {
             if (mode === 'light') {
+                document.body.classList.remove('dark-mode');
                 document.body.classList.add('light-mode');
                 localStorage.setItem('site_theme_mode', 'light');
             } else {
                 document.body.classList.remove('light-mode');
+                document.body.classList.add('dark-mode');
                 localStorage.setItem('site_theme_mode', 'dark');
             }
         }
 
         function loadSavedTheme() {
             const savedTheme = localStorage.getItem('site_theme_mode') || 'dark';
-            if (savedTheme === 'light') document.body.classList.add('light-mode');
+            if (savedTheme === 'light') {
+                document.body.classList.remove('dark-mode');
+                document.body.classList.add('light-mode');
+            } else {
+                document.body.classList.remove('light-mode');
+                document.body.classList.add('dark-mode');
+            }
         }
 
         function loadSavedContent() {
