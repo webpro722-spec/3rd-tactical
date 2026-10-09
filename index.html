@@ -10,7 +10,6 @@
     <meta property="og:type" content="website">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Firebase 실시간 동기화 라이브러리 -->
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
 
@@ -280,6 +279,14 @@
         .media-caption p { font-size: 0.98rem; color: var(--text-muted); line-height: 1.7; }
         .media-publisher { font-size: 0.85rem; color: var(--accent-sky); font-weight: 800; margin-top: 0.5rem; }
 
+        .card-delete-btn {
+            position: absolute; top: 15px; right: 15px; z-index: 10;
+            background: #ef4444; color: #fff; border: none; padding: 0.5rem 0.9rem;
+            border-radius: 8px; font-weight: 900; font-size: 0.8rem; cursor: pointer;
+            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4); display: none;
+        }
+        .card-delete-btn:hover { background: #dc2626; transform: scale(1.05); }
+
         .detail-profile-wrapper, .commander-hero-wrapper {
             background: var(--bg-card); border: 1px solid var(--border-color);
             border-radius: 28px; padding: 3.5rem 4rem; box-shadow: var(--shadow-lg); width: 100%;
@@ -424,13 +431,6 @@
         }
         .admin-dark-card h3 { font-size: 1.2rem; font-weight: 900; color: #f3f4f6; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.7rem; }
         .admin-panel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; margin-bottom: 2.2rem; }
-        
-        .emergency-btn {
-            background: #ef4444; color: #fff; padding: 1.1rem 1.6rem; border-radius: 12px;
-            font-weight: 900; border: none; cursor: pointer; width: 100%; font-size: 1.08rem;
-            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4); display: flex; align-items: center; justify-content: center; gap: 0.7rem;
-        }
-        .emergency-btn:hover { background: #dc2626; transform: translateY(-2px); }
 
         #login-choice-modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -930,7 +930,7 @@
         <section id="page-c6-lieutenant" class="page-section"><div class="detail-profile-wrapper"><h1 class="edit-all" data-key="c6_l_h">부중대장 소개</h1><div style="text-align: right;"><button onclick="switchPage('company')" class="btn-action" style="background: var(--accent-navy);">돌아가기</button></div></div></section>
         <section id="page-c6-firstsergeant" class="page-section"><div class="detail-profile-wrapper"><h1 class="edit-all" data-key="c6_f_h">행보관 소개</h1><div style="text-align: right;"><button onclick="switchPage('company')" class="btn-action" style="background: var(--accent-navy);">돌아가기</button></div></div></section>
 
-        <!-- 6. 부대 홍보 메인 (관리자 전용 추가/삭제 컨트롤 포함) -->
+        <!-- 6. 부대 홍보 메인 -->
         <section id="page-promo" class="page-section">
             <div id="lock-overlay-promo" class="section-lock-overlay" style="display:none;">
                 <i class="fa-solid fa-triangle-exclamation"></i>
@@ -988,8 +988,7 @@
         <section id="page-media-detail" class="page-section">
             <div class="detail-profile-wrapper">
                 <div id="dynamic-detail-container"></div>
-                <div style="margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center;">
-                    <button onclick="deleteCurrentMediaItem()" id="admin-delete-media-btn" class="floating-action-btn" style="display:none; background: #ef4444; color: #fff; padding: 0.8rem 1.4rem; font-weight: 900;"><i class="fa-solid fa-trash"></i> 이 콘텐츠 삭제</button>
+                <div style="margin-top: 2.5rem; text-align: right;">
                     <button onclick="switchBackToCategory()" class="btn-action" style="background: var(--accent-navy);"><i class="fa-solid fa-arrow-left"></i> 목록으로 돌아가기</button>
                 </div>
             </div>
@@ -1092,7 +1091,6 @@
                     </div>
                 </div>
 
-                <!-- 긴급 폐쇄 대신 보안 무력화 상태 표시 카드 -->
                 <div class="admin-dark-card" style="border-color: #ef4444;">
                     <h3><i class="fa-solid fa-triangle-exclamation" style="color: #ef4444;"></i> 보안 방화벽 상태</h3>
                     <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.4); padding: 1.1rem; border-radius: 10px; color: #fca5a5; font-weight: 900; font-size: 1.05rem; text-align: center; margin-top: 1rem;">
@@ -1305,7 +1303,6 @@
         }
 
         let lastActiveCategory = 'promo-videos';
-        let currentSelectedMediaId = null;
 
         function loadSavedMediaItems() {
             const videoContainer = document.getElementById('video-list-container');
@@ -1318,7 +1315,12 @@
             getStoredMediaItems().forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'media-card';
-                card.onclick = () => openMediaDetail(item.id);
+                
+                // 카드 전체를 누르면 상세 페이지로 가되, 삭제 버튼을 누르면 삭제만 수행
+                card.onclick = (e) => {
+                    if (e.target.closest('.card-delete-btn')) return;
+                    openMediaDetail(item.id);
+                };
                 
                 let mediaContent = '';
                 if (item.type === 'youtube') {
@@ -1331,7 +1333,11 @@
                     mediaContent = `<img src="${item.url}" alt="${item.title}" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=800&q=80';">`;
                 }
 
+                // 관리자 로그인 시 카드 우측 상단에 삭제 버튼 노출
+                const deleteBtnDisplay = isAdminLoggedIn ? 'block' : 'none';
+
                 card.innerHTML = `
+                    <button class="card-delete-btn" style="display: ${deleteBtnDisplay};" onclick="deleteMediaItemDirect('${item.id}', event)">삭제</button>
                     <div class="media-container">${mediaContent}</div>
                     <div class="media-caption">
                         <h4><i class="fa-solid fa-${item.type === 'youtube' ? 'video' : 'camera'}" style="color: var(--accent-blue);"></i> ${item.title}</h4>
@@ -1345,11 +1351,25 @@
             });
         }
 
+        function deleteMediaItemDirect(itemId, event) {
+            event.stopPropagation(); // 카드 클릭 이벤트 전파 방지
+            if (!isAdminLoggedIn) {
+                alert("관리자 권한이 필요합니다.");
+                return;
+            }
+            if (confirm("정말로 이 홍보 콘텐츠를 삭제하시겠습니까?")) {
+                let items = getStoredMediaItems();
+                items = items.filter(i => i.id !== itemId);
+                localStorage.setItem('custom_media_items', JSON.stringify(items));
+                loadSavedMediaItems();
+                showToast("콘텐츠가 삭제되었습니다.");
+            }
+        }
+
         function openMediaDetail(itemId) {
             const items = getStoredMediaItems();
             const target = items.find(i => i.id === itemId);
             if (!target) return;
-            currentSelectedMediaId = target.id;
             lastActiveCategory = target.type === 'youtube' ? 'promo-videos' : 'promo-photos';
 
             const detailContainer = document.getElementById('dynamic-detail-container');
@@ -1376,13 +1396,6 @@
                     </div>
                 </div>
             `;
-            
-            // 관리자 로그인 상태일 때만 삭제 버튼 노출
-            const deleteBtn = document.getElementById('admin-delete-media-btn');
-            if (deleteBtn) {
-                deleteBtn.style.display = isAdminLoggedIn ? 'inline-flex' : 'none';
-            }
-
             switchPage('media-detail');
         }
 
@@ -1410,21 +1423,6 @@
             localStorage.setItem('custom_media_items', JSON.stringify(items));
             loadSavedMediaItems();
             showToast("새 홍보 콘텐츠가 성공적으로 추가되었습니다.");
-        }
-
-        function deleteCurrentMediaItem() {
-            if (!isAdminLoggedIn) {
-                alert("관리자 권한이 필요합니다.");
-                return;
-            }
-            if (confirm("정말로 이 홍보 콘텐츠를 삭제하시겠습니까?")) {
-                let items = getStoredMediaItems();
-                items = items.filter(i => i.id !== currentSelectedMediaId);
-                localStorage.setItem('custom_media_items', JSON.stringify(items));
-                loadSavedMediaItems();
-                showToast("콘텐츠가 삭제되었습니다.");
-                switchPage(lastActiveCategory);
-            }
         }
 
         function switchBackToCategory() { switchPage(lastActiveCategory); }
@@ -1503,9 +1501,10 @@
             document.getElementById('admin-id').value = '';
             document.getElementById('admin-pw').value = '';
             
-            // 관리자 로그인 후 홍보관 추가 버튼 활성화 제어
+            // 관리자 로그인 후 홍보관 추가 버튼 및 카드 내 삭제 버튼 갱신
             const addMediaBtn = document.getElementById('admin-add-media-btn');
             if (addMediaBtn) addMediaBtn.style.display = 'inline-flex';
+            loadSavedMediaItems();
 
             if (target === 'admin') switchPage('admin');
             else if (target === 'home-edit') { switchPage('home'); enableAdminMode(); }
