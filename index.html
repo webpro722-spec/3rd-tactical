@@ -11,22 +11,41 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* 기본 화이트 모드 테마 변수 */
         :root {
+            --bg-primary: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f1f5f9;
+            --accent-navy: #0f172a;
+            --accent-blue: #1e3a8a;
+            --accent-sky: #0284c7;
+            --accent-gold: #d97706;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 20px 25px -5px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 25px 50px -12px rgba(15, 23, 42, 0.1);
+        }
+
+        /* 다크 모드 테마 변수 */
+        body.dark-mode {
             --bg-primary: #070b14;
             --bg-card: #0f172a;
             --bg-card-hover: #1e293b;
             --accent-navy: #0f172a;
             --accent-blue: #38bdf8;
-            --accent-glow: rgba(56, 189, 248, 0.25);
+            --accent-sky: #38bdf8;
             --accent-gold: #fbbf24;
             --text-main: #f1f5f9;
             --text-muted: #94a3b8;
             --border-color: #1e293b;
-            --border-glow: rgba(56, 189, 248, 0.4);
-            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
         
         body {
             background-color: var(--bg-primary);
@@ -35,27 +54,18 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            position: relative;
-            overflow-x: hidden;
         }
-
-        /* 배경 실시간 움직이는 홀로그램 그리드 효과 */
-        body::before {
-            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px; z-index: -1; pointer-events: none;
-            animation: gridMove 25s linear infinite;
-        }
-        @keyframes gridMove { 0% { background-position: 0 0; } 100% { background-position: 40px 40px; } }
 
         /* 상단 네비게이션바 */
         header {
             position: fixed; top: 0; left: 0; width: 100%;
-            background: rgba(15, 23, 42, 0.85);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--border-color);
             z-index: 1000;
+        }
+        body.dark-mode header {
+            background: rgba(15, 23, 42, 0.9);
         }
         .nav-container {
             max-width: 1650px; margin: 0 auto; display: flex;
@@ -63,12 +73,13 @@
         }
         .logo-box { display: flex; align-items: center; gap: 0.9rem; text-decoration: none; cursor: pointer; }
         .logo-icon {
-            width: 44px; height: 44px; background: linear-gradient(135deg, #0284c7, #1e3a8a);
+            width: 44px; height: 44px; background: linear-gradient(135deg, #0f172a, #1e3a8a);
             border-radius: 12px; display: flex; align-items: center; justify-content: center;
-            color: #fff; font-size: 1.2rem; box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+            color: #fff; font-size: 1.2rem; box-shadow: 0 8px 16px rgba(15, 23, 42, 0.2);
         }
         .logo-text-group { display: flex; flex-direction: column; }
-        .logo-title { font-size: 1.15rem; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
+        .logo-title { font-size: 1.15rem; font-weight: 800; color: var(--accent-navy); letter-spacing: -0.5px; }
+        body.dark-mode .logo-title { color: #fff; }
         .logo-subtitle { font-size: 0.68rem; color: var(--accent-gold); font-weight: 700; letter-spacing: 1.5px; }
 
         .nav-menu { display: flex; list-style: none; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
@@ -77,13 +88,14 @@
             color: var(--text-muted); font-weight: 600; font-size: 0.88rem; padding: 0.55rem 1.1rem;
             border-radius: 10px; transition: all 0.25s ease;
         }
-        .nav-menu button:hover { color: #fff; background: rgba(56, 189, 248, 0.1); transform: translateY(-1px); }
+        .nav-menu button:hover { color: var(--accent-navy); background: var(--bg-card-hover); transform: translateY(-1px); }
+        body.dark-mode .nav-menu button:hover { color: #fff; }
         .nav-menu button.active {
-            color: #0b0f19; background: var(--accent-blue); font-weight: 800;
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+            color: #fff; background: var(--accent-blue); font-weight: 800;
+            box-shadow: 0 6px 15px rgba(30, 58, 138, 0.25);
         }
         .admin-nav-btn {
-            background: #1e293b !important; color: var(--accent-blue) !important; border: 1px solid var(--accent-blue) !important;
+            background: var(--accent-navy) !important; color: #38bdf8 !important; border: 1px solid var(--border-color) !important;
         }
 
         /* 메인 콘텐츠 영역 */
@@ -109,186 +121,198 @@
             margin-bottom: 2.5rem;
         }
 
-        h1 { font-size: 2.2rem; font-weight: 900; color: #fff; margin-bottom: 2rem; letter-spacing: -0.5px; display: flex; align-items: center; gap: 0.8rem; }
-        h1 i { color: var(--accent-blue); font-size: 1.7rem; text-shadow: 0 0 15px rgba(56, 189, 248, 0.5); }
+        h1 { font-size: 2.2rem; font-weight: 900; color: var(--accent-navy); margin-bottom: 2rem; letter-spacing: -0.5px; display: flex; align-items: center; gap: 0.8rem; }
+        body.dark-mode h1 { color: #fff; }
+        h1 i { color: var(--accent-sky); font-size: 1.7rem; }
 
-        /* 관리자 전역 수정 제어 바 (모든 페이지 공용) */
+        /* 관리자 전역 수정 제어 바 */
         #admin-floating-bar {
-            position: sticky; top: 85px; z-index: 900; background: #0b0f19; color: #f8fafc;
+            position: sticky; top: 85px; z-index: 900; background: #0f172a; color: #f8fafc;
             padding: 0.95rem 1.8rem; border-radius: 14px; margin-bottom: 2.5rem; display: none;
-            justify-content: space-between; align-items: center; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8);
-            border: 1px solid var(--accent-blue); width: 100%;
+            justify-content: space-between; align-items: center; box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid #334155; width: 100%;
         }
         .floating-action-btn {
-            background: var(--accent-blue); color: #0b0f19; border: none; padding: 0.55rem 1.1rem;
+            background: #38bdf8; color: #0b0f19; border: none; padding: 0.55rem 1.1rem;
             border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 0.85rem; transition: 0.2s;
         }
-        .floating-action-btn:hover { background: #7dd3fc; transform: translateY(-1px); }
+        .floating-action-btn:hover { background: #0ea5e9; transform: translateY(-1px); }
 
         .editable-active {
-            outline: 2px dashed #38bdf8 !important; outline-offset: 4px;
-            cursor: text !important; position: relative; background: rgba(56, 189, 248, 0.05);
+            outline: 2px dashed #0284c7 !important; outline-offset: 4px;
+            cursor: text !important; position: relative; background: rgba(2, 132, 199, 0.05);
             border-radius: 4px;
         }
 
-        /* 메인 홈 배너 및 하이테크 위젯 */
+        /* 홈 메인 배너 */
         .hero-home {
-            background: linear-gradient(135deg, #090d16 0%, #0f172a 60%, #1e3a8a 100%);
-            border: 1px solid var(--border-glow);
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #2563eb 100%);
             border-radius: 28px; padding: 4.5rem 4rem; color: #fff;
-            box-shadow: 0 0 40px rgba(56, 189, 248, 0.15); margin-bottom: 2.5rem; position: relative; overflow: hidden;
+            box-shadow: 0 20px 40px rgba(30, 58, 138, 0.25); margin-bottom: 2.5rem; position: relative; overflow: hidden;
             width: 100%;
         }
         .hero-badge {
             display: inline-flex; align-items: center; gap: 0.6rem;
-            background: rgba(251, 191, 36, 0.15); color: #fbbf24;
-            border: 1px solid rgba(251, 191, 36, 0.4); padding: 0.45rem 1.3rem;
+            background: rgba(217, 119, 6, 0.25); color: #fbbf24;
+            border: 1px solid rgba(217, 119, 6, 0.5); padding: 0.45rem 1.3rem;
             border-radius: 30px; font-size: 0.8rem; font-weight: 800; margin-bottom: 1.5rem; letter-spacing: 1.5px;
         }
         .hero-home h1 { font-size: 2.8rem; font-weight: 900; color: #fff; margin-bottom: 1.2rem; line-height: 1.2; }
-        .hero-home p { font-size: 1.12rem; color: #cbd5e1; max-width: 900px; margin-bottom: 2.2rem; line-height: 1.8; }
+        .hero-home p { font-size: 1.12rem; color: #e2e8f0; max-width: 900px; margin-bottom: 2.2rem; line-height: 1.8; }
         
         .btn-action {
             display: inline-flex; align-items: center; gap: 0.8rem;
-            background: linear-gradient(135deg, #0284c7, #2563eb); color: #fff; padding: 1rem 2.2rem; border-radius: 14px;
+            background: linear-gradient(135deg, #d97706, #b45309); color: #fff; padding: 1rem 2.2rem; border-radius: 14px;
             font-weight: 800; border: none; cursor: pointer; text-decoration: none; transition: 0.3s;
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.4); font-size: 1rem;
+            box-shadow: 0 10px 20px rgba(217, 119, 6, 0.3); font-size: 1rem;
         }
-        .btn-action:hover { background: linear-gradient(135deg, #38bdf8, #1d4ed8); transform: translateY(-3px); box-shadow: 0 0 35px rgba(56, 189, 248, 0.7); }
+        .btn-action:hover { background: linear-gradient(135deg, #b45309, #92400e); transform: translateY(-3px); }
 
+        /* 한층 더 업그레이드된 멋진 사이트 현황 위젯 그리드 */
         .dashboard-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; margin-bottom: 2.5rem; width: 100%; }
         .widget {
             background: var(--bg-card); border: 1px solid var(--border-color);
-            padding: 2rem; border-radius: 20px; box-shadow: var(--shadow-lg);
+            padding: 2.2rem; border-radius: 22px; box-shadow: var(--shadow-sm);
             display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s;
             position: relative; overflow: hidden;
         }
         .widget::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent-blue);
+            content: ''; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: var(--accent-sky);
         }
-        .widget:hover { border-color: var(--accent-blue); transform: translateY(-4px); box-shadow: 0 0 30px rgba(56, 189, 248, 0.2); }
-        .widget-title { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 1rem; font-weight: 800; display: flex; align-items: center; gap: 0.6rem; }
-        .clock-display { font-size: 2.2rem; font-weight: 900; font-family: monospace; color: #fff; letter-spacing: -1px; text-shadow: 0 0 10px rgba(56, 189, 248, 0.5); }
+        .widget:hover { border-color: var(--accent-sky); transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        .widget-title { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 1.2rem; font-weight: 800; display: flex; align-items: center; gap: 0.6rem; }
+        .clock-display { font-size: 2.2rem; font-weight: 900; font-family: monospace; color: var(--accent-navy); letter-spacing: -1px; }
+        body.dark-mode .clock-display { color: #fff; }
         .date-display { font-size: 0.95rem; color: var(--text-muted); font-weight: 700; margin-top: 0.4rem; }
-        .server-status { font-size: 1.15rem; font-weight: 800; color: #34d399; display: flex; align-items: center; gap: 0.6rem; margin-top: 0.4rem; }
+        .server-status { font-size: 1.15rem; font-weight: 800; color: #059669; display: flex; align-items: center; gap: 0.6rem; margin-top: 0.4rem; }
+        body.dark-mode .server-status { color: #34d399; }
 
         .promo-highlight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; margin-bottom: 2.5rem; width: 100%; }
         .promo-highlight-card {
-            background: linear-gradient(145deg, #0f172a 0%, #0b0f19 100%);
+            background: linear-gradient(145deg, var(--bg-card) 0%, var(--bg-card-hover) 100%);
             border: 1px solid var(--border-color); border-top: 4px solid var(--accent-blue);
-            padding: 2.2rem; border-radius: 20px; box-shadow: var(--shadow-lg); transition: 0.3s;
+            padding: 2.2rem; border-radius: 20px; box-shadow: var(--shadow-sm); transition: 0.3s;
             display: flex; flex-direction: column; justify-content: space-between;
         }
-        .promo-highlight-card:hover { transform: translateY(-4px); border-color: var(--accent-blue); box-shadow: 0 0 30px rgba(56, 189, 248, 0.25); }
-        .promo-highlight-card h4 { font-size: 1.2rem; font-weight: 900; color: #fff; margin-bottom: 0.9rem; display: flex; align-items: center; gap: 0.7rem; }
+        .promo-highlight-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--accent-sky); }
+        .promo-highlight-card h4 { font-size: 1.2rem; font-weight: 900; color: var(--accent-navy); margin-bottom: 0.9rem; display: flex; align-items: center; gap: 0.7rem; }
+        body.dark-mode .promo-highlight-card h4 { color: #fff; }
         .promo-highlight-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem; }
 
         .home-sections-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem; margin-bottom: 2.5rem; width: 100%; }
         .home-card {
             background: var(--bg-card); border: 1px solid var(--border-color);
-            padding: 2.5rem; border-radius: 20px; box-shadow: var(--shadow-lg);
+            padding: 2.5rem; border-radius: 20px; box-shadow: var(--shadow-sm);
             display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s;
         }
-        .home-card:hover { border-color: var(--accent-blue); box-shadow: 0 0 30px rgba(56, 189, 248, 0.2); }
-        .home-card h3 { font-size: 1.3rem; font-weight: 900; color: #fff; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.7rem; }
+        .home-card:hover { box-shadow: var(--shadow-md); border-color: var(--accent-sky); }
+        .home-card h3 { font-size: 1.3rem; font-weight: 900; color: var(--accent-navy); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.7rem; }
+        body.dark-mode .home-card h3 { color: #fff; }
 
         .notice-list { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
         .notice-item {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 1rem 1.2rem; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color);
+            padding: 1rem 1.2rem; background: var(--bg-primary); border: 1px solid var(--border-color);
             border-radius: 12px; cursor: pointer; transition: 0.2s;
         }
-        .notice-item:hover { background: rgba(56, 189, 248, 0.05); border-color: var(--accent-blue); transform: translateX(3px); }
-        .notice-title { font-size: 0.96rem; font-weight: 700; color: #f8fafc; display: flex; align-items: center; gap: 0.6rem; }
+        .notice-item:hover { background: var(--bg-card-hover); border-color: var(--accent-sky); transform: translateX(3px); }
+        .notice-title { font-size: 0.96rem; font-weight: 700; color: var(--accent-navy); display: flex; align-items: center; gap: 0.6rem; }
+        body.dark-mode .notice-title { color: #f8fafc; }
         .notice-date { font-size: 0.82rem; color: var(--text-muted); font-weight: 600; }
 
-        /* 예하 중대 현황 스타일 (제5필사중대, 제6철혈중대 멋진 카드) */
+        /* 예하 전투부대 현황 카드 */
         .battalion-status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.2rem; }
         .battalion-status-card {
-            background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 16px; padding: 1.8rem;
+            background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 16px; padding: 1.8rem;
             display: flex; flex-direction: column; gap: 0.8rem; transition: 0.3s;
         }
-        .battalion-status-card:hover { border-color: var(--accent-blue); background: rgba(56, 189, 248, 0.04); }
-        .battalion-status-title { font-size: 1.1rem; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 0.6rem; }
+        .battalion-status-card:hover { border-color: var(--accent-sky); background: var(--bg-card-hover); }
+        .battalion-status-title { font-size: 1.1rem; font-weight: 900; color: var(--accent-navy); display: flex; align-items: center; gap: 0.6rem; }
+        body.dark-mode .battalion-status-title { color: #fff; }
         .battalion-status-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; }
 
         /* 프로필 카드 그리드 */
         .profile-card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; margin-top: 1.5rem; width: 100%; }
         .profile-card {
-            background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 20px;
-            padding: 2rem; box-shadow: var(--shadow-lg); transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between;
+            background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 20px;
+            padding: 2rem; box-shadow: var(--shadow-sm); transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between;
         }
-        .profile-card:hover { transform: translateY(-5px); border-color: var(--accent-blue); background: var(--bg-card); box-shadow: 0 0 30px rgba(56, 189, 248, 0.2); }
+        .profile-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--accent-sky); background: var(--bg-card); }
         .profile-photo-area {
-            width: 100%; height: 210px; background: #090d16; border-radius: 14px;
+            width: 100%; height: 210px; background: #e2e8f0; border-radius: 14px;
             overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            color: var(--text-muted); font-weight: 700; gap: 0.6rem; margin-bottom: 1.4rem; border: 2px dashed var(--border-color);
+            color: var(--text-muted); font-weight: 700; gap: 0.6rem; margin-bottom: 1.4rem; border: 2px dashed #cbd5e1;
         }
+        body.dark-mode .profile-photo-area { background: #090d16; border-color: #334155; }
         .profile-photo-area img { width: 100%; height: 100%; object-fit: cover; }
         .profile-photo-area i { font-size: 3rem; color: var(--accent-blue); }
-        .profile-info h3 { font-size: 1.25rem; font-weight: 900; color: #fff; margin-bottom: 0.4rem; }
+        .profile-info h3 { font-size: 1.25rem; font-weight: 900; color: var(--accent-navy); margin-bottom: 0.4rem; }
+        body.dark-mode .profile-info h3 { color: #fff; }
         .profile-info p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.4rem; }
         .btn-profile-link {
-            width: 100%; background: #1e293b; color: #fff; padding: 0.85rem; border-radius: 10px;
-            font-weight: 800; border: 1px solid var(--border-color); cursor: pointer; text-align: center; transition: 0.2s; font-size: 0.95rem;
+            width: 100%; background: var(--accent-navy); color: #fff; padding: 0.85rem; border-radius: 10px;
+            font-weight: 800; border: none; cursor: pointer; text-align: center; transition: 0.2s; font-size: 0.95rem;
             display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
         }
-        .btn-profile-link:hover { background: var(--accent-blue); color: #0b0f19; border-color: var(--accent-blue); }
+        .btn-profile-link:hover { background: var(--accent-blue); }
 
         /* 풍성한 상세 소개 스타일 */
         .rich-content-box {
-            background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color);
+            background: var(--bg-primary); border: 1px solid var(--border-color);
             padding: 2.2rem 2.5rem; border-radius: 20px; margin-bottom: 2rem;
-            box-shadow: var(--shadow-lg); line-height: 1.8; color: #cbd5e1; font-size: 1.05rem;
+            box-shadow: var(--shadow-sm); line-height: 1.8; color: var(--text-main); font-size: 1.05rem;
         }
-        .rich-content-box h3 { font-size: 1.35rem; font-weight: 900; color: #fff; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.7rem; }
+        .rich-content-box h3 { font-size: 1.35rem; font-weight: 900; color: var(--accent-navy); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.7rem; }
+        body.dark-mode .rich-content-box h3 { color: #fff; }
         .rich-content-box h3 i { color: var(--accent-blue); }
 
-        /* 부대 홍보 메인 배너 카드 스타일 */
+        /* 부대 홍보 배너 스타일 */
         .promo-banner-list { display: flex; flex-direction: column; gap: 1.8rem; margin-top: 1.5rem; }
         .promo-banner-card {
-            background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 20px;
+            background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 20px;
             padding: 2.5rem 3rem; display: flex; justify-content: space-between; align-items: center;
-            box-shadow: var(--shadow-lg); cursor: pointer; transition: 0.3s;
+            box-shadow: var(--shadow-sm); cursor: pointer; transition: 0.3s;
         }
-        .promo-banner-card:hover { transform: translateY(-4px); border-color: var(--accent-blue); background: var(--bg-card); box-shadow: 0 0 30px rgba(56, 189, 248, 0.2); }
-        .promo-banner-info h3 { font-size: 1.5rem; font-weight: 900; color: #fff; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.8rem; }
+        .promo-banner-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--accent-sky); background: var(--bg-card); }
+        .promo-banner-info h3 { font-size: 1.5rem; font-weight: 900; color: var(--accent-navy); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.8rem; }
+        body.dark-mode .promo-banner-info h3 { color: #fff; }
         .promo-banner-info p { font-size: 1.02rem; color: var(--text-muted); line-height: 1.6; }
         .promo-banner-btn {
-            background: var(--accent-blue); color: #0b0f19; padding: 0.9rem 1.8rem; border-radius: 12px;
-            font-weight: 900; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 0.6rem; white-space: nowrap; transition: 0.2s;
+            background: var(--accent-navy); color: #fff; padding: 0.9rem 1.8rem; border-radius: 12px;
+            font-weight: 800; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 0.6rem; white-space: nowrap; transition: 0.2s;
         }
-        .promo-banner-card:hover .promo-banner-btn { background: #7dd3fc; }
+        .promo-banner-card:hover .promo-banner-btn { background: var(--accent-blue); }
 
-        /* 줄줄이 나열되는 미디어 목록 그리드 */
+        /* 미디어 목록 그리드 */
         .media-list-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 1.5rem; }
         .media-card {
-            background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); border-radius: 20px;
-            overflow: hidden; box-shadow: var(--shadow-lg); transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between;
+            background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 20px;
+            overflow: hidden; box-shadow: var(--shadow-sm); transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between;
             cursor: pointer; position: relative;
         }
-        .media-card:hover { transform: translateY(-4px); border-color: var(--accent-blue); background: var(--bg-card); box-shadow: 0 0 30px rgba(56, 189, 248, 0.2); }
+        .media-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--accent-sky); background: var(--bg-card); }
         .media-container { width: 100%; height: 280px; background: #000; display: flex; align-items: center; justify-content: center; position: relative; color: #fff; }
         .media-container iframe, .media-container img { width: 100%; height: 100%; object-fit: cover; border: none; pointer-events: none; }
         .media-caption { padding: 1.8rem; display: flex; flex-direction: column; gap: 0.5rem; }
-        .media-caption h4 { font-size: 1.2rem; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 0.6rem; }
+        .media-caption h4 { font-size: 1.2rem; font-weight: 900; color: var(--accent-navy); display: flex; align-items: center; gap: 0.6rem; }
+        body.dark-mode .media-caption h4 { color: #fff; }
         .media-caption p { font-size: 0.98rem; color: var(--text-muted); line-height: 1.7; }
-        .media-publisher { font-size: 0.85rem; color: var(--accent-blue); font-weight: 800; margin-top: 0.5rem; }
+        .media-publisher { font-size: 0.85rem; color: var(--accent-sky); font-weight: 800; margin-top: 0.5rem; }
 
-        /* 관리자 전용 삭제 버튼 */
+        /* 관리자 삭제 버튼 */
         .admin-delete-item-btn {
             position: absolute; top: 15px; right: 15px; background: #ef4444; color: #fff; border: none;
             padding: 0.4rem 0.9rem; border-radius: 8px; font-weight: 900; font-size: 0.8rem; cursor: pointer; z-index: 50;
-            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.5); display: none; transition: 0.2s;
+            box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4); display: none; transition: 0.2s;
         }
         .admin-delete-item-btn:hover { background: #dc2626; transform: scale(1.05); }
 
-        /* 관리자 전용 업로드 폼 박스 */
+        /* 관리자 업로드 박스 */
         .admin-upload-box {
-            background: #0b0f19; border: 1px solid var(--accent-blue); border-radius: 20px;
-            padding: 2.5rem; margin-top: 3rem; color: #f8fafc; display: none; box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            background: #0b0f19; border: 1px solid #38bdf8; border-radius: 20px;
+            padding: 2.5rem; margin-top: 3rem; color: #f8fafc; display: none; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
-        .admin-upload-box h3 { color: var(--accent-blue); font-size: 1.3rem; font-weight: 900; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.7rem; }
+        .admin-upload-box h3 { color: #38bdf8; font-size: 1.3rem; font-weight: 900; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.7rem; }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.2rem; }
         .form-group-custom { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.2rem; }
         .form-group-custom label { font-size: 0.9rem; font-weight: 800; color: #e2e8f0; }
@@ -296,14 +320,10 @@
             width: 100%; padding: 0.9rem 1.2rem; background: #111827; border: 1px solid #374151;
             border-radius: 10px; color: #fff; font-size: 0.98rem; outline: none;
         }
-        .form-group-custom input:focus, .form-group-custom textarea:focus { border-color: var(--accent-blue); }
+        .form-group-custom input:focus, .form-group-custom textarea:focus { border-color: #38bdf8; }
 
         /* 간부 상세 소개 페이지 스타일 */
-        .detail-profile-wrapper {
-            background: var(--bg-card); border: 1px solid var(--border-color);
-            border-radius: 28px; padding: 3.5rem 4rem; box-shadow: var(--shadow-lg); width: 100%;
-        }
-        .commander-hero-wrapper {
+        .detail-profile-wrapper, .commander-hero-wrapper {
             background: var(--bg-card); border: 1px solid var(--border-color);
             border-radius: 28px; padding: 3.5rem 4rem; box-shadow: var(--shadow-lg); width: 100%;
         }
@@ -312,33 +332,37 @@
             padding-bottom: 3rem; border-bottom: 1px solid var(--border-color);
         }
         .commander-photo-box {
-            width: 100%; height: 380px; background: #090d16; border-radius: 20px;
-            overflow: hidden; border: 2px solid var(--accent-blue); box-shadow: 0 0 25px rgba(56, 189, 248, 0.2);
+            width: 100%; height: 380px; background: #e2e8f0; border-radius: 20px;
+            overflow: hidden; border: 5px solid #fff; box-shadow: var(--shadow-md);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             color: var(--text-muted);
         }
+        body.dark-mode .commander-photo-box { background: #090d16; border-color: #334155; }
         .commander-photo-box img { width: 100%; height: 100%; object-fit: cover; }
         .commander-photo-placeholder { display: flex; flex-direction: column; align-items: center; gap: 1rem; font-weight: 700; }
         .commander-photo-placeholder i { font-size: 4rem; color: var(--accent-blue); }
-        .commander-title-area h2 { font-size: 2.4rem; font-weight: 900; color: #fff; margin-bottom: 0.6rem; }
+        .commander-title-area h2 { font-size: 2.4rem; font-weight: 900; color: var(--accent-navy); margin-bottom: 0.6rem; }
+        body.dark-mode .commander-title-area h2 { color: #fff; }
         .commander-rank-badge {
-            display: inline-block; background: rgba(56, 189, 248, 0.15); color: var(--accent-blue);
+            display: inline-block; background: #eff6ff; color: var(--accent-blue);
             font-size: 1.05rem; font-weight: 800; padding: 0.5rem 1.4rem; border-radius: 10px;
-            margin-bottom: 1.5rem; border: 1px solid rgba(56, 189, 248, 0.4); box-shadow: var(--shadow-lg);
+            margin-bottom: 1.5rem; border: 1px solid #bfdbfe; box-shadow: var(--shadow-sm);
         }
+        body.dark-mode .commander-rank-badge { background: rgba(56,189,248,0.15); color: #38bdf8; border-color: rgba(56,189,248,0.4); }
         .commander-quote-box {
-            background: rgba(255, 255, 255, 0.02); border-left: 5px solid var(--accent-gold);
+            background: var(--bg-primary); border-left: 5px solid var(--accent-gold);
             padding: 1.4rem 1.8rem; border-radius: 0 14px 14px 0; font-style: italic;
-            color: #cbd5e1; font-size: 1.08rem; line-height: 1.7; margin-top: 1.2rem;
+            color: var(--text-main); font-size: 1.08rem; line-height: 1.7; margin-top: 1.2rem;
             border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);
         }
         .commander-details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
-        .detail-block h4 { font-size: 1.2rem; font-weight: 900; color: #fff; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.6rem; }
+        .detail-block h4 { font-size: 1.2rem; font-weight: 900; color: var(--accent-navy); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.6rem; }
+        body.dark-mode .detail-block h4 { color: #fff; }
         .detail-block p { font-size: 1.02rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.2rem; }
         .career-list { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
         .career-list li {
             display: flex; gap: 1.2rem; align-items: flex-start;
-            background: rgba(255, 255, 255, 0.02); padding: 0.95rem 1.3rem; border-radius: 12px; border: 1px solid var(--border-color);
+            background: var(--bg-primary); padding: 0.95rem 1.3rem; border-radius: 12px; border: 1px solid var(--border-color);
         }
         .career-year { font-weight: 900; color: var(--accent-blue); min-width: 85px; }
         .career-desc { color: var(--text-muted); font-size: 0.96rem; font-weight: 600; }
@@ -348,13 +372,14 @@
         .timeline-item::before {
             content: ''; position: absolute; left: -2.62rem; top: 0.3rem;
             width: 16px; height: 16px; background: var(--accent-blue);
-            border-radius: 50%; border: 4px solid #0f172a; box-shadow: 0 0 15px var(--accent-blue);
+            border-radius: 50%; border: 4px solid #fff; box-shadow: 0 0 0 3px var(--accent-blue);
         }
+        body.dark-mode .timeline-item::before { border-color: #0f172a; }
         .timeline-year { font-size: 1.15rem; font-weight: 900; color: var(--accent-blue); margin-bottom: 0.5rem; }
         .timeline-desc {
-            background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color);
+            background: var(--bg-primary); border: 1px solid var(--border-color);
             padding: 1.6rem 2rem; border-radius: 16px; color: var(--text-muted); line-height: 1.8;
-            box-shadow: var(--shadow-lg); font-size: 1.02rem;
+            box-shadow: var(--shadow-sm); font-size: 1.02rem;
         }
 
         /* 로그인 화면 및 관리자 패널 */
@@ -363,35 +388,37 @@
             border: 1px solid var(--border-color); border-radius: 28px; padding: 3.5rem;
             box-shadow: var(--shadow-lg); text-align: center;
         }
-        .login-wrapper h2 { font-size: 2rem; font-weight: 900; color: #fff; margin-bottom: 0.6rem; }
+        .login-wrapper h2 { font-size: 2rem; font-weight: 900; color: var(--accent-navy); margin-bottom: 0.6rem; }
+        body.dark-mode .login-wrapper h2 { color: #fff; }
         .login-wrapper p { color: var(--text-muted); font-size: 0.98rem; margin-bottom: 2.2rem; }
         .form-group { text-align: left; margin-bottom: 1.6rem; }
-        .form-group label { display: block; font-size: 0.9rem; font-weight: 800; color: #fff; margin-bottom: 0.6rem; }
+        .form-group label { display: block; font-size: 0.9rem; font-weight: 800; color: var(--accent-navy); margin-bottom: 0.6rem; }
+        body.dark-mode .form-group label { color: #fff; }
         .form-group input {
             width: 100%; padding: 1rem 1.2rem; border: 1px solid var(--border-color);
-            border-radius: 12px; font-size: 1.02rem; background: #090d16; color: #fff; outline: none; transition: 0.25s;
+            border-radius: 12px; font-size: 1.02rem; background: var(--bg-primary); color: var(--text-main); outline: none; transition: 0.25s;
         }
-        .form-group input:focus { border-color: var(--accent-blue); box-shadow: 0 0 15px rgba(56, 189, 248, 0.3); }
+        .form-group input:focus { border-color: var(--accent-blue); background: var(--bg-card); box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.1); }
         .btn-submit {
-            width: 100%; background: var(--accent-blue); color: #0b0f19; padding: 1.05rem;
+            width: 100%; background: var(--accent-navy); color: #fff; padding: 1.05rem;
             border-radius: 12px; font-weight: 900; border: none; cursor: pointer; transition: 0.25s;
-            font-size: 1.05rem; box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+            font-size: 1.05rem; box-shadow: 0 10px 20px rgba(15, 23, 42, 0.2);
         }
-        .btn-submit:hover { background: #7dd3fc; transform: translateY(-2px); }
+        .btn-submit:hover { background: var(--accent-blue); transform: translateY(-2px); }
         
         .site-alert-box {
-            background: rgba(239, 68, 68, 0.15); border: 1px solid #ef4444; color: #fca5a5;
+            background: #fef2f2; border: 1px solid #fecaca; color: #991b1b;
             padding: 1rem 1.2rem; border-radius: 10px; font-size: 0.9rem; font-weight: 800;
             margin-bottom: 1.8rem; display: none; text-align: left; align-items: center; gap: 0.7rem;
         }
 
         #page-admin {
             background: #0b0f19; color: #f1f5f9; padding: 3.5rem; border-radius: 28px;
-            border: 1px solid var(--accent-blue); box-shadow: 0 0 50px rgba(56, 189, 248, 0.15);
+            border: 1px solid #1e293b; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
             width: 100%;
         }
         #page-admin h1 { color: #f8fafc; }
-        #page-admin h1 i { color: var(--accent-blue); }
+        #page-admin h1 i { color: #38bdf8; }
         .admin-dark-card {
             background: #111827; border: 1px solid #1f2937; border-radius: 20px;
             padding: 2.2rem; box-shadow: 0 15px 25px rgba(0,0,0,0.4);
@@ -407,16 +434,16 @@
         .emergency-btn:hover { background: #dc2626; transform: translateY(-2px); }
         .emergency-btn.normal { background: #10b981; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4); }
 
-        /* 로그인 성공 후 목적지 선택 모달 */
+        /* 모달 및 토스트 */
         #login-choice-modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(7, 11, 20, 0.9); backdrop-filter: blur(12px);
+            background: rgba(11, 15, 25, 0.85); backdrop-filter: blur(12px);
             z-index: 9999; display: none; align-items: center; justify-content: center;
         }
         .choice-modal-box {
-            background: #111827; border: 1px solid var(--accent-blue); border-radius: 24px;
+            background: #111827; border: 1px solid #374151; border-radius: 24px;
             padding: 3.5rem; max-width: 540px; width: 90%; text-align: center; color: #fff;
-            box-shadow: 0 0 50px rgba(56, 189, 248, 0.3);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
         }
         .choice-btn-group { display: flex; gap: 1.2rem; margin-top: 2.2rem; }
         .choice-btn {
@@ -425,18 +452,17 @@
         }
         .choice-btn i { font-size: 1.8rem; }
         .choice-btn.panel { background: #38bdf8; color: #0b0f19; }
-        .choice-btn.panel:hover { background: #7dd3fc; transform: translateY(-2px); }
-        .choice-btn.home-edit { background: #2563eb; color: #fff; }
-        .choice-btn.home-edit:hover { background: #3b82f6; transform: translateY(-2px); }
+        .choice-btn.panel:hover { background: #0ea5e9; transform: translateY(-2px); }
+        .choice-btn.home-edit { background: #d97706; color: #fff; }
+        .choice-btn.home-edit:hover { background: #b45309; transform: translateY(-2px); }
 
-        /* 토스트 메시지 */
         #site-toast-container {
             position: fixed; bottom: 2.5rem; right: 2.5rem; z-index: 99999;
             display: flex; flex-direction: column; gap: 0.9rem; pointer-events: none;
         }
         .site-toast {
             background: #0f172a; color: #fff; padding: 1.1rem 1.8rem; border-radius: 14px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.8); border: 1px solid var(--accent-blue);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4); border: 1px solid #334155;
             display: flex; align-items: center; gap: 0.9rem; font-size: 0.95rem; font-weight: 700;
             pointer-events: auto; animation: toastIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
@@ -445,24 +471,23 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 보안 경고 오버레이 */
         #emergency-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, #090d16 0%, #050811 100%);
+            background: radial-gradient(circle at center, #0f172a 0%, #050811 100%);
             color: #fff; z-index: 999999; display: flex;
             flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2.5rem;
         }
         .radar-box {
-            position: relative; width: 120px; height: 120px; border: 2px solid rgba(239, 68, 68, 0.6);
+            position: relative; width: 120px; height: 120px; border: 2px solid rgba(239, 68, 68, 0.4);
             border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;
-            box-shadow: 0 0 30px rgba(239, 68, 68, 0.3); animation: radarPulse 2s infinite;
+            box-shadow: 0 0 30px rgba(239, 68, 68, 0.2); animation: radarPulse 2s infinite;
         }
-        @keyframes radarPulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 35px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
+        @keyframes radarPulse { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.6); } 70% { box-shadow: 0 0 0 35px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
         .radar-box i { font-size: 3.5rem; color: #ef4444; }
 
         footer {
             text-align: center; padding: 3rem; color: var(--text-muted);
-            font-size: 0.88rem; font-weight: 600; border-top: 1px solid var(--border-color); background: #070b14;
+            font-size: 0.88rem; font-weight: 600; border-top: 1px solid var(--border-color); background: var(--bg-card);
         }
 
         @media(max-width: 1200px) {
@@ -539,7 +564,7 @@
         <!-- 전 페이지 공용 관리자 수정 제어 바 -->
         <div id="admin-floating-bar">
             <div style="display: flex; align-items: center; gap: 0.9rem; font-weight: 800; font-size: 0.95rem;">
-                <i class="fa-solid fa-circle-check" style="color: var(--accent-blue); font-size: 1.2rem;"></i>
+                <i class="fa-solid fa-circle-check" style="color: #38bdf8; font-size: 1.2rem;"></i>
                 <span>[전체 직접 수정 모드 활성화됨] 현재 페이지의 모든 텍스트 및 프로필 사진을 클릭하여 즉시 수정하세요!</span>
             </div>
             <div style="display: flex; gap: 0.8rem;">
@@ -559,6 +584,7 @@
                 </button>
             </div>
 
+            <!-- 새롭게 꾸며진 멋진 사이트 현황 위젯 그리드 -->
             <div class="dashboard-grid">
                 <div class="widget">
                     <div class="widget-title edit-all" data-key="widget_title_1"><i class="fa-regular fa-clock" style="color: var(--accent-blue);"></i> 표준시각 및 날짜 (KST)</div>
@@ -571,7 +597,7 @@
                     <div class="widget-title edit-all" data-key="widget_title_2"><i class="fa-solid fa-server" style="color: var(--accent-blue);"></i> 지휘제어망 및 보안 상태</div>
                     <div>
                         <div class="server-status edit-all" data-key="server_status_text">
-                            <span style="width: 10px; height: 10px; background: #34d399; border-radius: 50%; display: inline-block; box-shadow: 0 0 10px #34d399;"></span>
+                            <span style="width: 10px; height: 10px; background: #059669; border-radius: 50%; display: inline-block;"></span>
                             통합방화벽 최적 가동 중
                         </div>
                         <div class="edit-all" data-key="server_sub" style="font-size: 0.88rem; color: var(--text-muted); margin-top: 0.6rem; font-weight: 600; line-height: 1.5;">
@@ -704,7 +730,7 @@
                     </p>
                 </div>
 
-                <h3 style="font-size: 1.4rem; font-weight: 900; color: #fff; margin-top: 2rem; margin-bottom: 1rem;"><i class="fa-solid fa-user-group"></i> 대대 지휘부 및 주임원사 프로필</h3>
+                <h3 style="font-size: 1.4rem; font-weight: 900; color: var(--accent-navy); margin-top: 2rem; margin-bottom: 1rem;"><i class="fa-solid fa-user-group"></i> 대대 지휘부 및 주임원사 프로필</h3>
                 <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 1rem;">각 프로필 카드를 클릭하여 전용 상세 소개 페이지로 이동하실 수 있습니다.</p>
 
                 <div class="profile-card-grid">
@@ -757,7 +783,7 @@
                         <div class="commander-quote-box edit-all" data-key="vicedeer_quote"><i class="fa-solid fa-quote-left" style="color: var(--accent-gold); margin-right: 8px;"></i>철저한 사전 준비와 실전 같은 팀워크로 대대의 모든 임무 완수에 중추적인 역할을 다하겠습니다.</div>
                     </div>
                 </div>
-                <div style="text-align: right;"><button onclick="switchPage('battalion')" class="btn-action" style="background: #1e293b;">대대본부로 돌아가기</button></div>
+                <div style="text-align: right;"><button onclick="switchPage('battalion')" class="btn-action" style="background: var(--accent-navy);">대대본부로 돌아가기</button></div>
             </div>
         </section>
 
@@ -774,7 +800,7 @@
                         <div class="commander-quote-box edit-all" data-key="master_quote"><i class="fa-solid fa-quote-left" style="color: var(--accent-gold); margin-right: 8px;"></i>용사들의 목소리에 귀 기울이고 부모님의 마음으로 돌보며, 전투력 발휘의 든든한 버팀목이 되겠습니다.</div>
                     </div>
                 </div>
-                <div style="text-align: right;"><button onclick="switchPage('battalion')" class="btn-action" style="background: #1e293b;">대대본부로 돌아가기</button></div>
+                <div style="text-align: right;"><button onclick="switchPage('battalion')" class="btn-action" style="background: var(--accent-navy);">대대본부로 돌아가기</button></div>
             </div>
         </section>
 
@@ -804,7 +830,7 @@
                     </p>
                 </div>
 
-                <h3 style="font-size: 1.3rem; font-weight: 900; color: #fff; margin-bottom: 1rem;"><i class="fa-solid fa-users"></i> 제5필사중대 간부진 프로필</h3>
+                <h3 style="font-size: 1.3rem; font-weight: 900; color: var(--accent-navy); margin-bottom: 1rem;"><i class="fa-solid fa-users"></i> 제5필사중대 간부진 프로필</h3>
                 <div class="profile-card-grid">
                     <div class="profile-card">
                         <div>
@@ -850,7 +876,7 @@
                     </p>
                 </div>
 
-                <h3 style="font-size: 1.3rem; font-weight: 900; color: #fff; margin-bottom: 1rem;"><i class="fa-solid fa-users"></i> 제6철혈중대 간부진 프로필</h3>
+                <h3 style="font-size: 1.3rem; font-weight: 900; color: var(--accent-navy); margin-bottom: 1rem;"><i class="fa-solid fa-users"></i> 제6철혈중대 간부진 프로필</h3>
                 <div class="profile-card-grid">
                     <div class="profile-card">
                         <div>
@@ -898,7 +924,7 @@
                         <p class="edit-all" data-key="c5_c_desc" style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">"필사의 신념으로 적을 제압하고 중대의 명예를 사수하겠습니다."</p>
                     </div>
                 </div>
-                <div style="text-align: right;"><button onclick="switchPage('company')" class="btn-action" style="background: #1e293b;">중대본부로 돌아가기</button></div>
+                <div style="text-align: right;"><button onclick="switchPage('company')" class="btn-action" style="background: var(--accent-navy);">중대본부로 돌아가기</button></div>
             </div>
         </section>
 
@@ -913,7 +939,7 @@
                         <p class="edit-all" data-key="c5_l_desc" style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">"중대장님을 보좌하여 빈틈없는 행정 및 작전 지원을 수행합니다."</p>
                     </div>
                 </div>
-                <div style="text-align: right;"><button onclick="switchPage('company')" class="btn-action" style="background: #1e293b;">중대본부로 돌아가기</button></div>
+                <div style="text-align: right;"><button onclick="switchPage('company')" class="btn-action" style="background: var(--accent-navy);">중대본부로 돌아가기</button></div>
             </div>
         </section>
 
@@ -928,7 +954,7 @@
                         <p class="edit-all" data-key="c5_f_desc" style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">"용사들과 동고동락하며 최고의 중대 생활 환경을 조성하겠습니다."</p>
                     </div>
                 </div>
-                <div style="text-align: right;"><button onclick="switchPage('company')" class="btn-action" style="background: #1e293b;">중대본부로 돌아가기</button></div>
+                <div style="text-align: right;"><button onclick="switchPage('company')" class="btn-action" style="background: var(--accent-navy);">중대본부로 돌아가기</button></div>
             </div>
         </section>
 
@@ -944,7 +970,7 @@
                         <p class="edit-all" data-key="c6_c_desc" style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">"철혈의 기개로 최정예 중대를 이끌며 승리만 향해 전진합니다."</p>
                     </div>
                 </div>
-                <div style="text-align: right;"><button onclick="switchPage('company')" class="btn-action" style="background: #1e293b;">중대본부로 돌아가기</button></div>
+                <div style="text-align: right;"><button onclick="switchPage('company')" class="btn-action" style="background: var(--accent-navy);">중대본부로 돌아가기</button></div>
             </div>
         </section>
 
@@ -959,7 +985,7 @@
                         <p class="edit-all" data-key="c6_l_desc" style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">"맡은 바 임무에 완벽을 기하며 중대의 중추적 역할을 수행합니다."</p>
                     </div>
                 </div>
-                <div style="text-align: right;"><button onclick="switchPage('company')" class="btn-action" style="background: #1e293b;">중대본부로 돌아가기</button></div>
+                <div style="text-align: right;"><button onclick="switchPage('company')" class="btn-action" style="background: var(--accent-navy);">중대본부로 돌아가기</button></div>
             </div>
         </section>
 
@@ -974,18 +1000,17 @@
                         <p class="edit-all" data-key="c6_f_desc" style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">"철통같은 시설 관리와 세심한 사병 관리를 책임집니다."</p>
                     </div>
                 </div>
-                <div style="text-align: right;"><button onclick="switchPage('company')" class="btn-action" style="background: #1e293b;">중대본부로 돌아가기</button></div>
+                <div style="text-align: right;"><button onclick="switchPage('company')" class="btn-action" style="background: var(--accent-navy);">중대본부로 돌아가기</button></div>
             </div>
         </section>
 
-        <!-- 6. 부대 홍보 메인 (위: 영상 바로가기, 아래: 사진 바로가기) -->
+        <!-- 6. 부대 홍보 메인 -->
         <section id="page-promo" class="page-section">
             <div class="card-box">
                 <h1 class="edit-all" data-key="promo_main_title"><i class="fa-solid fa-film"></i> 부대 홍보 및 훈련 아카이브</h1>
                 <p class="edit-all" data-key="promo_main_desc" style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.05rem;">제3대항전술대대의 실전과 같은 훈련 영상을 모아둔 영상관과 생생한 현장 사진을 모아둔 사진관으로 바로 이동할 수 있습니다.</p>
                 
                 <div class="promo-banner-list">
-                    <!-- 위쪽: 영상 바로가기 배너 -->
                     <div class="promo-banner-card" onclick="switchPage('promo-videos')">
                         <div class="promo-banner-info">
                             <h3><i class="fa-solid fa-video" style="color: var(--accent-blue);"></i> 부대 홍보 영상 아카이브</h3>
@@ -996,7 +1021,6 @@
                         </div>
                     </div>
 
-                    <!-- 아래쪽: 사진 바로가기 배너 -->
                     <div class="promo-banner-card" onclick="switchPage('promo-photos')">
                         <div class="promo-banner-info">
                             <h3><i class="fa-solid fa-camera" style="color: var(--accent-blue);"></i> 부대 훈련 및 활동 사진 갤러리</h3>
@@ -1015,7 +1039,7 @@
             <div class="card-box">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
                     <h1><i class="fa-solid fa-video"></i> 부대 홍보 영상 목록</h1>
-                    <button onclick="switchPage('promo')" class="btn-action" style="background: #1e293b; padding: 0.7rem 1.4rem; font-size: 0.9rem;"><i class="fa-solid fa-arrow-left"></i> 홍보관 메인으로</button>
+                    <button onclick="switchPage('promo')" class="btn-action" style="background: var(--accent-navy); padding: 0.7rem 1.4rem; font-size: 0.9rem;"><i class="fa-solid fa-arrow-left"></i> 홍보관 메인으로</button>
                 </div>
                 <p style="color: var(--text-muted); margin-bottom: 2rem;">등록된 훈련 및 홍보 영상 리스트입니다. 카드를 클릭하면 상세 재생 및 리포트를 확인할 수 있습니다.</p>
                 
@@ -1028,7 +1052,7 @@
             <div class="card-box">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
                     <h1><i class="fa-solid fa-camera"></i> 부대 훈련 사진 갤러리</h1>
-                    <button onclick="switchPage('promo')" class="btn-action" style="background: #1e293b; padding: 0.7rem 1.4rem; font-size: 0.9rem;"><i class="fa-solid fa-arrow-left"></i> 홍보관 메인으로</button>
+                    <button onclick="switchPage('promo')" class="btn-action" style="background: var(--accent-navy); padding: 0.7rem 1.4rem; font-size: 0.9rem;"><i class="fa-solid fa-arrow-left"></i> 홍보관 메인으로</button>
                 </div>
                 <p style="color: var(--text-muted); margin-bottom: 2rem;">등록된 훈련 현장 및 활동 사진 리스트입니다. 카드를 클릭하면 상세 내용을 확인할 수 있습니다.</p>
                 
@@ -1036,10 +1060,10 @@
             </div>
         </section>
 
-        <!-- 관리자 전용 업로드 박스 (홍보 메인 하단에 위치) -->
+        <!-- 관리자 전용 업로드 박스 -->
         <div id="admin-media-upload-wrapper" style="display: none; max-width: 1560px; margin: 0 auto 4rem auto;">
             <div class="admin-upload-box" style="display: block;">
-                <h3><i class="fa-solid fa-circle-plus" style="color: var(--accent-blue);"></i> [관리자 전용] 새로운 훈련 영상 또는 사진 자료 등록</h3>
+                <h3><i class="fa-solid fa-circle-plus" style="color: #38bdf8;"></i> [관리자 전용] 새로운 훈련 영상 또는 사진 자료 등록</h3>
                 <p style="font-size: 0.9rem; color: #9ca3af; margin-bottom: 1.5rem;">유형에 따라 영상 목록 또는 사진 갤러리에 자동으로 분류되어 추가됩니다. (링크 주소 입력 가능)</p>
                 
                 <div class="form-row">
@@ -1073,18 +1097,16 @@
                     <label>상세 페이지 본문 내용 (상세 페이지 접속 시 출력될 내용)</label>
                     <textarea id="upload-detail-content" rows="4" placeholder="상세 페이지에서 보여줄 대원들의 활약상, 훈련 일시, 성과 등 구체적인 내용을 적어주세요."></textarea>
                 </div>
-                <button onclick="addNewMediaItem()" class="btn-action" style="background: var(--accent-blue); color: #0b0f19; width: 100%; justify-content: center;">해당 목록에 자료 추가하기</button>
+                <button onclick="addNewMediaItem()" class="btn-action" style="background: #38bdf8; color: #0b0f19; width: 100%; justify-content: center;">해당 목록에 자료 추가하기</button>
             </div>
         </div>
 
-        <!-- 동적 생성되는 미디어 상세 페이지 섹션 (요청하신 상단 대형 미디어 + 하단 좌측 제목/내용/게시자) -->
+        <!-- 미디어 상세 페이지 섹션 -->
         <section id="page-media-detail" class="page-section">
             <div class="detail-profile-wrapper">
-                <div id="dynamic-detail-container">
-                    <!-- 자바스크립트로 동적 렌더링됨 -->
-                </div>
+                <div id="dynamic-detail-container"></div>
                 <div style="margin-top: 2.5rem; text-align: right;">
-                    <button onclick="switchBackToCategory()" class="btn-action" style="background: #1e293b;"><i class="fa-solid fa-arrow-left"></i> 목록으로 돌아가기</button>
+                    <button onclick="switchBackToCategory()" class="btn-action" style="background: var(--accent-navy);"><i class="fa-solid fa-arrow-left"></i> 목록으로 돌아가기</button>
                 </div>
             </div>
         </section>
@@ -1112,17 +1134,27 @@
             </div>
         </section>
 
-        <!-- 8. 관리자 패널 -->
+        <!-- 8. 관리자 패널 (화이트/다크모드 스위치 포함) -->
         <section id="page-admin" class="page-section">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.2rem;">
                 <h1><i class="fa-solid fa-gauge-high"></i> 관리자 콘트롤 타워 (비밀 보안 구역)</h1>
                 <div style="display: flex; gap: 0.9rem;">
-                    <button onclick="switchPage('home'); enableAdminMode();" style="background: var(--accent-blue); color: #0b0f19; border: none; padding: 0.7rem 1.4rem; border-radius: 10px; cursor: pointer; font-weight: 900;"><i class="fa-solid fa-pen-to-square"></i> 전체 직접 수정모드로 가기</button>
-                    <button onclick="switchPage('home')" style="background: #1f2937; color: var(--accent-blue); border: 1px solid var(--border-color); padding: 0.7rem 1.4rem; border-radius: 10px; cursor: pointer; font-weight: 800;"><i class="fa-solid fa-house"></i> 홈페이지 이동</button>
+                    <button onclick="switchPage('home'); enableAdminMode();" style="background: #38bdf8; color: #0b0f19; border: none; padding: 0.7rem 1.4rem; border-radius: 10px; cursor: pointer; font-weight: 900;"><i class="fa-solid fa-pen-to-square"></i> 전체 직접 수정모드로 가기</button>
+                    <button onclick="switchPage('home')" style="background: #1f2937; color: #38bdf8; border: 1px solid #374151; padding: 0.7rem 1.4rem; border-radius: 10px; cursor: pointer; font-weight: 800;"><i class="fa-solid fa-house"></i> 홈페이지 이동</button>
                 </div>
             </div>
 
             <div class="admin-panel-grid">
+                <!-- 테마 전환 카드 -->
+                <div class="admin-dark-card">
+                    <h3><i class="fa-solid fa-circle-half-stroke" style="color: #38bdf8;"></i> 사이트 테마 모드 전환</h3>
+                    <p style="font-size: 0.9rem; color: #9ca3af; margin-bottom: 1.4rem;">현재 기본 화이트 모드이며, 필요시 다크 모드로 전환할 수 있습니다.</p>
+                    <div style="display: flex; gap: 1rem;">
+                        <button onclick="setThemeMode('light')" class="floating-action-btn" style="flex: 1; background: #ffffff; color: #0f172a;"><i class="fa-solid fa-sun"></i> 화이트 모드</button>
+                        <button onclick="setThemeMode('dark')" class="floating-action-btn" style="flex: 1; background: #1e293b; color: #38bdf8;"><i class="fa-solid fa-moon"></i> 다크 모드</button>
+                    </div>
+                </div>
+
                 <div class="admin-dark-card">
                     <h3><i class="fa-solid fa-power-off" style="color: #ef4444;"></i> 긴급 사이트 제어</h3>
                     <p style="font-size: 0.9rem; color: #9ca3af; margin-bottom: 1.4rem;">비상 상황 발생 시 모든 사용자 화면을 실시간으로 차단합니다.</p>
@@ -1130,11 +1162,7 @@
                         <i class="fa-solid fa-triangle-exclamation"></i> 사이트 긴급 폐쇄 발동
                     </button>
                 </div>
-                <div class="admin-dark-card">
-                    <h3><i class="fa-solid fa-microchip"></i> 실시간 시스템 현황</h3>
-                    <p style="font-size: 0.95rem; color: #34d399; font-weight: 800; margin-bottom: 0.6rem;"><span style="width: 8px; height: 8px; background: #34d399; border-radius: 50%; display: inline-block; margin-right: 6px; box-shadow: 0 0 10px #34d399;"></span> 시스템 안정 가동 중</p>
-                    <p style="font-size: 0.85rem; color: #9ca3af; line-height: 1.6;">CPU 점유율: 12.4% (Core i9)<br>RAM 사용량: 4.2GB / 32GB<br>방화벽 패킷 필터링: 정상 (0 차단)</p>
-                </div>
+
                 <div class="admin-dark-card">
                     <h3><i class="fa-solid fa-shield-cat"></i> 세션 및 보안 상태</h3>
                     <p style="font-size: 0.95rem; color: #f3f4f6; font-weight: 800; margin-bottom: 0.5rem;" id="current-admin-display">인증된 관리자</p>
@@ -1144,7 +1172,7 @@
             </div>
 
             <div class="admin-dark-card">
-                <h3><i class="fa-solid fa-database" style="color: var(--accent-blue);"></i> 저장 데이터 초기화 및 관리</h3>
+                <h3><i class="fa-solid fa-database" style="color: #38bdf8;"></i> 저장 데이터 초기화 및 관리</h3>
                 <p style="font-size: 0.9rem; color: #9ca3af; margin-bottom: 1.6rem;">직접 수정한 모든 내용과 추가된 홍보 자료, 프로필 사진, 방문자 기록을 초기 기본값으로 되돌릴 수 있습니다.</p>
                 <button onclick="resetAllData()" style="background: #ef4444; color: #fff; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; font-weight: 800; cursor: pointer;">모든 수정 내용 및 자료 초기화</button>
             </div>
@@ -1157,6 +1185,7 @@
 
     <script>
         window.addEventListener('DOMContentLoaded', () => {
+            loadSavedTheme();
             loadSavedContent();
             loadSavedProfiles();
             initVisitorCounter();
@@ -1167,7 +1196,28 @@
             checkEmergencyStateOnLoad();
         });
 
-        // 실제 방문자 카운터 로직
+        // 테마 모드 관리
+        function setThemeMode(mode) {
+            if (mode === 'dark') {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('site_theme_mode', 'dark');
+                showToast("다크 모드로 전환되었습니다.");
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('site_theme_mode', 'light');
+                showToast("화이트 모드로 전환되었습니다.");
+            }
+        }
+
+        function loadSavedTheme() {
+            const savedTheme = localStorage.getItem('site_theme_mode') || 'light';
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+            }
+        }
+
         function initVisitorCounter() {
             let totalVisitors = parseInt(localStorage.getItem('real_total_visitors') || '0', 10);
             let todayVisitors = parseInt(localStorage.getItem('real_today_visitors') || '0', 10);
@@ -1222,7 +1272,6 @@
             });
         }
 
-        // 기본 샘플 미디어 데이터
         const defaultMediaItems = [
             {
                 id: 'sample-1',
@@ -1317,25 +1366,24 @@
             const detailContainer = document.getElementById('dynamic-detail-container');
             let mediaBox = '';
             if (target.type === 'youtube') {
-                mediaBox = `<div style="width:100%; height:480px; background:#000; border-radius:18px; overflow:hidden; margin-bottom:2.5rem; border:1px solid var(--accent-blue);"><iframe src="${target.url}" style="width:100%; height:100%; border:none;" allowfullscreen></iframe></div>`;
+                mediaBox = `<div style="width:100%; height:480px; background:#000; border-radius:18px; overflow:hidden; margin-bottom:2.5rem; border:1px solid var(--border-color);"><iframe src="${target.url}" style="width:100%; height:100%; border:none;" allowfullscreen></iframe></div>`;
             } else {
-                mediaBox = `<div style="width:100%; height:480px; background:#111; border-radius:18px; overflow:hidden; margin-bottom:2.5rem; border:1px solid var(--accent-blue);"><img src="${target.url}" style="width:100%; height:100%; object-fit:cover;" alt="상세 사진"></div>`;
+                mediaBox = `<div style="width:100%; height:480px; background:#111; border-radius:18px; overflow:hidden; margin-bottom:2.5rem; border:1px solid var(--border-color);"><img src="${target.url}" style="width:100%; height:100%; object-fit:cover;" alt="상세 사진"></div>`;
             }
 
-            // 요청하신 배치: 상단 대형 미디어, 하단 좌측 순서대로 제목, 내용, 게시자
             detailContainer.innerHTML = `
-                <div style="display:inline-block; background:rgba(56,189,248,0.15); color:var(--accent-blue); padding:0.4rem 1.2rem; border-radius:10px; font-weight:800; font-size:0.9rem; margin-bottom:1.2rem; border:1px solid rgba(56,189,248,0.4);">
+                <div style="display:inline-block; background:#eff6ff; color:var(--accent-blue); padding:0.4rem 1.2rem; border-radius:10px; font-weight:800; font-size:0.9rem; margin-bottom:1.2rem; border:1px solid #bfdbfe;">
                     <i class="fa-solid fa-shield-halved"></i> 제3대항전술대대 훈련 아카이브 상세 리포트
                 </div>
                 ${mediaBox}
-                <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border-color); padding:3rem; border-radius:20px; line-height:1.9; color:#cbd5e1; font-size:1.05rem;">
-                    <div style="font-size:2.2rem; font-weight:900; color:#fff; margin-bottom:1.2rem; line-height:1.3; display:flex; align-items:center; gap:0.8rem;">
+                <div style="background:var(--bg-primary); border:1px solid var(--border-color); padding:3rem; border-radius:20px; line-height:1.9; color:var(--text-main); font-size:1.05rem;">
+                    <div style="font-size:2.2rem; font-weight:900; color:var(--accent-navy); margin-bottom:1.2rem; line-height:1.3; display:flex; align-items:center; gap:0.8rem;">
                         <i class="fa-solid fa-bookmark" style="color:var(--accent-blue);"></i> ${target.title}
                     </div>
-                    <p style="margin-bottom:2rem; font-size:1.1rem; color:#e2e8f0; font-weight:700;">${target.desc}</p>
+                    <p style="margin-bottom:2rem; font-size:1.1rem; color:var(--text-main); font-weight:700;">${target.desc}</p>
                     <hr style="border:0; border-top:1px solid var(--border-color); margin:2rem 0;">
-                    <p style="margin-bottom:2.5rem; color:#94a3b8; font-size:1.05rem;">${target.detail || '상세 내용이 등록되지 않았습니다.'}</p>
-                    <div style="display:inline-flex; align-items:center; gap:0.6rem; background:#111827; padding:0.8rem 1.4rem; border-radius:12px; border:1px solid var(--border-color); color:var(--accent-blue); font-weight:800; font-size:0.95rem;">
+                    <p style="margin-bottom:2.5rem; color:var(--text-muted); font-size:1.05rem;">${target.detail || '상세 내용이 등록되지 않았습니다.'}</p>
+                    <div style="display:inline-flex; align-items:center; gap:0.6rem; background:var(--bg-card); padding:0.8rem 1.4rem; border-radius:12px; border:1px solid var(--border-color); color:var(--accent-blue); font-weight:800; font-size:0.95rem;">
                         <i class="fa-solid fa-user-pen"></i> 게시자: ${target.publisher || '제3대항전술대대'}
                     </div>
                 </div>
@@ -1362,7 +1410,6 @@
             }
 
             let finalUrl = url;
-            // 유튜브 일반 링크 입력 시 embed 링크로 자동 변환 지원
             if (type === 'youtube' && url.includes('watch?v=')) {
                 const videoId = url.split('watch?v=')[1].split('&')[0];
                 finalUrl = `https://www.youtube.com/embed/${videoId}`;
@@ -1395,7 +1442,7 @@
             const container = document.getElementById('site-toast-container');
             const toast = document.createElement('div');
             toast.className = 'site-toast';
-            const icon = type === 'success' ? '<i class="fa-solid fa-circle-check" style="color: var(--accent-blue); font-size: 1.2rem;"></i>' : '<i class="fa-solid fa-circle-info" style="color: #f59e0b; font-size: 1.2rem;"></i>';
+            const icon = type === 'success' ? '<i class="fa-solid fa-circle-check" style="color: #38bdf8; font-size: 1.2rem;"></i>' : '<i class="fa-solid fa-circle-info" style="color: #f59e0b; font-size: 1.2rem;"></i>';
             toast.innerHTML = `${icon} <span>${message}</span>`;
             container.appendChild(toast);
 
