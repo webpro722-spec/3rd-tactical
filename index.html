@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>제3대항전술대대 | 3RD TACTICAL BATTALION</title>
+    
+    <!-- 디스코드 / 카카오톡 등 메신저 미리보기 설정 -->
+    <meta property="og:title" content="제3대항전술대대 공식 지휘제어 시스템">
+    <meta property="og:description" content="제3대항전술대대 본부 소개, 지휘관 프로필 및 실전 훈련 아카이브 공간입니다.">
+    <meta property="og:type" content="website">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -209,7 +215,7 @@
         }
         .btn-profile-link:hover { background: var(--accent-blue); }
 
-        /* 대대본부 및 중대본부 풍성한 상세 소개 스타일 */
+        /* 풍성한 상세 소개 스타일 */
         .rich-content-box {
             background: #f8fafc; border: 1px solid var(--border-color);
             padding: 2.2rem 2.5rem; border-radius: 20px; margin-bottom: 2rem;
@@ -227,7 +233,7 @@
         .mission-item h4 { font-size: 1.1rem; font-weight: 900; color: var(--accent-navy); margin-bottom: 0.6rem; }
         .mission-item p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.6; }
 
-        /* 부대 홍보 아카이브 그리드 스타일 (영상/사진 + 캡션) */
+        /* 부대 홍보 아카이브 그리드 */
         .media-archive-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 1.5rem; }
         .media-card {
             background: #f8fafc; border: 1px solid var(--border-color); border-radius: 20px;
@@ -255,7 +261,7 @@
         }
         .form-group-custom input:focus, .form-group-custom textarea:focus { border-color: #38bdf8; }
 
-        /* 간부 상세 소개 페이지 */
+        /* 간부 상세 소개 페이지 스타일 */
         .detail-profile-wrapper {
             background: var(--bg-card); border: 1px solid var(--border-color);
             border-radius: 28px; padding: 3.5rem 4rem; box-shadow: var(--shadow-lg); width: 100%;
@@ -652,7 +658,7 @@
             </div>
         </section>
 
-        <!-- 3. 대대본부 소개 (풍성한 설명 + 지휘부 프로필 카드) -->
+        <!-- 3. 대대본부 소개 -->
         <section id="page-battalion" class="page-section">
             <div class="card-box">
                 <h1 class="edit-all" data-key="bat_header"><i class="fa-solid fa-sitemap"></i> 대대본부 조직 및 임무 소개</h1>
@@ -774,7 +780,7 @@
             </div>
         </section>
 
-        <!-- 5. 중대본부 소개 (제5필사중대본부 / 제6철혈중대본부 각 상세 소개 + 3명 간부 카드) -->
+        <!-- 5. 중대본부 소개 -->
         <section id="page-company" class="page-section">
             <!-- 제5필사중대본부 소개 -->
             <div class="card-box">
@@ -961,15 +967,13 @@
             </div>
         </section>
 
-        <!-- 6. 부대 홍보 (영상 및 사진 아카이브 + 관리자 전용 업로드 폼) -->
+        <!-- 6. 부대 홍보 -->
         <section id="page-promo" class="page-section">
             <div class="card-box">
                 <h1><i class="fa-solid fa-film"></i> 부대 홍보 및 훈련 갤러리</h1>
                 <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.05rem;">제3대항전술대대의 실전과 같은 훈련 현장 및 주요 활동 사진/영상 아카이브입니다.</p>
                 
-                <!-- 미디어 아카이브 그리드 (동적으로 추가됨) -->
                 <div id="media-archive-container" class="media-archive-grid">
-                    <!-- 기본 샘플 1 -->
                     <div class="media-card">
                         <div class="media-container">
                             <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="훈련 영상 샘플" allowfullscreen></iframe>
@@ -979,7 +983,6 @@
                             <p>실전 가상 교리를 바탕으로 혹독한 야외 환경에서 입체적인 전술 기동을 수행 중인 장병들의 모습입니다.</p>
                         </div>
                     </div>
-                    <!-- 기본 샘플 2 -->
                     <div class="media-card">
                         <div class="media-container">
                             <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.5rem; color:#94a3b8;">
@@ -994,7 +997,6 @@
                     </div>
                 </div>
 
-                <!-- 관리자 권한으로 로그인한 경우에만 노출되는 업로드 패널 -->
                 <div id="admin-media-upload-wrapper" style="display: none;">
                     <div class="admin-upload-box">
                         <h3><i class="fa-solid fa-circle-plus" style="color: #38bdf8;"></i> [관리자 전용]새로운 훈련 영상/사진 자료 등록</h3>
@@ -1114,7 +1116,6 @@
             });
         }
 
-        // 부대 홍보 커스텀 미디어 저장 및 로드
         function loadSavedMediaItems() {
             const container = document.getElementById('media-archive-container');
             const saved = localStorage.getItem('custom_media_items');
@@ -1170,7 +1171,6 @@
             document.getElementById('upload-title').value = '';
             document.getElementById('upload-desc').value = '';
 
-            // 즉시 화면 반영
             const container = document.getElementById('media-archive-container');
             const card = document.createElement('div');
             card.className = 'media-card';
@@ -1256,7 +1256,6 @@
                 document.getElementById('admin-nav-item').style.display = 'block';
                 document.getElementById('current-admin-display').innerText = '로그인 계정 ID: ' + idInput;
                 
-                // 관리자 로그인 시 부대 홍보 업로드 박스 활성화
                 const uploadBox = document.getElementById('admin-media-upload-wrapper');
                 if(uploadBox) uploadBox.style.display = 'block';
 
