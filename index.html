@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>제3보병사단 제22보병여단 예하대대 | 부대 홍보 포털</title>
+    <title>제3대항전술대대 | 3RD TACTICAL BATTALION</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg-primary: #f8fafc;
             --bg-card: #ffffff;
             --accent-navy: #0f172a;
-            --accent-blue: #1d4ed8;
+            --accent-blue: #1e3a8a;
             --accent-gold: #d97706;
             --text-main: #1e293b;
             --text-muted: #64748b;
@@ -31,7 +31,7 @@
             justify-content: space-between;
         }
 
-        /* 상단 네비게이션바 (클린 화이트) */
+        /* 상단 네비게이션바 (화이트 글래스모피즘) */
         header {
             position: fixed; top: 0; left: 0; width: 100%;
             background: rgba(255, 255, 255, 0.95);
@@ -45,13 +45,13 @@
         }
         .logo-box { display: flex; align-items: center; gap: 0.9rem; text-decoration: none; cursor: pointer; }
         .logo-icon {
-            width: 44px; height: 44px; background: linear-gradient(135deg, #1e3a8a, #1d4ed8);
+            width: 44px; height: 44px; background: linear-gradient(135deg, #0f172a, #1e3a8a);
             border-radius: 12px; display: flex; align-items: center; justify-content: center;
-            color: #fff; font-size: 1.2rem; box-shadow: 0 8px 16px rgba(29, 78, 216, 0.2);
+            color: #fff; font-size: 1.2rem; box-shadow: 0 8px 16px rgba(15, 23, 42, 0.2);
         }
         .logo-text-group { display: flex; flex-direction: column; }
-        .logo-title { font-size: 1.1rem; font-weight: 800; color: var(--accent-navy); letter-spacing: -0.5px; }
-        .logo-subtitle { font-size: 0.68rem; color: var(--accent-gold); font-weight: 700; letter-spacing: 1px; }
+        .logo-title { font-size: 1.15rem; font-weight: 800; color: var(--accent-navy); letter-spacing: -0.5px; }
+        .logo-subtitle { font-size: 0.68rem; color: var(--accent-gold); font-weight: 700; letter-spacing: 1.5px; }
 
         .nav-menu { display: flex; list-style: none; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
         .nav-menu button {
@@ -95,7 +95,7 @@
         /* 관리자 수정 제어 바 */
         #admin-floating-bar {
             position: sticky; top: 85px; z-index: 900; background: #0f172a; color: #f8fafc;
-            padding: 0.95rem 1.8rem; border-radius: 14px; margin-bottom: 2rem; display: none;
+            padding: 0.95rem 1.8rem; border-radius: 14px; margin-bottom: 2.5rem; display: none;
             justify-content: space-between; align-items: center; box-shadow: 0 15px 30px -5px rgba(15, 23, 42, 0.4);
             border: 1px solid #334155;
         }
@@ -105,78 +105,173 @@
         }
         .floating-action-btn:hover { background: #0ea5e9; transform: translateY(-1px); }
 
-        /* 수정 모드 활성화 스타일 */
+        /* 직접 수정 모드 활성화 스타일 */
         .editable-active {
-            outline: 2px dashed #1d4ed8 !important; outline-offset: 6px;
-            cursor: text !important; position: relative; background: rgba(29, 78, 216, 0.03);
+            outline: 2px dashed #0284c7 !important; outline-offset: 6px;
+            cursor: text !important; position: relative; background: rgba(2, 132, 199, 0.04);
             border-radius: 6px;
         }
         .editable-active::after {
-            content: '클릭하여 홍보 문구 직접 수정'; position: absolute; top: -26px; right: 0;
-            background: #1d4ed8; color: #ffffff; font-size: 0.7rem; font-weight: 800;
-            padding: 3px 8px; border-radius: 6px; pointer-events: none; box-shadow: 0 4px 10px rgba(29, 78, 216, 0.3);
+            content: '클릭하여 직접 수정'; position: absolute; top: -26px; right: 0;
+            background: #0284c7; color: #ffffff; font-size: 0.7rem; font-weight: 800;
+            padding: 3px 8px; border-radius: 6px; pointer-events: none; box-shadow: 0 4px 10px rgba(2, 132, 199, 0.3);
         }
 
-        /* 홍보 특화 메인 히어로 배너 */
-        .hero-promo-banner {
-            background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%);
+        /* 첫 화면 메인 히어로 배너 (화려하고 세련된 네이비 그라데이션) */
+        .hero-home {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #1d4ed8 100%);
             border-radius: 28px; padding: 5rem 3.5rem; color: #fff;
-            box-shadow: 0 20px 40px -10px rgba(29, 78, 216, 0.3); position: relative; overflow: hidden;
-            margin-bottom: 2.5rem; text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(30, 58, 138, 0.35); margin-bottom: 2.5rem; position: relative; overflow: hidden;
         }
-        .hero-promo-banner::before {
-            content: ''; position: absolute; top: -50%; right: -10%; width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+        .hero-home::before {
+            content: ''; position: absolute; top: -50%; right: -20%; width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 70%);
             border-radius: 50%; pointer-events: none;
         }
         .hero-badge {
             display: inline-flex; align-items: center; gap: 0.6rem;
             background: rgba(217, 119, 6, 0.25); color: #fbbf24;
-            border: 1px solid rgba(217, 119, 6, 0.5); padding: 0.4rem 1.4rem;
+            border: 1px solid rgba(217, 119, 6, 0.5); padding: 0.45rem 1.3rem;
             border-radius: 30px; font-size: 0.8rem; font-weight: 800; margin-bottom: 1.5rem; letter-spacing: 1.5px;
             box-shadow: 0 4px 12px rgba(217, 119, 6, 0.2);
         }
-        .hero-promo-banner h1 { font-size: 3rem; font-weight: 900; color: #fff; margin-bottom: 1.2rem; line-height: 1.25; justify-content: center; }
-        .hero-promo-banner p { font-size: 1.15rem; color: #e2e8f0; margin-bottom: 2.5rem; line-height: 1.7; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .hero-home h1 { font-size: 3rem; font-weight: 900; color: #fff; margin-bottom: 1.2rem; line-height: 1.2; text-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        .hero-home p { font-size: 1.15rem; color: #e2e8f0; max-width: 680px; margin-bottom: 2.5rem; line-height: 1.8; }
         
         .btn-action {
             display: inline-flex; align-items: center; gap: 0.8rem;
-            background: #d97706; color: #fff; padding: 1rem 2.5rem; border-radius: 14px;
+            background: linear-gradient(135deg, #d97706, #b45309); color: #fff; padding: 1rem 2.2rem; border-radius: 14px;
             font-weight: 800; border: none; cursor: pointer; text-decoration: none; transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 10px 20px -5px rgba(217, 119, 6, 0.4); font-size: 1.05rem;
+            box-shadow: 0 10px 20px -5px rgba(217, 119, 6, 0.4); font-size: 1rem;
         }
-        .btn-action:hover { background: #b45309; transform: translateY(-3px); }
+        .btn-action:hover { background: linear-gradient(135deg, #b45309, #92400e); transform: translateY(-3px); box-shadow: 0 15px 25px -5px rgba(217, 119, 6, 0.5); }
 
-        /* 홍보 하이라이트 카드 그리드 */
-        .promo-grid-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.8rem; margin-bottom: 2.5rem; }
-        .promo-feature-card {
-            background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 20px;
-            padding: 2.5rem; box-shadow: var(--shadow-sm); transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between;
+        /* 대시보드 위젯 그리드 */
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.8rem; margin-bottom: 2.5rem; }
+        .widget {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            padding: 2rem; border-radius: 20px; box-shadow: var(--shadow-sm);
+            display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s;
         }
-        .promo-feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: #cbd5e1; }
-        .promo-feature-card h3 { font-size: 1.3rem; font-weight: 900; color: var(--accent-navy); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem; }
-        .promo-feature-card h3 i { color: var(--accent-blue); font-size: 1.4rem; }
-        .promo-feature-card p { font-size: 1rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.8rem; }
+        .widget:hover { border-color: #cbd5e1; transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        .widget-title { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 1rem; font-weight: 800; display: flex; align-items: center; gap: 0.6rem; letter-spacing: 0.5px; }
+        .clock-display { font-size: 2rem; font-weight: 900; font-family: monospace; color: var(--accent-navy); letter-spacing: -1px; }
+        .date-display { font-size: 0.95rem; color: var(--text-muted); font-weight: 700; margin-top: 0.4rem; }
+        .server-status { font-size: 1.15rem; font-weight: 800; color: #059669; display: flex; align-items: center; gap: 0.6rem; margin-top: 0.4rem; }
 
-        /* 부대 소개 및 갤러리 페이지 디자인 */
-        .intro-showcase-box {
-            background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 28px;
-            padding: 4rem; box-shadow: var(--shadow-lg); margin-bottom: 2.5rem;
+        /* 부대 홍보 연계 하이라이트 카드 섹션 */
+        .promo-highlight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.8rem; margin-bottom: 2.5rem; }
+        .promo-highlight-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid var(--border-color); border-left: 5px solid var(--accent-blue);
+            padding: 2.2rem; border-radius: 20px; box-shadow: var(--shadow-sm); transition: 0.3s;
+            display: flex; flex-direction: column; justify-content: space-between;
         }
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.8rem; margin-top: 2rem; }
-        .gallery-card {
-            background: #f8fafc; border: 1px solid var(--border-color); border-radius: 18px; overflow: hidden;
-            box-shadow: var(--shadow-sm); transition: 0.3s; display: flex; flex-direction: column;
+        .promo-highlight-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: #cbd5e1; }
+        .promo-highlight-card h4 { font-size: 1.2rem; font-weight: 900; color: var(--accent-navy); margin-bottom: 0.9rem; display: flex; align-items: center; gap: 0.7rem; }
+        .promo-highlight-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem; }
+
+        /* 하단 종합 현황 및 공지 게시판 그리드 */
+        .home-sections-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem; margin-bottom: 2.5rem; }
+        .home-card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            padding: 2.5rem; border-radius: 20px; box-shadow: var(--shadow-sm);
+            display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s;
         }
-        .gallery-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-        .gallery-img-placeholder {
-            height: 200px; background: #e2e8f0; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; color: var(--text-muted); font-weight: 700; gap: 0.8rem;
+        .home-card:hover { box-shadow: var(--shadow-md); border-color: #cbd5e1; }
+        .home-card h3 { font-size: 1.3rem; font-weight: 900; color: var(--accent-navy); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.7rem; }
+
+        /* 공지사항 리스트 스타일 */
+        .notice-list { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
+        .notice-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 1.2rem; background: #f8fafc; border: 1px solid var(--border-color);
+            border-radius: 12px; cursor: pointer; transition: 0.2s;
         }
-        .gallery-img-placeholder i { font-size: 3rem; color: var(--accent-blue); }
-        .gallery-content { padding: 1.8rem; }
-        .gallery-content h4 { font-size: 1.15rem; font-weight: 900; color: var(--accent-navy); margin-bottom: 0.8rem; }
-        .gallery-content p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.7; }
+        .notice-item:hover { background: #f1f5f9; border-color: #cbd5e1; transform: translateX(3px); }
+        .notice-title { font-size: 0.96rem; font-weight: 700; color: var(--accent-navy); display: flex; align-items: center; gap: 0.6rem; }
+        .notice-date { font-size: 0.82rem; color: var(--text-muted); font-weight: 600; }
+
+        /* 통신 상태 리스트 스타일 */
+        .status-badge-list { display: flex; flex-direction: column; gap: 0.9rem; }
+        .status-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 1.2rem; background: #f8fafc; border: 1px solid var(--border-color); border-radius: 12px;
+        }
+        .status-indicator { display: flex; align-items: center; gap: 0.6rem; font-size: 0.95rem; font-weight: 700; color: var(--accent-navy); }
+        .dot-green { width: 10px; height: 10px; background: #059669; border-radius: 50%; box-shadow: 0 0 10px rgba(5, 150, 105, 0.5); }
+
+        /* 대대장 소개, 조직도 등 기타 페이지 스타일 */
+        .commander-hero-wrapper {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            border-radius: 28px; padding: 4rem; box-shadow: var(--shadow-lg);
+        }
+        .commander-top-layout {
+            display: grid; grid-template-columns: 340px 1fr; gap: 4rem; align-items: center; margin-bottom: 4rem;
+            padding-bottom: 3.5rem; border-bottom: 1px solid var(--border-color);
+        }
+        .commander-photo-box {
+            width: 100%; height: 410px; background: #e2e8f0; border-radius: 20px;
+            overflow: hidden; border: 5px solid #fff; box-shadow: var(--shadow-lg);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: var(--text-muted);
+        }
+        .commander-photo-placeholder { display: flex; flex-direction: column; align-items: center; gap: 1rem; font-weight: 700; }
+        .commander-photo-placeholder i { font-size: 4.5rem; color: var(--accent-blue); }
+        .commander-title-area h2 { font-size: 2.4rem; font-weight: 900; color: var(--accent-navy); margin-bottom: 0.6rem; }
+        .commander-rank-badge {
+            display: inline-block; background: #eff6ff; color: var(--accent-blue);
+            font-size: 1.05rem; font-weight: 800; padding: 0.5rem 1.4rem; border-radius: 10px;
+            margin-bottom: 1.5rem; border: 1px solid #bfdbfe; box-shadow: var(--shadow-sm);
+        }
+        .commander-quote-box {
+            background: #f8fafc; border-left: 5px solid var(--accent-gold);
+            padding: 1.4rem 1.8rem; border-radius: 0 14px 14px 0; font-style: italic;
+            color: #334155; font-size: 1.1rem; line-height: 1.7; margin-top: 1.2rem;
+        }
+        .commander-details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+        .detail-block h4 { font-size: 1.2rem; font-weight: 900; color: var(--accent-navy); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.6rem; }
+        .detail-block p { font-size: 1.05rem; color: #475569; line-height: 1.8; margin-bottom: 1.2rem; }
+        .career-list { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; }
+        .career-list li {
+            display: flex; gap: 1.2rem; align-items: flex-start;
+            background: #f8fafc; padding: 1rem 1.4rem; border-radius: 12px; border: 1px solid var(--border-color);
+        }
+        .career-year { font-weight: 900; color: var(--accent-blue); min-width: 95px; }
+        .career-desc { color: #475569; font-size: 0.98rem; font-weight: 600; }
+
+        .org-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.8rem; }
+        .org-card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            padding: 2.5rem; border-radius: 20px; box-shadow: var(--shadow-sm); transition: 0.3s;
+        }
+        .org-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: #cbd5e1; }
+        .org-card h3 { font-size: 1.25rem; color: var(--accent-navy); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.7rem; font-weight: 900; }
+        .org-card h3 i { color: var(--accent-blue); }
+        .org-card p { font-size: 0.98rem; color: var(--text-muted); line-height: 1.8; }
+
+        .timeline { position: relative; padding-left: 2.2rem; border-left: 4px solid var(--accent-blue); margin-top: 1.2rem; }
+        .timeline-item { position: relative; margin-bottom: 3rem; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -2.62rem; top: 0.3rem;
+            width: 16px; height: 16px; background: var(--accent-blue);
+            border-radius: 50%; border: 4px solid #fff; box-shadow: 0 0 0 3px var(--accent-blue);
+        }
+        .timeline-year { font-size: 1.2rem; font-weight: 900; color: var(--accent-blue); margin-bottom: 0.5rem; }
+        .timeline-desc {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            padding: 1.8rem; border-radius: 16px; color: var(--text-muted); line-height: 1.8;
+            box-shadow: var(--shadow-sm); font-size: 1.02rem;
+        }
+
+        .promo-card {
+            background: var(--bg-card); border: 1px solid var(--border-color);
+            padding: 2.5rem; border-radius: 20px; margin-bottom: 1.8rem; box-shadow: var(--shadow-sm); transition: 0.3s;
+        }
+        .promo-card:hover { box-shadow: var(--shadow-md); border-color: #cbd5e1; }
+        .promo-card h3 { color: var(--accent-navy); margin-bottom: 1rem; font-size: 1.3rem; display: flex; align-items: center; gap: 0.7rem; font-weight: 900; }
+        .promo-card h3 i { color: var(--accent-gold); }
+        .promo-card p { color: var(--text-muted); line-height: 1.8; font-size: 1.02rem; }
 
         /* 관리자 로그인 화면 */
         .login-wrapper {
@@ -192,7 +287,7 @@
             width: 100%; padding: 1rem 1.2rem; border: 1px solid var(--border-color);
             border-radius: 12px; font-size: 1.02rem; background: #f8fafc; color: var(--text-main); outline: none; transition: 0.25s;
         }
-        .form-group input:focus { border-color: var(--accent-blue); background: #fff; box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.1); }
+        .form-group input:focus { border-color: var(--accent-blue); background: #fff; box-shadow: 0 0 0 4px rgba(30, 58, 138, 0.1); }
         .btn-submit {
             width: 100%; background: var(--accent-navy); color: #fff; padding: 1.05rem;
             border-radius: 12px; font-weight: 900; border: none; cursor: pointer; transition: 0.25s;
@@ -272,7 +367,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ★ [간지 폭발 사이버 테러 방호 컨셉] 실시간 긴급 폐쇄 오버레이 */
+        /* ★ [간지 폭발 사이버 보안 경고] 실시간 긴급 폐쇄 오버레이 (새로고침 불필요 실시간 동기화) */
         #emergency-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at center, #0f172a 0%, #050811 100%);
@@ -292,8 +387,10 @@
             font-size: 0.88rem; font-weight: 600; border-top: 1px solid var(--border-color); background: #ffffff;
         }
 
-        @media(max-width: 950px) {
-            .promo-grid-section { grid-template-columns: 1fr; }
+        @media(max-width: 900px) {
+            .commander-top-layout { grid-template-columns: 1fr; text-align: center; justify-items: center; }
+            .commander-details-grid { grid-template-columns: 1fr; }
+            .home-sections-grid { grid-template-columns: 1fr; }
             .nav-container { flex-direction: column; gap: 1rem; }
             main { margin-top: 180px; }
         }
@@ -323,7 +420,7 @@
         </div>
     </div>
 
-    <!-- ★ [간지나는 실시간 전파] 긴급 폐쇄 오버레이 -->
+    <!-- ★ [간지나는 실시간 브로드캐스트] 긴급 폐쇄 오버레이 -->
     <div id="emergency-overlay">
         <div class="radar-box">
             <i class="fa-solid fa-shield-halved"></i>
@@ -341,33 +438,34 @@
 
     <header>
         <div class="nav-container">
-            <a onclick="switchPage('home')" class="logo-box" title="메인 홍보관으로 이동">
+            <a onclick="switchPage('login')" class="logo-box" title="관리자 로그인으로 이동">
                 <div class="logo-icon"><i class="fa-solid fa-shield-halved"></i></div>
                 <div class="logo-text-group">
-                    <span class="logo-title">제3보병사단 제22보병여단 예하대대</span>
-                    <span class="logo-subtitle">OFFICIAL PROMOTION PORTAL</span>
+                    <span class="logo-title">제3대항전술대대</span>
+                    <span class="logo-subtitle">3RD TACTICAL BATTALION</span>
                 </div>
             </a>
             <ul class="nav-menu">
-                <li><button onclick="switchPage('home')" id="nav-home" class="active">홍보관 홈</button></li>
-                <li><button onclick="switchPage('about')" id="nav-about">부대 소개</button></li>
-                <li><button onclick="switchPage('gallery')" id="nav-gallery">훈련 갤러리</button></li>
-                <li><button onclick="switchPage('visit')" id="nav-visit">면회 및 방문 안내</button></li>
-                <li><button onclick="switchPage('history')" id="nav-history">부대 역사</button></li>
+                <li><button onclick="switchPage('home')" id="nav-home" class="active">홈페이지</button></li>
+                <li><button onclick="switchPage('greeting')" id="nav-greeting">대대장 소개</button></li>
+                <li><button onclick="switchPage('battalion')" id="nav-battalion">대대본부 소개</button></li>
+                <li><button onclick="switchPage('history')" id="nav-history">대대약력</button></li>
+                <li><button onclick="switchPage('company')" id="nav-company">중대본부 소개</button></li>
+                <li><button onclick="switchPage('promo')" id="nav-promo">부대 홍보</button></li>
                 <li id="admin-nav-item" style="display:none;"><button onclick="switchPage('admin')" id="nav-admin" class="admin-nav-btn"><i class="fa-solid fa-gauge-high"></i> 관리자 패널</button></li>
             </ul>
         </div>
     </header>
 
     <main>
-        <!-- 1. 홍보관 홈 페이지 -->
+        <!-- 1. 홈페이지 섹션 -->
         <section id="page-home" class="page-section active-section">
             
             <!-- 관리자 로그인 시 상단에 표시되는 제어 바 -->
             <div id="admin-floating-bar">
                 <div style="display: flex; align-items: center; gap: 0.9rem; font-weight: 800; font-size: 0.95rem;">
                     <i class="fa-solid fa-circle-check" style="color: #38bdf8; font-size: 1.2rem;"></i>
-                    <span>[홍보 관리자 모드 활성화] 아래 문구를 직접 클릭하여 홍보 내용을 바로 수정하세요!</span>
+                    <span>[관리자 직관적 수정 모드 활성화됨] 홈페이지의 텍스트를 직접 클릭해 수정하세요!</span>
                 </div>
                 <div style="display: flex; gap: 0.8rem;">
                     <button onclick="toggleDirectEditMode()" id="direct-edit-toggle-btn" class="floating-action-btn" style="background: #10b981; color: #fff;">수정 모드 ON</button>
@@ -375,132 +473,235 @@
                 </div>
             </div>
 
-            <!-- 홍보 특화 메인 히어로 배너 -->
-            <div class="hero-promo-banner">
-                <div class="hero-badge"><i class="fa-solid fa-star"></i> REPUBLIC OF KOREA ARMY - 3사단 22여단 예하대대</div>
-                <h1 id="saved-hero-title" class="editable-target">불굴의 백골 정신, 최강의 전투력을 자랑하는 최전방 수호자</h1>
-                <p id="saved-hero-desc" class="editable-target">철통같은 경계 작전과 굳건한 태세로 조국의 최전방을 난공불락의 요충지로 사수하며, 국민과 함께하는 신뢰받는 부대입니다.</p>
-                <button onclick="switchPage('gallery')" class="btn-action">
-                    <i class="fa-solid fa-images"></i> 생생한 훈련 갤러리 보러가기 <i class="fa-solid fa-arrow-right"></i>
+            <!-- 중앙 프리미엄 히어로 배너 (부대 홍보 직통 연결) -->
+            <div class="hero-home">
+                <div class="hero-badge"><i class="fa-solid fa-star"></i> REPUBLIC OF KOREA ARMY</div>
+                <h1 id="saved-hero-title" class="editable-target">실전적 훈련과 최정예 전술의 중추</h1>
+                <p id="saved-hero-desc" class="editable-target">완벽한 전투태세와 철저한 임무 수행 능력으로 조국의 평화와 안전을 최선두에서 수호합니다.</p>
+                <button onclick="switchPage('promo')" class="btn-action">
+                    <i class="fa-solid fa-bullhorn"></i> 부대 홍보관 및 훈련 갤러리 바로가기 <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </div>
 
-            <!-- 홍보 핵심 안내 그리드 -->
-            <div class="promo-grid-section">
-                <div class="promo-feature-card">
+            <!-- 대시보드 위젯 -->
+            <div class="dashboard-grid">
+                <div class="widget">
+                    <div class="widget-title"><i class="fa-regular fa-clock" style="color: var(--accent-blue);"></i> 표준시각 및 날짜 (KST)</div>
                     <div>
-                        <h3><i class="fa-solid fa-shield-dog"></i> 무결점 철책 경계 작전</h3>
-                        <p id="saved-card-1" class="editable-target">최첨단 과학화 감시 시스템과 장병들의 투철한 군인정신을 바탕으로 24시간 단 한 치의 빈틈도 허용하지 않는 철벽 방어를 수행합니다.</p>
+                        <div class="clock-display" id="clock">00:00:00</div>
+                        <div class="date-display" id="date">0000년 00월 00일</div>
                     </div>
-                    <button onclick="switchPage('about')" style="background: none; border: none; color: var(--accent-blue); font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.95rem;">부대 소개 자세히 보기 <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem;"></i></button>
                 </div>
-                <div class="promo-feature-card">
+                <div class="widget">
+                    <div class="widget-title"><i class="fa-solid fa-server" style="color: var(--accent-blue);"></i> 서버 및 전술망 현황</div>
                     <div>
-                        <h3><i class="fa-solid fa-fire"></i> 실전적 전술 훈련 아카이브</h3>
-                        <p id="saved-card-2" class="editable-target">어떠한 전장 환경에서도 즉각 임무를 완수할 수 있도록 혹독하고 실전과 동일한 야외 기동 훈련 및 전술 연마를 지속하고 있습니다.</p>
+                        <div class="server-status">
+                            <span style="width: 10px; height: 10px; background: #059669; border-radius: 50%; display: inline-block;"></span>
+                            정상 가동 중 (Optimal)
+                        </div>
+                        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.6rem; font-weight: 600;">응답 속도: 12ms / 보안등급: A+</div>
                     </div>
-                    <button onclick="switchPage('gallery')" style="background: none; border: none; color: var(--accent-blue); font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.95rem;">훈련 사진 갤러리 가기 <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem;"></i></button>
                 </div>
-                <div class="promo-feature-card">
+                <div class="widget">
+                    <div class="widget-title"><i class="fa-solid fa-chart-line" style="color: var(--accent-blue);"></i> 누적 방문자 현황</div>
                     <div>
-                        <h3><i class="fa-solid fa-handshake-angle"></i> 소통하는 병영 & 면회 안내</h3>
-                        <p id="saved-card-3" class="editable-target">부대를 찾아주시는 가족 및 민원인분들께 투명하고 편리한 면회 예약 절차와 따뜻한 병영 소식을 전달합니다.</p>
-                    </div>
-                    <button onclick="switchPage('visit')" style="background: none; border: none; color: var(--accent-blue); font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.95rem;">영외 면회 안내 신청 <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem;"></i></button>
-                </div>
-            </div>
-        </section>
-
-        <!-- 2. 부대 소개 페이지 -->
-        <section id="page-about" class="page-section">
-            <div class="intro-showcase-box">
-                <h1><i class="fa-solid fa-shield-halved"></i> 부대 소개 및 지휘 방침</h1>
-                <p class="editable-target" style="font-size: 1.1rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem;">
-                    우리 대대는 제3보병사단 제22보병여단 예하 부대로서, 조국의 최전선에서 국토 방위의 신성한 임무를 완수하고 있습니다. 살아서 돌아오지 않겠다는 백골의 숭고한 호국 정신을 가슴에 품고 임무에 매진합니다.
-                </p>
-                <div class="promo-grid-section" style="margin-bottom: 0;">
-                    <div class="promo-feature-card">
-                        <h3><i class="fa-solid fa-user-tie"></i> 지휘관 정신</h3>
-                        <p class="editable-target">"오직 적만 바라보고 싸우며, 승리로 부대의 명예를 빛내는 최정예 백골 용사 육성"</p>
-                    </div>
-                    <div class="promo-feature-card">
-                        <h3><i class="fa-solid fa-bullseye"></i> 핵심 임무</h3>
-                        <p class="editable-target">최전방 철책 경계 태세 완비 및 전시 즉각 대응 작전 수행 능력 극대화</p>
+                        <div style="font-size: 2rem; font-weight: 900; color: var(--accent-blue);">4,128 명</div>
+                        <div style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.4rem; font-weight: 600;">오늘 방문: 142명</div>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <!-- 3. 훈련 갤러리 페이지 -->
-        <section id="page-gallery" class="page-section">
-            <div class="intro-showcase-box">
-                <h1><i class="fa-solid fa-images"></i> 부대 홍보 및 훈련 갤러리</h1>
-                <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1rem;">백골부대 용맹한 장병들의 실전 훈련 현장과 활기찬 병영 모습을 담은 공간입니다.</p>
-                <div class="gallery-grid">
-                    <div class="gallery-card">
-                        <div class="gallery-img-placeholder"><i class="fa-solid fa-mountain"></i><span>야외 전술 기동 훈련</span></div>
-                        <div class="gallery-content">
-                            <h4>혹한기 및 전술 기동 훈련</h4>
-                            <p class="editable-target">험난한 전방 지형을 극복하고 완벽한 작전 수행 능력을 검증하는 현장</p>
+            <!-- 부대 홍보 연계 하이라이트 카드 섹션 -->
+            <div class="promo-highlight-grid">
+                <div class="promo-highlight-card">
+                    <div>
+                        <h4><i class="fa-solid fa-crosshairs" style="color: var(--accent-blue);"></i> 가상 적대군(OPFOR) 전술</h4>
+                        <p class="editable-target">전군의 전투력 극대화를 위해 적의 전술과 교리를 완벽히 체득하고 실전과 동일한 훈련 환경을 선도합니다.</p>
+                    </div>
+                    <button onclick="switchPage('promo')" style="background: none; border: none; color: var(--accent-blue); font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.95rem;">홍보관에서 영상 보기 <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem;"></i></button>
+                </div>
+                <div class="promo-highlight-card">
+                    <div>
+                        <h4><i class="fa-solid fa-medal" style="color: var(--accent-blue);"></i> 최우수 전투부대 위상</h4>
+                        <p class="editable-target">수많은 작전 성공과 과학화 훈련 검증을 통해 대한민국 육군 최고의 정예 부대로 명성을 떨치고 있습니다.</p>
+                    </div>
+                    <button onclick="switchPage('history')" style="background: none; border: none; color: var(--accent-blue); font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.95rem;">부대 역사 확인하기 <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem;"></i></button>
+                </div>
+                <div class="promo-highlight-card">
+                    <div>
+                        <h4><i class="fa-solid fa-calendar-check" style="color: var(--accent-blue);"></i> 영외 면회 및 방문 안내</h4>
+                        <p class="editable-target">부대를 방문하시는 가족 및 민원인분들을 위한 투명하고 신속한 출입 절차와 편의 정보를 제공합니다.</p>
+                    </div>
+                    <button onclick="switchPage('promo')" style="background: none; border: none; color: var(--accent-blue); font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.95rem;">방문 예약 안내 <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem;"></i></button>
+                </div>
+            </div>
+
+            <!-- 하단 종합 현황 및 공지 게시판 그리드 -->
+            <div class="home-sections-grid">
+                <div class="home-card">
+                    <div>
+                        <h3><i class="fa-solid fa-bullhorn" style="color: var(--accent-blue);"></i> 최근 부대 소식 및 공지사항</h3>
+                        <ul class="notice-list" style="margin-top: 1.2rem;">
+                            <li class="notice-item">
+                                <span class="notice-title editable-target"><i class="fa-solid fa-circle-chevron-right" style="color: var(--accent-blue); font-size: 0.75rem;"></i> 2026년도 하반기 전술 종합평가 안내</span>
+                                <span class="notice-date">2026.10.05</span>
+                            </li>
+                            <li class="notice-item">
+                                <span class="notice-title editable-target"><i class="fa-solid fa-circle-chevron-right" style="color: var(--accent-blue); font-size: 0.75rem;"></i> 장병 영내 복지 및 시설 개선 공사 일정</span>
+                                <span class="notice-date">2026.09.28</span>
+                            </li>
+                            <li class="notice-item">
+                                <span class="notice-title editable-target"><i class="fa-solid fa-circle-chevron-right" style="color: var(--accent-blue); font-size: 0.75rem;"></i> 주말 영외 면회 및 방문 신청 절차 안내</span>
+                                <span class="notice-date">2026.09.15</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="home-card">
+                    <div>
+                        <h3><i class="fa-solid fa-satellite-dish" style="color: var(--accent-blue);"></i> 예하 중대 통신 및 작전망 상태</h3>
+                        <div class="status-badge-list" style="margin-top: 1.2rem;">
+                            <div class="status-row">
+                                <span class="status-indicator editable-target"><span class="dot-green"></span> 제1중대 전술통신망</span>
+                                <span style="font-size: 0.88rem; color: #059669; font-weight: 800;">양호 (99.8%)</span>
+                            </div>
+                            <div class="status-row">
+                                <span class="status-indicator editable-target"><span class="dot-green"></span> 제2중대 화력지원망</span>
+                                <span style="font-size: 0.88rem; color: #059669; font-weight: 800;">양호 (100%)</span>
+                            </div>
+                            <div class="status-row">
+                                <span class="status-indicator editable-target"><span class="dot-green"></span> 제3중대 야간침투망</span>
+                                <span style="font-size: 0.88rem; color: #059669; font-weight: 800;">양호 (99.5%)</span>
+                            </div>
+                            <div class="status-row">
+                                <span class="status-indicator editable-target"><span class="dot-green"></span> 본부중대 지휘통제시스템</span>
+                                <span style="font-size: 0.88rem; color: #059669; font-weight: 800;">안정 (Optimal)</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="gallery-card">
-                        <div class="gallery-img-placeholder"><i class="fa-solid fa-crosshairs"></i><span>철책 경계 감시 활동</span></div>
-                        <div class="gallery-content">
-                            <h4>철통같은 GOP 경계 태세</h4>
-                            <p class="editable-target">24시간 깨어있는 감시 장비 운용과 철저한 수색 작전</p>
+                </div>
+            </div>
+
+            <!-- 지휘관 메시지 요약 및 부대 소개 바로가기 카드 -->
+            <div class="home-sections-grid">
+                <div class="home-card">
+                    <div>
+                        <h3><i class="fa-solid fa-user-tie" style="color: var(--accent-blue);"></i> 지휘관 메시지 요약</h3>
+                        <p id="saved-msg-summary" class="editable-target" style="margin-top: 1.2rem;">"어떠한 극한의 전장 환경에서도 즉각 임무를 완수할 수 있는 최강의 전투력을 구축하고 있습니다. 명예와 자부심으로 무장한 정예 부대로 거듭나겠습니다."</p>
+                    </div>
+                    <button onclick="switchPage('greeting')" style="background: none; border: none; color: var(--accent-blue); font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.2rem;">대대장 프로필 및 약력 자세히 보기 <i class="fa-solid fa-angle-right"></i></button>
+                </div>
+                <div class="home-card">
+                    <div>
+                        <h3><i class="fa-solid fa-sitemap" style="color: var(--accent-blue);"></i> 대대본부 핵심 개요</h3>
+                        <p class="editable-target" style="margin-top: 1.2rem;">인사·정보·작전·군수 4대 핵심 과를 중심으로 빈틈없는 작전 지원 태세를 완비하고 있으며, 과학화 모의 전투 훈련 체계를 선도합니다.</p>
+                    </div>
+                    <button onclick="switchPage('battalion')" style="background: none; border: none; color: var(--accent-blue); font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.2rem;">대대본부 조직도 확인하기 <i class="fa-solid fa-angle-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 대대장 소개 페이지 -->
+        <section id="page-greeting" class="page-section">
+            <div class="commander-hero-wrapper">
+                <h1><i class="fa-solid fa-user-shield"></i> 지휘관 프로필 및 소개</h1>
+                <div class="commander-top-layout">
+                    <div class="commander-photo-box">
+                        <div class="commander-photo-placeholder">
+                            <i class="fa-solid fa-user-tie"></i>
+                            <span>대대장 프로필 사진</span>
                         </div>
                     </div>
-                    <div class="gallery-card">
-                        <div class="gallery-img-placeholder"><i class="fa-solid fa-people-group"></i><span>장병 소통 및 화합</span></div>
-                        <div class="gallery-content">
-                            <h4>활기차고 단결된 병영 문화</h4>
-                            <p class="editable-target">상호 존중과 신뢰를 바탕으로 단단하게 결속된 부대원들</p>
+                    <div class="commander-title-area">
+                        <h2 class="editable-target">중령 ◯ ◯ ◯</h2>
+                        <div class="commander-rank-badge">제3대항전술대대장</div>
+                        <p class="editable-target" style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;">
+                            "적을 알고 나를 알면 백전백승. 실전과 다름없는 혹독한 훈련 속에서 대한민국 최고 수준의 대항전술 역량을 완성합니다."
+                        </p>
+                        <div class="commander-quote-box editable-target">
+                            <i class="fa-solid fa-quote-left" style="color: var(--accent-gold); margin-right: 8px;"></i>
+                            완벽한 전투태세와 투철한 군인정신은 조국 수호의 가장 강력한 무기입니다. 부대원 모두가 자랑스러운 명예를 품고 임무에 매진할 수 있도록 최선을 다하겠습니다.
                         </div>
+                    </div>
+                </div>
+                <div class="commander-details-grid">
+                    <div class="detail-block">
+                        <h4><i class="fa-solid fa-book-open"></i> 지휘 철학 및 인사말</h4>
+                        <p class="editable-target">안녕하십니까. 제3대항전술대대 공식 홈페이지를 찾아주신 모든 분들께 진심으로 감사의 말씀을 드립니다.</p>
+                        <p class="editable-target">우리 대대는 국군의 최선두에서 실전 가상 시나리오를 연구하고 적용하며, 전군의 전투력 향상을 견인하는 중책을 맡고 있습니다.</p>
+                    </div>
+                    <div class="detail-block">
+                        <h4><i class="fa-solid fa-award"></i> 주요 경력 및 약력</h4>
+                        <ul class="career-list">
+                            <li><span class="career-year">임관</span><span class="career-desc editable-target">육군사관학교 / 학군 출신 임관 (보병 병과)</span></li>
+                            <li><span class="career-year">주요 직책</span><span class="career-desc editable-target">야전 주요 작전장교 및 각급 부대 중대장 역임</span></li>
+                            <li><span class="career-year">참모 경력</span><span class="career-desc editable-target">육군본부 및 작전사령부 주요 참모요원 역임</span></li>
+                            <li><span class="career-year">현재</span><span class="career-desc editable-target">제3대항전술대대장 취임 중</span></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 4. 면회 및 방문 안내 페이지 -->
-        <section id="page-visit" class="page-section">
-            <div class="intro-showcase-box">
-                <h1><i class="fa-solid fa-calendar-days"></i> 장병 면회 및 부대 방문 안내</h1>
-                <p class="editable-target" style="font-size: 1.1rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem;">
-                    부대를 찾아주시는 가족 및 민원인분들을 환영합니다. 신속하고 투명한 출입 절차를 통해 편리한 방문이 되도록 지원하고 있습니다.
-                </p>
-                <div class="promo-grid-section" style="margin-bottom: 0;">
-                    <div class="promo-feature-card">
-                        <h3><i class="fa-solid fa-clock"></i> 면회 및 방문 시간</h3>
-                        <p class="editable-target">주말 및 공휴일 (사전 예약 필수)<br>시간: 09:00 ~ 17:00</p>
-                    </div>
-                    <div class="promo-feature-card">
-                        <h3><i class="fa-solid fa-file-lines"></i> 방문 신청 방법</h3>
-                        <p class="editable-target">방문 최소 3일 전 담당 부서 연락 또는 온라인 사전 예약 접수 진행</p>
-                    </div>
+        <!-- 3. 대대본부 소개 -->
+        <section id="page-battalion" class="page-section">
+            <div class="card-box">
+                <h1><i class="fa-solid fa-sitemap"></i> 대대본부 조직 및 임무 소개</h1>
+                <div class="org-grid">
+                    <div class="org-card"><h3><i class="fa-solid fa-id-card"></i> 인사과</h3><p class="editable-target">투명하고 공정한 장병 인사 관리, 사기 진작 및 복지 총괄</p></div>
+                    <div class="org-card"><h3><i class="fa-solid fa-brain"></i> 정보과</h3><p class="editable-target">실시간 전술 정보 수집 및 위협 분석, 부대 보안 태세 유지</p></div>
+                    <div class="org-card"><h3><i class="fa-solid fa-chess"></i> 작전과</h3><p class="editable-target">실전적 대항전술 훈련 계획 수립 및 입체적 작전 지휘 통제</p></div>
+                    <div class="org-card"><h3><i class="fa-solid fa-truck-field"></i> 군수과</h3><p class="editable-target">신속한 물자 보급과 완벽한 상시 군수 지원 체계 구축</p></div>
                 </div>
             </div>
         </section>
 
-        <!-- 5. 부대 역사 페이지 -->
+        <!-- 4. 대대약력 -->
         <section id="page-history" class="page-section">
-            <div class="intro-showcase-box">
-                <h1><i class="fa-solid fa-landmark"></i> 부대 주요 역사 및 전통</h1>
-                <p class="editable-target" style="font-size: 1.1rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem;">
-                    조국 수호의 최선두에서 수많은 전공을 세워온 백골부대의 빛나는 역사를 이어받고 있습니다.
-                </p>
-                <div class="promo-feature-card" style="margin-bottom: 1.2rem;">
-                    <h3><i class="fa-solid fa-flag"></i> 백골부대의 긍지</h3>
-                    <p class="editable-target">창설 이래 단 한 순간도 경계 태세를 소홀히 하지 않았으며, 전군 최고의 명예와 전통을 계승 발전시키고 있습니다.</p>
+            <div class="card-box">
+                <h1><i class="fa-solid fa-landmark"></i> 부대 주요 역사 및 약력</h1>
+                <div class="timeline">
+                    <div class="timeline-item"><div class="timeline-year">2020년 3월</div><div class="timeline-desc editable-target">제3대항전술대대 창설식 및 부대기 수여식 거행</div></div>
+                    <div class="timeline-item"><div class="timeline-year">2022년 10월</div><div class="timeline-desc editable-target">육군 대전술 경연대회 최우수부대 선정 및 국방부 장관 표창 수상</div></div>
+                    <div class="timeline-item"><div class="timeline-year">2024년 7월</div><div class="timeline-desc editable-target">최첨단 과학화 모의 전투 훈련 체계 도입 및 전술 역량 강화</div></div>
+                    <div class="timeline-item"><div class="timeline-year">2026년 현재</div><div class="timeline-desc editable-target">완벽한 상시 전투태세를 확립한 최정예 대항전술부대 임무 수행 중</div></div>
                 </div>
             </div>
         </section>
 
-        <!-- 6. 관리자 로그인 페이지 -->
+        <!-- 5. 중대본부 소개 -->
+        <section id="page-company" class="page-section">
+            <div class="card-box">
+                <h1><i class="fa-solid fa-shield-quartered"></i> 예하 중대본부 소개</h1>
+                <div class="org-grid">
+                    <div class="org-card"><h3><i class="fa-solid fa-angles-right"></i> 제1중대</h3><p class="editable-target">선봉 정찰 및 신속한 기동력으로 적 동향 파악 및 타격</p></div>
+                    <div class="org-card"><h3><i class="fa-solid fa-shield"></i> 제2중대</h3><p class="editable-target">강력한 주력 화력 지원과 철통같은 방어 진지 구축</p></div>
+                    <div class="org-card"><h3><i class="fa-solid fa-bolt"></i> 제3중대</h3><p class="editable-target">특수 야간 침투 및 입체적인 전술 임무 완수</p></div>
+                    <div class="org-card"><h3><i class="fa-solid fa-network-wired"></i> 본부중대</h3><p class="editable-target">지휘 통제 지원, 통신망 유지 및 전장 의무·수송 전담</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. 부대 홍보 -->
+        <section id="page-promo" class="page-section">
+            <div class="card-box">
+                <h1><i class="fa-solid fa-bullhorn"></i> 부대 홍보 및 알림마당</h1>
+                <div class="promo-card">
+                    <h3><i class="fa-solid fa-film"></i> 실전 훈련 스케치 및 영상 아카이브</h3>
+                    <p class="editable-target">제3대항전술대대의 실전과 같은 혹독한 야외 기동 훈련 및 과학화 전투 훈련 현장</p>
+                </div>
+                <div class="promo-card">
+                    <h3><i class="fa-solid fa-calendar-days"></i> 장병 면회 및 부대 방문 안내</h3>
+                    <p class="editable-target">부대 방문 일정 예약, 주말 면회 절차 및 영내 행사 안내</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. 관리자 로그인 페이지 -->
         <section id="page-login" class="page-section">
             <div class="login-wrapper">
                 <h2><i class="fa-solid fa-lock" style="color: var(--accent-blue);"></i> 관리자 인증</h2>
-                <p>제3보병사단 제22보병여단 홍보 포털 시스템</p>
+                <p>제3대항전술대대 통합 지휘제어 시스템</p>
                 
                 <div id="site-error-box" class="site-alert-box">
                     <i class="fa-solid fa-circle-exclamation"></i>
@@ -519,13 +720,13 @@
             </div>
         </section>
 
-        <!-- 7. 관리자 패널 -->
+        <!-- 8. 관리자 패널 -->
         <section id="page-admin" class="page-section">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.2rem;">
                 <h1><i class="fa-solid fa-gauge-high"></i> 관리자 콘트롤 타워 (비밀 보안 구역)</h1>
                 <div style="display: flex; gap: 0.9rem;">
-                    <button onclick="switchPage('home'); enableAdminMode();" style="background: #38bdf8; color: #0b0f19; border: none; padding: 0.7rem 1.4rem; border-radius: 10px; cursor: pointer; font-weight: 900;"><i class="fa-solid fa-pen-to-square"></i> 홍보 내용 직접 수정모드로 가기</button>
-                    <button onclick="switchPage('home')" style="background: #1f2937; color: #38bdf8; border: 1px solid #374151; padding: 0.7rem 1.4rem; border-radius: 10px; cursor: pointer; font-weight: 800;"><i class="fa-solid fa-house"></i> 홍보관 홈으로 이동</button>
+                    <button onclick="switchPage('home'); enableAdminMode();" style="background: #38bdf8; color: #0b0f19; border: none; padding: 0.7rem 1.4rem; border-radius: 10px; cursor: pointer; font-weight: 900;"><i class="fa-solid fa-pen-to-square"></i> 홈페이지 직접 수정모드로 가기</button>
+                    <button onclick="switchPage('home')" style="background: #1f2937; color: #38bdf8; border: 1px solid #374151; padding: 0.7rem 1.4rem; border-radius: 10px; cursor: pointer; font-weight: 800;"><i class="fa-solid fa-house"></i> 홈페이지 이동</button>
                 </div>
             </div>
 
@@ -538,58 +739,63 @@
                     </button>
                 </div>
                 <div class="admin-dark-card">
-                    <h3><i class="fa-solid fa-cloud-arrow-up"></i> 실시간 업데이트 동기화</h3>
-                    <p style="font-size: 0.95rem; color: #10b981; font-weight: 800; margin-bottom: 0.6rem;"><span style="width: 8px; height: 8px; background: #10b981; border-radius: 50%; display: inline-block; margin-right: 6px;"></span> 자동 저장 활성화됨</p>
-                    <p style="font-size: 0.85rem; color: #9ca3af; line-height: 1.6;">변경하신 홍보 문구는 브라우저 저장소 및 세션에 즉시 반영되어 유지됩니다.</p>
+                    <h3><i class="fa-solid fa-microchip"></i> 실시간 시스템 현황</h3>
+                    <p style="font-size: 0.95rem; color: #10b981; font-weight: 800; margin-bottom: 0.6rem;"><span style="width: 8px; height: 8px; background: #10b981; border-radius: 50%; display: inline-block; margin-right: 6px;"></span> 전술망 안정 가동 중</p>
+                    <p style="font-size: 0.85rem; color: #9ca3af; line-height: 1.6;">CPU 점유율: 12.4% (Core i9)<br>RAM 사용량: 4.2GB / 32GB<br>방화벽 패킷 필터링: 정상 (0 차단)</p>
                 </div>
                 <div class="admin-dark-card">
                     <h3><i class="fa-solid fa-shield-cat"></i> 세션 및 보안 상태</h3>
                     <p style="font-size: 0.95rem; color: #f3f4f6; font-weight: 800; margin-bottom: 0.5rem;" id="current-admin-display">인증된 관리자</p>
-                    <p style="font-size: 0.85rem; color: #9ca3af; margin-bottom: 1.2rem;">보안 방화벽: 최상급 유지 중</p>
+                    <p style="font-size: 0.85rem; color: #9ca3af; margin-bottom: 1.2rem;">비정상 로그인 차단 횟수: 0회</p>
                     <button onclick="handleLogout()" style="background: #374151; color: #f3f4f6; border: none; padding: 0.5rem 1.2rem; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 700;">로그아웃</button>
                 </div>
             </div>
 
             <div class="admin-dark-card">
-                <h3><i class="fa-solid fa-pen-to-square" style="color: #38bdf8;"></i> 홍보 문구 일괄 수정 에디터</h3>
-                <p style="font-size: 0.9rem; color: #9ca3af; margin-bottom: 1.6rem;">아래에서 메인 홍보 문구를 입력하고 반영하면 즉시 전파됩니다.</p>
+                <h3><i class="fa-solid fa-pen-to-square" style="color: #38bdf8;"></i> 주요 문구 일괄 수정 에디터</h3>
+                <p style="font-size: 0.9rem; color: #9ca3af; margin-bottom: 1.6rem;">패널에서 내용을 변경한 뒤 반영하면 즉시 메인 홈페이지에 적용됩니다.</p>
                 
                 <div class="form-group">
                     <label style="color: #e5e7eb;">메인 히어로 타이틀</label>
-                    <input type="text" id="edit-title-input" class="edit-input-dark" value="불굴의 백골 정신, 최강의 전투력을 자랑하는 최전방 수호자">
+                    <input type="text" id="edit-title-input" class="edit-input-dark" value="실전적 훈련과 최정예 전술의 중추">
                 </div>
                 <div class="form-group">
                     <label style="color: #e5e7eb;">메인 히어로 서브 설명</label>
-                    <input type="text" id="edit-desc-input" class="edit-input-dark" value="철통같은 경계 작전과 굳건한 태세로 조국의 최전방을 난공불락의 요충지로 사수하며, 국민과 함께하는 신뢰받는 부대입니다.">
+                    <input type="text" id="edit-desc-input" class="edit-input-dark" value="완벽한 전투태세와 철저한 임무 수행 능력으로 조국의 평화와 안전을 최선두에서 수호합니다.">
                 </div>
-                <button onclick="applyPanelEdits()" class="btn-action" style="margin-top: 0.8rem; background: #38bdf8; color: #0b0f19;">수정 내용 즉시 반영</button>
+                <div class="form-group">
+                    <label style="color: #e5e7eb;">지휘관 메시지 요약글</label>
+                    <input type="text" id="edit-msg-input" class="edit-input-dark" value="&quot;어떠한 극한의 전장 환경에서도 즉각 임무를 완수할 수 있는 최강의 전투력을 구축하고 있습니다. 명예와 자부심으로 무장한 정예 부대로 거듭나겠습니다.&quot;">
+                </div>
+                <button onclick="applyPanelEdits()" class="btn-action" style="margin-top: 0.8rem; background: #38bdf8; color: #0b0f19;">수정 내용 실시간 반영</button>
             </div>
         </section>
     </main>
 
     <footer>
-        &copy; 2026 REPUBLIC OF KOREA ARMY - 3RD INFANTRY DIVISION 22ND BRIGADE. All Rights Reserved.
+        &copy; 2026 REPUBLIC OF KOREA ARMY - 3RD TACTICAL BATTALION. All Rights Reserved.
     </footer>
 
     <script>
-        // 페이지 로드 시 저장된 데이터 불러오기
+        // 페이지 로드 시 저장된 내용 복원 및 긴급 상태 체크
         window.addEventListener('DOMContentLoaded', () => {
             loadSavedContent();
             checkEmergencyStateOnLoad();
         });
 
         function loadSavedContent() {
-            if (localStorage.getItem('promo_hero_title')) {
-                document.getElementById('saved-hero-title').innerText = localStorage.getItem('promo_hero_title');
-                document.getElementById('edit-title-input').value = localStorage.getItem('promo_hero_title');
+            if (localStorage.getItem('tactical_hero_title')) {
+                document.getElementById('saved-hero-title').innerText = localStorage.getItem('tactical_hero_title');
+                document.getElementById('edit-title-input').value = localStorage.getItem('tactical_hero_title');
             }
-            if (localStorage.getItem('promo_hero_desc')) {
-                document.getElementById('saved-hero-desc').innerText = localStorage.getItem('promo_hero_desc');
-                document.getElementById('edit-desc-input').value = localStorage.getItem('promo_hero_desc');
+            if (localStorage.getItem('tactical_hero_desc')) {
+                document.getElementById('saved-hero-desc').innerText = localStorage.getItem('tactical_hero_desc');
+                document.getElementById('edit-desc-input').value = localStorage.getItem('tactical_hero_desc');
             }
-            if (localStorage.getItem('promo_card_1')) document.getElementById('saved-card-1').innerText = localStorage.getItem('promo_card_1');
-            if (localStorage.getItem('promo_card_2')) document.getElementById('saved-card-2').innerText = localStorage.getItem('promo_card_2');
-            if (localStorage.getItem('promo_card_3')) document.getElementById('saved-card-3').innerText = localStorage.getItem('promo_card_3');
+            if (localStorage.getItem('tactical_msg_summary')) {
+                document.getElementById('saved-msg-summary').innerText = localStorage.getItem('tactical_msg_summary');
+                document.getElementById('edit-msg-input').value = localStorage.getItem('tactical_msg_summary');
+            }
         }
 
         // 사이트 내 토스트 메시지 함수
@@ -610,6 +816,24 @@
                 setTimeout(() => toast.remove(), 350);
             }, 3500);
         }
+
+        // 시계 및 날짜 기능
+        function updateDateTime() {
+            const now = new Date();
+            const clockEl = document.getElementById('clock');
+            const dateEl = document.getElementById('date');
+            
+            if (clockEl) {
+                clockEl.innerText = String(now.getHours()).padStart(2, '0') + ':' + 
+                    String(now.getMinutes()).padStart(2, '0') + ':' + String(now.getSeconds()).padStart(2, '0');
+            }
+            if (dateEl) {
+                const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+                dateEl.innerText = now.toLocaleDateString('ko-KR', options);
+            }
+        }
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
 
         // 페이지 전환 함수
         function switchPage(pageId) {
@@ -652,7 +876,7 @@
                 failCount++;
                 errorBox.style.display = 'flex';
                 if (failCount >= 3) {
-                    errorText.innerText = `[보안경고] 비정상 로그인 시도가 ${failCount}회 감지되었습니다!`;
+                    errorText.innerText = `[보안경고] 비정상 로그인 시도가 ${failCount}회 감지되었습니다! IP가 임시 주시됩니다.`;
                 } else {
                     errorText.innerText = `아이디 또는 비밀번호가 일치하지 않습니다. (실패: ${failCount}/3)`;
                 }
@@ -700,7 +924,7 @@
                 });
                 toggleBtn.innerText = "수정 모드 OFF (저장완료)";
                 toggleBtn.style.background = "#ef4444";
-                showToast("홍보 문구 직접 수정 모드가 켜졌습니다. 텍스트를 클릭해 편집하세요.", "info");
+                showToast("실시간 직접 수정 모드가 켜졌습니다. 텍스트를 클릭해 수정하세요.", "info");
             } else {
                 targets.forEach(el => {
                     el.removeAttribute('contenteditable');
@@ -709,14 +933,12 @@
                 toggleBtn.innerText = "수정 모드 ON";
                 toggleBtn.style.background = "#10b981";
 
-                // 수정된 내용 로컬스토리지에 즉시 저장
-                localStorage.setItem('promo_hero_title', document.getElementById('saved-hero-title').innerText);
-                localStorage.setItem('promo_hero_desc', document.getElementById('saved-hero-desc').innerText);
-                localStorage.setItem('promo_card_1', document.getElementById('saved-card-1').innerText);
-                localStorage.setItem('promo_card_2', document.getElementById('saved-card-2').innerText);
-                localStorage.setItem('promo_card_3', document.getElementById('saved-card-3').innerText);
+                // 수정 내용 자동 저장
+                localStorage.setItem('tactical_hero_title', document.getElementById('saved-hero-title').innerText);
+                localStorage.setItem('tactical_hero_desc', document.getElementById('saved-hero-desc').innerText);
+                localStorage.setItem('tactical_msg_summary', document.getElementById('saved-msg-summary').innerText);
 
-                showToast("수정된 홍보 내용이 사이트에 즉시 반영 및 저장되었습니다!");
+                showToast("홈페이지 화면 내용이 직접 수정 및 실시간 저장되었습니다!");
             }
         }
 
@@ -731,19 +953,22 @@
         function applyPanelEdits() {
             const newTitle = document.getElementById('edit-title-input').value;
             const newDesc = document.getElementById('edit-desc-input').value;
+            const newMsg = document.getElementById('edit-msg-input').value;
 
             document.getElementById('saved-hero-title').innerText = newTitle;
             document.getElementById('saved-hero-desc').innerText = newDesc;
+            document.getElementById('saved-msg-summary').innerText = newMsg;
 
-            localStorage.setItem('promo_hero_title', newTitle);
-            localStorage.setItem('promo_hero_desc', newDesc);
+            localStorage.setItem('tactical_hero_title', newTitle);
+            localStorage.setItem('tactical_hero_desc', newDesc);
+            localStorage.setItem('tactical_msg_summary', newMsg);
 
-            showToast('관리자 패널을 통해 홍보 문구가 즉시 반영되었습니다!');
+            showToast('관리자 패널을 통해 문구가 성공적으로 반영 및 저장되었습니다!');
             switchPage('home');
             enableAdminMode();
         }
 
-        // ★ [실시간 브로드캐스트 긴급 폐쇄 함수]
+        // ★ [실시간 브로드캐스트 긴급 폐쇄 시스템]
         function toggleEmergency() {
             let currentState = localStorage.getItem('site_emergency') === 'true';
             let newState = !currentState;
@@ -775,13 +1000,13 @@
             applyEmergencyState(isEmergency);
         }
 
-        // 다른 창이나 탭에서 긴급 폐쇄 상태가 바뀌어도 새로고침 없이 즉시 반응하도록 감지
+        // 다른 창이나 탭에서 긴급 폐쇄 상태나 수정 사항이 바뀌면 새로고침 없이 즉시 반응
         window.addEventListener('storage', function(e) {
             if (e.key === 'site_emergency') {
                 let isEmergency = (e.newValue === 'true');
                 applyEmergencyState(isEmergency);
             }
-            if (e.key === 'promo_hero_title' || e.key === 'promo_hero_desc') {
+            if (e.key === 'tactical_hero_title' || e.key === 'tactical_hero_desc' || e.key === 'tactical_msg_summary') {
                 loadSavedContent();
             }
         });
