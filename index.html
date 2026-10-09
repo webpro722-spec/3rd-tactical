@@ -147,7 +147,6 @@
             cursor: text !important; position: relative; background: rgba(14, 165, 233, 0.05); border-radius: 4px;
         }
 
-        /* 홈페이지 메인 히어로 배너 */
         .hero-home {
             background: linear-gradient(135deg, #0b1329 0%, #1d4ed8 60%, #2563eb 100%);
             border-radius: 28px; padding: 4.8rem 4.2rem; color: #fff;
@@ -172,7 +171,6 @@
         }
         .btn-action:hover { background: linear-gradient(135deg, #b45309, #92400e); transform: translateY(-3px); }
 
-        /* 세련되고 멋지게 바뀐 상단 사이트 현황 위젯 그리드 */
         .dashboard-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; margin-bottom: 2.5rem; width: 100%; align-items: stretch; }
         .widget {
             background: var(--bg-card); border: 2px solid var(--border-color);
@@ -183,7 +181,6 @@
         .widget:hover { border-color: var(--accent-sky); transform: translateY(-5px); box-shadow: var(--shadow-md), var(--neon-glow); }
         .widget-title { font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 1rem; font-weight: 800; display: flex; align-items: center; gap: 0.6rem; }
         
-        /* 더 멋진 디자인으로 바뀐 실시간 시계 */
         .clock-display {
             font-size: 2.5rem; font-weight: 900; font-family: 'Courier New', Courier, monospace;
             color: var(--accent-navy); letter-spacing: -1px; line-height: 1.2;
@@ -200,7 +197,6 @@
         .server-status { font-size: 1.15rem; font-weight: 800; color: #059669; display: flex; align-items: center; gap: 0.6rem; margin-top: 0.4rem; }
         body.dark-mode .server-status { color: #34d399; }
 
-        /* 요청하신 딱 3개만 들어간 하이라이트 카드 그리드 */
         .promo-highlight-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; margin-bottom: 2.5rem; width: 100%; }
         .promo-highlight-card {
             background: linear-gradient(145deg, var(--bg-card) 0%, var(--bg-card-hover) 100%);
@@ -235,7 +231,7 @@
         .battalion-status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.2rem; }
         .battalion-status-card {
             background: var(--bg-primary); border: 2px solid var(--border-color); border-radius: 16px; padding: 1.8rem;
-            display: flex; flex-direction: column; gap: 0.8rem;
+            display: flex; flex-direction: column; gap: 0.8rem; cursor: pointer;
         }
         .battalion-status-card:hover { border-color: var(--accent-sky); background: var(--bg-card-hover); transform: translateY(-2px); }
         .battalion-status-title { font-size: 1.1rem; font-weight: 900; color: var(--accent-navy); display: flex; align-items: center; gap: 0.6rem; }
@@ -253,7 +249,7 @@
             overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center;
             color: var(--text-muted); font-weight: 700; gap: 0.6rem; margin-bottom: 1.4rem; border: 2px dashed #94a3b8;
         }
-        body.dark-mode .profile-photo-area { background: #090d16; border-color: #1e293b; }
+        body.dark-mode .profile-photo-area { background: #090d16; border-color: #334155; }
         .profile-photo-area img { width: 100%; height: 100%; object-fit: cover; }
         .profile-photo-area i { font-size: 3rem; color: var(--accent-blue); }
         .profile-info h3 { font-size: 1.25rem; font-weight: 900; color: var(--accent-navy); margin-bottom: 0.4rem; }
@@ -442,21 +438,6 @@
         .choice-btn.home-edit { background: #d97706; color: #fff; }
         .choice-btn.home-edit:hover { background: #b45309; transform: translateY(-2px); }
 
-        #site-toast-container {
-            position: fixed; bottom: 2.5rem; right: 2.5rem; z-index: 99999;
-            display: flex; flex-direction: column; gap: 0.9rem; pointer-events: none;
-        }
-        .site-toast {
-            background: #0b1329; color: #fff; padding: 1.1rem 1.8rem; border-radius: 14px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4); border: 2px solid #1e293b;
-            display: flex; align-items: center; gap: 0.9rem; font-size: 0.95rem; font-weight: 700;
-            pointer-events: auto; animation: toastIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        @keyframes toastIn {
-            from { opacity: 0; transform: translateY(25px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         footer {
             text-align: center; padding: 3rem; color: var(--text-muted);
             font-size: 0.88rem; font-weight: 600; border-top: 2px solid var(--border-color); background: var(--bg-card);
@@ -471,8 +452,6 @@
     </style>
 </head>
 <body>
-
-    <div id="site-toast-container"></div>
 
     <div id="login-choice-modal">
         <div class="choice-modal-box">
@@ -494,7 +473,7 @@
 
     <header>
         <div class="nav-container">
-            <a onclick="switchPage('login')" class="logo-box" title="관리자 로그인으로 이동">
+            <a onclick="safeSwitchPage('login', event)" class="logo-box" title="관리자 로그인으로 이동">
                 <div class="logo-icon"><i class="fa-solid fa-shield-halved"></i></div>
                 <div class="logo-text-group">
                     <span class="logo-title edit-all" data-key="nav_title">제3대항전술대대</span>
@@ -502,14 +481,14 @@
                 </div>
             </a>
             <ul class="nav-menu">
-                <li><button onclick="switchPage('home')" id="nav-home" class="active edit-all" data-key="menu_home">홈페이지</button></li>
-                <li><button onclick="switchPage('greeting')" id="nav-greeting" class="edit-all" data-key="menu_greeting">대대장 소개</button></li>
-                <li><button onclick="switchPage('battalion')" id="nav-battalion" class="edit-all" data-key="menu_battalion">대대본부 소개</button></li>
-                <li><button onclick="switchPage('history')" id="nav-history" class="edit-all" data-key="menu_history">대대약력</button></li>
-                <li><button onclick="switchPage('company')" id="nav-company" class="edit-all" data-key="menu_company">중대본부 소개</button></li>
-                <li><button onclick="switchPage('promo')" id="nav-promo" class="edit-all" data-key="menu_promo">부대 홍보</button></li>
+                <li><button onclick="safeSwitchPage('home', event)" id="nav-home" class="active edit-all" data-key="menu_home">홈페이지</button></li>
+                <li><button onclick="safeSwitchPage('greeting', event)" id="nav-greeting" class="edit-all" data-key="menu_greeting">대대장 소개</button></li>
+                <li><button onclick="safeSwitchPage('battalion', event)" id="nav-battalion" class="edit-all" data-key="menu_battalion">대대본부 소개</button></li>
+                <li><button onclick="safeSwitchPage('history', event)" id="nav-history" class="edit-all" data-key="menu_history">대대약력</button></li>
+                <li><button onclick="safeSwitchPage('company', event)" id="nav-company" class="edit-all" data-key="menu_company">중대본부 소개</button></li>
+                <li><button onclick="safeSwitchPage('promo', event)" id="nav-promo" class="edit-all" data-key="menu_promo">부대 홍보</button></li>
                 <li><button onclick="toggleUserThemeMode()" class="theme-toggle-nav-btn"><i class="fa-solid fa-circle-half-stroke"></i> 테마 전환</button></li>
-                <li id="admin-nav-item" style="display:none;"><button onclick="switchPage('admin')" id="nav-admin" class="admin-nav-btn"><i class="fa-solid fa-gauge-high"></i> 관리자 패널</button></li>
+                <li id="admin-nav-item" style="display:none;"><button onclick="safeSwitchPage('admin', event)" id="nav-admin" class="admin-nav-btn"><i class="fa-solid fa-gauge-high"></i> 관리자 패널</button></li>
             </ul>
         </div>
     </header>
@@ -518,7 +497,7 @@
         <div id="admin-floating-bar">
             <div style="display: flex; align-items: center; gap: 0.9rem; font-weight: 800; font-size: 0.95rem;">
                 <i class="fa-solid fa-circle-check" style="color: #38bdf8; font-size: 1.2rem;"></i>
-                <span>[전체 직접 수정 모드] 텍스트 및 사진을 클릭하여 즉시 수정하세요!</span>
+                <span>[전체 직접 수정 모드] 텍스트 클릭 시 즉시 수정 가능! (카드는 더블클릭해야 이동합니다)</span>
             </div>
             <div style="display: flex; gap: 0.8rem;">
                 <button onclick="toggleDirectEditMode()" id="direct-edit-toggle-btn" class="floating-action-btn" style="background: #10b981; color: #fff;">수정 모드 ON</button>
@@ -538,7 +517,7 @@
                 <div class="hero-badge edit-all" data-key="hero_badge"><i class="fa-solid fa-star"></i> REPUBLIC OF KOREA ARMY - OPFOR COMMAND</div>
                 <h1 class="edit-all" data-key="hero_title">실전적 훈련과 최정예 역량의 중추</h1>
                 <p class="edit-all" data-key="hero_desc">완벽한 전투태세와 철저한 임무 수행 능력으로 조국의 평화와 안전을 최선두에서 수호합니다.</p>
-                <button onclick="switchPage('promo')" class="btn-action">
+                <button onclick="safeSwitchPage('promo', event)" class="btn-action">
                     <i class="fa-solid fa-bullhorn"></i> <span class="edit-all" data-key="hero_btn">부대 홍보관 및 훈련 갤러리 바로가기</span> <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </div>
@@ -572,23 +551,22 @@
                 </div>
             </div>
 
-            <!-- 요청하신 딱 3개의 카드만 배치한 하이라이트 구역 -->
             <div class="promo-highlight-grid">
-                <div class="promo-highlight-card" onclick="switchPage('promo')">
+                <div class="promo-highlight-card" onclick="safeSwitchPage('promo', event)">
                     <div>
                         <h4 class="edit-all" data-key="hl_title_1"><i class="fa-solid fa-film" style="color: var(--accent-blue);"></i> 제3대항전술대대 홍보관</h4>
                         <p class="edit-all" data-key="hl_desc_1">실전적 야외 기동 훈련 및 가상 적대군(OPFOR) 전술 시연 영상과 훈련 사진 아카이브를 만나보세요.</p>
                     </div>
                     <span style="color: var(--accent-blue); font-weight: 800; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 0.5rem;">홍보관 바로가기 <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem;"></i></span>
                 </div>
-                <div class="promo-highlight-card" onclick="switchPage('history')">
+                <div class="promo-highlight-card" onclick="safeSwitchPage('history', event)">
                     <div>
                         <h4 class="edit-all" data-key="hl_title_2"><i class="fa-solid fa-landmark" style="color: var(--accent-blue);"></i> 제3대항전술대대 역사</h4>
                         <p class="edit-all" data-key="hl_desc_2">창설 이후 수많은 작전 성공과 과학화 훈련 검증을 거쳐온 영광스러운 부대 약력을 확인하세요.</p>
                     </div>
                     <span style="color: var(--accent-blue); font-weight: 800; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 0.5rem;">부대 역사 보기 <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem;"></i></span>
                 </div>
-                <div class="promo-highlight-card" onclick="switchPage('greeting')">
+                <div class="promo-highlight-card" onclick="safeSwitchPage('greeting', event)">
                     <div>
                         <h4 class="edit-all" data-key="hl_title_3"><i class="fa-solid fa-user-shield" style="color: var(--accent-blue);"></i> 제3대항전술대대장 소개</h4>
                         <p class="edit-all" data-key="hl_desc_3">조국 수호의 최선두에서 부대를 이끄는 지휘관의 철학 및 주요 경력 사항을 안내합니다.</p>
@@ -602,11 +580,11 @@
                     <div>
                         <h3 class="edit-all" data-key="notice_header"><i class="fa-solid fa-bullhorn" style="color: var(--accent-blue);"></i> 최근 부대 소식 및 공지사항</h3>
                         <ul class="notice-list" style="margin-top: 1.2rem;">
-                            <li class="notice-item" onclick="switchPage('home')">
+                            <li class="notice-item" onclick="safeSwitchPage('home', event)">
                                 <span class="notice-title edit-all" data-key="notice_1"><i class="fa-solid fa-circle-chevron-right" style="color: var(--accent-blue); font-size: 0.75rem;"></i> 2026년도 하반기 종합평가 안내</span>
                                 <span class="notice-date edit-all" data-key="notice_date_1">2026.10.05</span>
                             </li>
-                            <li class="notice-item" onclick="switchPage('home')">
+                            <li class="notice-item" onclick="safeSwitchPage('home', event)">
                                 <span class="notice-title edit-all" data-key="notice_2"><i class="fa-solid fa-circle-chevron-right" style="color: var(--accent-blue); font-size: 0.75rem;"></i> 장병 영내 복지 및 시설 개선 공사 일정</span>
                                 <span class="notice-date edit-all" data-key="notice_date_2">2026.09.28</span>
                             </li>
@@ -617,11 +595,11 @@
                     <div>
                         <h3 class="edit-all" data-key="battalion_status_header"><i class="fa-solid fa-shield-quartered" style="color: var(--accent-blue);"></i> 예하 전투부대 현황</h3>
                         <div class="battalion-status-grid">
-                            <div class="battalion-status-card" onclick="switchPage('company')">
+                            <div class="battalion-status-card" onclick="safeSwitchPage('company', event)">
                                 <div class="battalion-status-title edit-all" data-key="bat_status_1_title"><i class="fa-solid fa-bolt" style="color: var(--accent-blue);"></i> 제5필사중대본부</div>
                                 <div class="battalion-status-desc edit-all" data-key="bat_status_1_desc">필사즉생의 각오로 최전선 기동 타격을 전담하는 선봉 돌격 부대입니다.</div>
                             </div>
-                            <div class="battalion-status-card" onclick="switchPage('company')">
+                            <div class="battalion-status-card" onclick="safeSwitchPage('company', event)">
                                 <div class="battalion-status-title edit-all" data-key="bat_status_2_title"><i class="fa-solid fa-fire" style="color: var(--accent-blue);"></i> 제6철혈중대본부</div>
                                 <div class="battalion-status-desc edit-all" data-key="bat_status_2_desc">철통같은 화력 지원과 거점 사수를 완수하는 주력 방어 부대입니다.</div>
                             </div>
@@ -631,7 +609,7 @@
             </div>
         </section>
 
-        <!-- 2. 대대장 소개 페이지 (경력 포함) -->
+        <!-- 2. 대대장 소개 페이지 -->
         <section id="page-greeting" class="page-section">
             <div id="lock-overlay-greeting" class="section-lock-overlay" style="display:none;">
                 <i class="fa-solid fa-triangle-exclamation"></i>
@@ -708,7 +686,7 @@
                                 <p class="edit-all" data-key="bat_card_d_1">대대의 모든 작전과 행정을 총괄하는 지휘관입니다.</p>
                             </div>
                         </div>
-                        <button onclick="switchPage('greeting')" class="btn-profile-link"><i class="fa-solid fa-user-shield"></i> <span class="edit-all" data-key="bat_btn_1">대대장 소개 바로가기</span></button>
+                        <button onclick="safeSwitchPage('greeting', event)" class="btn-profile-link"><i class="fa-solid fa-user-shield"></i> <span class="edit-all" data-key="bat_btn_1">대대장 소개 바로가기</span></button>
                     </div>
 
                     <div class="profile-card">
@@ -719,7 +697,7 @@
                                 <p class="edit-all" data-key="bat_card_d_2">지휘관을 보좌하며 부대의 일상적인 작전 및 참모 업무를 조율합니다.</p>
                             </div>
                         </div>
-                        <button onclick="switchPage('vcl-vicedeer')" class="btn-profile-link"><i class="fa-solid fa-id-badge"></i> <span class="edit-all" data-key="bat_btn_2">부대대장 소개 바로가기</span></button>
+                        <button onclick="safeSwitchPage('vcl-vicedeer', event)" class="btn-profile-link"><i class="fa-solid fa-id-badge"></i> <span class="edit-all" data-key="bat_btn_2">부대대장 소개 바로가기</span></button>
                     </div>
 
                     <div class="profile-card">
@@ -730,13 +708,13 @@
                                 <p class="edit-all" data-key="bat_card_d_3">장병들의 병영 생활과 사기를 책임지는 부대의 어머니 같은 존재입니다.</p>
                             </div>
                         </div>
-                        <button onclick="switchPage('vcl-mastersergeant')" class="btn-profile-link"><i class="fa-solid fa-id-badge"></i> <span class="edit-all" data-key="bat_btn_3">주임원사 소개 바로가기</span></button>
+                        <button onclick="safeSwitchPage('vcl-mastersergeant', event)" class="btn-profile-link"><i class="fa-solid fa-id-badge"></i> <span class="edit-all" data-key="bat_btn_3">주임원사 소개 바로가기</span></button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 부대대장 상세 페이지 (경력 제외, 시계+사진+소개 위주) -->
+        <!-- 부대대장 상세 페이지 -->
         <section id="page-vcl-vicedeer" class="page-section">
             <div class="detail-profile-wrapper">
                 <h1 class="edit-all" data-key="vicedeer_header"><i class="fa-solid fa-user-gear"></i> 부대대장 프로필 및 소개</h1>
@@ -761,11 +739,11 @@
                         <div class="commander-quote-box edit-all" data-key="vicedeer_quote"><i class="fa-solid fa-quote-left" style="color: var(--accent-gold); margin-right: 8px;"></i>철저한 사전 준비와 실전 같은 팀워크로 대대의 모든 임무 완수에 중추적인 역할을 다하겠습니다.</div>
                     </div>
                 </div>
-                <div style="margin-top: 3rem; text-align: right;"><button onclick="switchPage('battalion')" class="btn-action" style="background: var(--accent-navy);"><i class="fa-solid fa-arrow-left"></i> 대대본부로 돌아가기</button></div>
+                <div style="margin-top: 3rem; text-align: right;"><button onclick="safeSwitchPage('battalion', event)" class="btn-action" style="background: var(--accent-navy);"><i class="fa-solid fa-arrow-left"></i> 대대본부로 돌아가기</button></div>
             </div>
         </section>
 
-        <!-- 대대주임원사 상세 페이지 (경력 제외, 시계+사진+소개 위주) -->
+        <!-- 대대주임원사 상세 페이지 -->
         <section id="page-vcl-mastersergeant" class="page-section">
             <div class="detail-profile-wrapper">
                 <h1 class="edit-all" data-key="master_header"><i class="fa-solid fa-medal"></i> 대대주임원사 프로필 및 소개</h1>
@@ -790,7 +768,7 @@
                         <div class="commander-quote-box edit-all" data-key="master_quote"><i class="fa-solid fa-quote-left" style="color: var(--accent-gold); margin-right: 8px;"></i>용사들의 목소리에 귀 기울이고 부모님의 마음으로 돌보며, 전투력 발휘의 든든한 버팀목이 되겠습니다.</div>
                     </div>
                 </div>
-                <div style="margin-top: 3rem; text-align: right;"><button onclick="switchPage('battalion')" class="btn-action" style="background: var(--accent-navy);"><i class="fa-solid fa-arrow-left"></i> 대대본부로 돌아가기</button></div>
+                <div style="margin-top: 3rem; text-align: right;"><button onclick="safeSwitchPage('battalion', event)" class="btn-action" style="background: var(--accent-navy);"><i class="fa-solid fa-arrow-left"></i> 대대본부로 돌아가기</button></div>
             </div>
         </section>
 
@@ -841,7 +819,7 @@
                                 <p class="edit-all" data-key="c5_d_1">중대의 모든 전술 훈련과 전투 지휘를 총괄합니다.</p>
                             </div>
                         </div>
-                        <button onclick="switchPage('c5-captain')" class="btn-profile-link"><i class="fa-solid fa-user"></i> <span class="edit-all" data-key="c5_btn_1">중대장 소개 바로가기</span></button>
+                        <button onclick="safeSwitchPage('c5-captain', event)" class="btn-profile-link"><i class="fa-solid fa-user"></i> <span class="edit-all" data-key="c5_btn_1">중대장 소개 바로가기</span></button>
                     </div>
                     <div class="profile-card">
                         <div>
@@ -851,7 +829,7 @@
                                 <p class="edit-all" data-key="c5_d_2">중대장을 보좌하여 실무 행정과 작전 지원을 담당합니다.</p>
                             </div>
                         </div>
-                        <button onclick="switchPage('c5-lieutenant')" class="btn-profile-link"><i class="fa-solid fa-user"></i> <span class="edit-all" data-key="c5_btn_2">부중대장 소개 바로가기</span></button>
+                        <button onclick="safeSwitchPage('c5-lieutenant', event)" class="btn-profile-link"><i class="fa-solid fa-user"></i> <span class="edit-all" data-key="c5_btn_2">부중대장 소개 바로가기</span></button>
                     </div>
                     <div class="profile-card">
                         <div>
@@ -861,7 +839,7 @@
                                 <p class="edit-all" data-key="c5_d_3">중대 용사들의 생활과 장비 관리를 책임지는 주춧돌입니다.</p>
                             </div>
                         </div>
-                        <button onclick="switchPage('c5-firstsergeant')" class="btn-profile-link"><i class="fa-solid fa-user"></i> <span class="edit-all" data-key="c5_btn_3">행보관 소개 바로가기</span></button>
+                        <button onclick="safeSwitchPage('c5-firstsergeant', event)" class="btn-profile-link"><i class="fa-solid fa-user"></i> <span class="edit-all" data-key="c5_btn_3">행보관 소개 바로가기</span></button>
                     </div>
                 </div>
             </div>
@@ -886,7 +864,7 @@
                                 <p class="edit-all" data-key="c6_d_1">철혈의 투지로 중대를 이끄는 핵심 지휘관입니다.</p>
                             </div>
                         </div>
-                        <button onclick="switchPage('c6-captain')" class="btn-profile-link"><i class="fa-solid fa-user"></i> <span class="edit-all" data-key="c6_btn_1">중대장 소개 바로가기</span></button>
+                        <button onclick="safeSwitchPage('c6-captain', event)" class="btn-profile-link"><i class="fa-solid fa-user"></i> <span class="edit-all" data-key="c6_btn_1">중대장 소개 바로가기</span></button>
                     </div>
                     <div class="profile-card">
                         <div>
@@ -896,7 +874,7 @@
                                 <p class="edit-all" data-key="c6_d_2">중대장을 측면에서 보좌하며 완벽한 임무 수행을 지원합니다.</p>
                             </div>
                         </div>
-                        <button onclick="switchPage('c6-lieutenant')" class="btn-profile-link"><i class="fa-solid fa-user"></i> <span class="edit-all" data-key="c6_btn_2">부중대장 소개 바로가기</span></button>
+                        <button onclick="safeSwitchPage('c6-lieutenant', event)" class="btn-profile-link"><i class="fa-solid fa-user"></i> <span class="edit-all" data-key="c6_btn_2">부중대장 소개 바로가기</span></button>
                     </div>
                     <div class="profile-card">
                         <div>
@@ -906,13 +884,13 @@
                                 <p class="edit-all" data-key="c6_d_3">중대 행정과 용사 복지를 든든하게 지켜주는 버팀목입니다.</p>
                             </div>
                         </div>
-                        <button onclick="switchPage('c6-firstsergeant')" class="btn-profile-link"><i class="fa-solid fa-user"></i> <span class="edit-all" data-key="c6_btn_3">행보관 소개 바로가기</span></button>
+                        <button onclick="safeSwitchPage('c6-firstsergeant', event)" class="btn-profile-link"><i class="fa-solid fa-user"></i> <span class="edit-all" data-key="c6_btn_3">행보관 소개 바로가기</span></button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 중대장 상세 페이지 (경력 제외, 시계+사진+소개 위주) -->
+        <!-- 중대장 상세 페이지 -->
         <section id="page-c5-captain" class="page-section">
             <div class="detail-profile-wrapper">
                 <h1 class="edit-all" data-key="c5_c_h">제5필사중대장 프로필 및 소개</h1>
@@ -937,16 +915,16 @@
                         <div class="commander-quote-box edit-all" data-key="c5_c_quote"><i class="fa-solid fa-quote-left" style="color: var(--accent-gold); margin-right: 8px;"></i>거친 훈련 속에서 단련된 전투력만이 실전에서 승리하는 유일한 길입니다. 부하를 아끼고 임무에 철저한 중대를 만들겠습니다.</div>
                     </div>
                 </div>
-                <div style="margin-top: 3rem; text-align: right;"><button onclick="switchPage('company')" class="btn-action" style="background: var(--accent-navy);"><i class="fa-solid fa-arrow-left"></i> 중대본부로 돌아가기</button></div>
+                <div style="margin-top: 3rem; text-align: right;"><button onclick="safeSwitchPage('company', event)" class="btn-action" style="background: var(--accent-navy);"><i class="fa-solid fa-arrow-left"></i> 중대본부로 돌아가기</button></div>
             </div>
         </section>
 
         <!-- 나머지 간부 상세 페이지들 -->
-        <section id="page-c5-lieutenant" class="page-section"><div class="detail-profile-wrapper"><h1 class="edit-all" data-key="c5_l_h">제5필사중대 부중대장 소개</h1><div style="margin-top:2rem; line-height:1.8; color:var(--text-muted); font-size:1.05rem;">중대장을 보좌하여 행정 및 군수 지원을 총괄하며, 용사들의 실무 교육과 안전 관리에 만전을 기하고 있습니다.</div><div style="margin-top: 3rem; text-align: right;"><button onclick="switchPage('company')" class="btn-action" style="background: var(--accent-navy);">돌아가기</button></div></div></section>
-        <section id="page-c5-firstsergeant" class="page-section"><div class="detail-profile-wrapper"><h1 class="edit-all" data-key="c5_f_h">제5필사중대 행보관 소개</h1><div style="margin-top:2rem; line-height:1.8; color:var(--text-muted); font-size:1.05rem;">중대의 어머니 같은 존재로서 장비 정비 상태를 점검하고 용사들의 고충을 적극 수렴하여 화합하는 병영을 이끕니다.</div><div style="margin-top: 3rem; text-align: right;"><button onclick="switchPage('company')" class="btn-action" style="background: var(--accent-navy);">돌아가기</button></div></div></section>
-        <section id="page-c6-captain" class="page-section"><div class="detail-profile-wrapper"><h1 class="edit-all" data-key="c6_c_h">제6철혈중대장 소개</h1><div style="margin-top:2rem; line-height:1.8; color:var(--text-muted); font-size:1.05rem;">철통같은 방어력과 강력한 화력 지원 태세를 확립하여 거점 사수 임무를 완벽히 수행하는 철혈의 지휘관입니다.</div><div style="margin-top: 3rem; text-align: right;"><button onclick="switchPage('company')" class="btn-action" style="background: var(--accent-navy);">돌아가기</button></div></div></section>
-        <section id="page-c6-lieutenant" class="page-section"><div class="detail-profile-wrapper"><h1 class="edit-all" data-key="c6_l_h">제6철혈중대 부중대장 소개</h1><div style="margin-top:2rem; line-height:1.8; color:var(--text-muted); font-size:1.05rem;">중대 행정 및 작전 실무를 조율하며 빈틈없는 지원 태세로 철혈중대의 전투력 발휘를 든든히 뒷받침합니다.</div><div style="margin-top: 3rem; text-align: right;"><button onclick="switchPage('company')" class="btn-action" style="background: var(--accent-navy);">돌아가기</button></div></div></section>
-        <section id="page-c6-firstsergeant" class="page-section"><div class="detail-profile-wrapper"><h1 class="edit-all" data-key="c6_f_h">제6철혈중대 행보관 소개</h1><div style="margin-top:2rem; line-height:1.8; color:var(--text-muted); font-size:1.05rem;">부대 기강을 확립하고 용사들의 병영 생활 만족도를 높이기 위해 늘 현장에서 발로 뛰는 베테랑 부사관입니다.</div><div style="margin-top: 3rem; text-align: right;"><button onclick="switchPage('company')" class="btn-action" style="background: var(--accent-navy);">돌아가기</button></div></div></section>
+        <section id="page-c5-lieutenant" class="page-section"><div class="detail-profile-wrapper"><h1 class="edit-all" data-key="c5_l_h">제5필사중대 부중대장 소개</h1><div style="margin-top:2rem; line-height:1.8; color:var(--text-muted); font-size:1.05rem;">중대장을 보좌하여 행정 및 군수 지원을 총괄하며, 용사들의 실무 교육과 안전 관리에 만전을 기하고 있습니다.</div><div style="margin-top: 3rem; text-align: right;"><button onclick="safeSwitchPage('company', event)" class="btn-action" style="background: var(--accent-navy);">돌아가기</button></div></div></section>
+        <section id="page-c5-firstsergeant" class="page-section"><div class="detail-profile-wrapper"><h1 class="edit-all" data-key="c5_f_h">제5필사중대 행보관 소개</h1><div style="margin-top:2rem; line-height:1.8; color:var(--text-muted); font-size:1.05rem;">중대의 어머니 같은 존재로서 장비 정비 상태를 점검하고 용사들의 고충을 적극 수렴하여 화합하는 병영을 이끕니다.</div><div style="margin-top: 3rem; text-align: right;"><button onclick="safeSwitchPage('company', event)" class="btn-action" style="background: var(--accent-navy);">돌아가기</button></div></div></section>
+        <section id="page-c6-captain" class="page-section"><div class="detail-profile-wrapper"><h1 class="edit-all" data-key="c6_c_h">제6철혈중대장 소개</h1><div style="margin-top:2rem; line-height:1.8; color:var(--text-muted); font-size:1.05rem;">철통같은 방어력과 강력한 화력 지원 태세를 확립하여 거점 사수 임무를 완벽히 수행하는 철혈의 지휘관입니다.</div><div style="margin-top: 3rem; text-align: right;"><button onclick="safeSwitchPage('company', event)" class="btn-action" style="background: var(--accent-navy);">돌아가기</button></div></div></section>
+        <section id="page-c6-lieutenant" class="page-section"><div class="detail-profile-wrapper"><h1 class="edit-all" data-key="c6_l_h">제6철혈중대 부중대장 소개</h1><div style="margin-top:2rem; line-height:1.8; color:var(--text-muted); font-size:1.05rem;">중대 행정 및 작전 실무를 조율하며 빈틈없는 지원 태세로 철혈중대의 전투력 발휘를 든든히 뒷받침합니다.</div><div style="margin-top: 3rem; text-align: right;"><button onclick="safeSwitchPage('company', event)" class="btn-action" style="background: var(--accent-navy);">돌아가기</button></div></div></section>
+        <section id="page-c6-firstsergeant" class="page-section"><div class="detail-profile-wrapper"><h1 class="edit-all" data-key="c6_f_h">제6철혈중대 행보관 소개</h1><div style="margin-top:2rem; line-height:1.8; color:var(--text-muted); font-size:1.05rem;">부대 기강을 확립하고 용사들의 병영 생활 만족도를 높이기 위해 늘 현장에서 발로 뛰는 베테랑 부사관입니다.</div><div style="margin-top: 3rem; text-align: right;"><button onclick="safeSwitchPage('company', event)" class="btn-action" style="background: var(--accent-navy);">돌아가기</button></div></div></section>
 
         <!-- 6. 부대 홍보 메인 -->
         <section id="page-promo" class="page-section">
@@ -964,7 +942,7 @@
                 <p class="edit-all" data-key="promo_main_desc" style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.05rem;">제3대항전술대대의 실전과 같은 훈련 현장 및 주요 활동 사진/영상 아카이브입니다. 아래 카드를 클릭하면 상세 페이지로 이동합니다.</p>
                 
                 <div class="promo-banner-list">
-                    <div class="promo-banner-card" onclick="switchPage('promo-videos')">
+                    <div class="promo-banner-card" onclick="safeSwitchPage('promo-videos', event)">
                         <div class="promo-banner-info">
                             <h3 class="edit-all" data-key="promo_banner_v_title"><i class="fa-solid fa-video" style="color: var(--accent-blue);"></i> 부대 홍보 영상 아카이브</h3>
                             <p class="edit-all" data-key="promo_banner_v_desc">실전적 야외 기동 훈련 및 가상 적대군(OPFOR) 전술 시연 영상</p>
@@ -972,7 +950,7 @@
                         <div class="promo-banner-btn"><span class="edit-all" data-key="promo_banner_v_btn">영상 목록 보기</span> <i class="fa-solid fa-arrow-right"></i></div>
                     </div>
 
-                    <div class="promo-banner-card" onclick="switchPage('promo-photos')">
+                    <div class="promo-banner-card" onclick="safeSwitchPage('promo-photos', event)">
                         <div class="promo-banner-info">
                             <h3 class="edit-all" data-key="promo_banner_p_title"><i class="fa-solid fa-camera" style="color: var(--accent-blue);"></i> 부대 훈련 및 활동 사진 갤러리</h3>
                             <p class="edit-all" data-key="promo_banner_p_desc">과학화 마일즈 훈련 검증 및 장병들의 현장 활동 사진</p>
@@ -987,7 +965,7 @@
             <div class="card-box">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
                     <h1><i class="fa-solid fa-video"></i> 부대 홍보 영상 목록</h1>
-                    <button onclick="switchPage('promo')" class="btn-action" style="background: var(--accent-navy); padding: 0.7rem 1.4rem; font-size: 0.9rem;"><i class="fa-solid fa-arrow-left"></i> 홍보관 메인으로</button>
+                    <button onclick="safeSwitchPage('promo', event)" class="btn-action" style="background: var(--accent-navy); padding: 0.7rem 1.4rem; font-size: 0.9rem;"><i class="fa-solid fa-arrow-left"></i> 홍보관 메인으로</button>
                 </div>
                 <div id="video-list-container" class="media-list-grid"></div>
             </div>
@@ -997,7 +975,7 @@
             <div class="card-box">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
                     <h1><i class="fa-solid fa-camera"></i> 부대 훈련 사진 갤러리</h1>
-                    <button onclick="switchPage('promo')" class="btn-action" style="background: var(--accent-navy); padding: 0.7rem 1.4rem; font-size: 0.9rem;"><i class="fa-solid fa-arrow-left"></i> 홍보관 메인으로</button>
+                    <button onclick="safeSwitchPage('promo', event)" class="btn-action" style="background: var(--accent-navy); padding: 0.7rem 1.4rem; font-size: 0.9rem;"><i class="fa-solid fa-arrow-left"></i> 홍보관 메인으로</button>
                 </div>
                 <div id="photo-list-container" class="media-list-grid"></div>
             </div>
@@ -1043,7 +1021,7 @@
                 <h1><i class="fa-solid fa-gauge-high"></i> 관리자 콘트롤 타워</h1>
                 <div style="display: flex; gap: 0.9rem;">
                     <button onclick="switchPage('home'); enableAdminMode();" style="background: #38bdf8; color: #050811; border: none; padding: 0.7rem 1.4rem; border-radius: 10px; cursor: pointer; font-weight: 900;"><i class="fa-solid fa-pen-to-square"></i> 전체 직접 수정모드</button>
-                    <button onclick="switchPage('home')" style="background: #1e293b; color: #38bdf8; border: 2px solid #334155; padding: 0.7rem 1.4rem; border-radius: 10px; cursor: pointer; font-weight: 800;"><i class="fa-solid fa-house"></i> 홈페이지 이동</button>
+                    <button onclick="safeSwitchPage('home', event)" style="background: #1e293b; color: #38bdf8; border: 2px solid #334151; padding: 0.7rem 1.4rem; border-radius: 10px; cursor: pointer; font-weight: 800;"><i class="fa-solid fa-house"></i> 홈페이지 이동</button>
                 </div>
             </div>
 
@@ -1134,7 +1112,16 @@
         function toggleUserThemeMode() {
             const isDark = document.body.classList.toggle('dark-mode');
             localStorage.setItem('site_theme_mode', isDark ? 'dark' : 'light');
-            showToast(isDark ? "다크 모드가 적용되었습니다." : "화이트 모드가 적용되었습니다.");
+        }
+
+        function safeSwitchPage(pageId, event) {
+            if (isDirectEditActive) {
+                if (event && event.detail === 2) {
+                    switchPage(pageId);
+                }
+                return;
+            }
+            switchPage(pageId);
         }
 
         function toggleSubAdminAccess() {
@@ -1142,7 +1129,6 @@
             let newState = !isBlocked;
             localStorage.setItem('sub_admin_blocked', newState ? 'true' : 'false');
             updateSubAdminUI(newState);
-            showToast(newState ? "eoeowkdsla 계정 권한이 차단되었습니다." : "eoeowkdsla 계정 권한이 복구되었습니다.");
         }
 
         function updateSubAdminUI(isBlocked) {
@@ -1168,7 +1154,6 @@
             let newLock = !currentLock;
             localStorage.setItem('sec_lock_' + secKey, newLock ? 'true' : 'false');
             applySectionLockState(secKey, newLock);
-            showToast(newLock ? `[${secKey}] 점검 차단 설정됨` : `[${secKey}] 차단 해제됨`);
         }
 
         function applySectionLockState(secKey, isLocked) {
@@ -1229,7 +1214,7 @@
             const totalEl = document.getElementById('visitor-count-display');
             const todayEl = document.getElementById('visitor-today-display');
             if (totalEl) totalEl.innerText = totalVisitors.toLocaleString() + ' 명';
-            if (todayEl) todayEl.innerText = '오늘 방문: ' + todayVisitors.toLocaleString() + '명';
+            if (todayEl) todayEl.innerText = '실시간 세션 연동 완료';
         }
 
         function loadSavedContent() {
@@ -1276,6 +1261,7 @@
                 
                 card.onclick = (e) => {
                     if (e.target.closest('.card-delete-btn')) return;
+                    if (isDirectEditActive) return;
                     openMediaDetail(item.id);
                 };
                 
@@ -1318,7 +1304,6 @@
                 items = items.filter(i => i.id !== itemId);
                 localStorage.setItem('custom_media_items', JSON.stringify(items));
                 loadSavedMediaItems();
-                showToast("콘텐츠가 삭제되었습니다.");
             }
         }
 
@@ -1378,19 +1363,9 @@
             items.push(newItem);
             localStorage.setItem('custom_media_items', JSON.stringify(items));
             loadSavedMediaItems();
-            showToast("새 홍보 콘텐츠가 성공적으로 추가되었습니다.");
         }
 
         function switchBackToCategory() { switchPage(lastActiveCategory); }
-
-        function showToast(message, type = 'success') {
-            const container = document.getElementById('site-toast-container');
-            const toast = document.createElement('div');
-            toast.className = 'site-toast';
-            toast.innerHTML = `<i class="fa-solid fa-circle-check" style="color: #38bdf8;"></i> <span>${message}</span>`;
-            container.appendChild(toast);
-            setTimeout(() => toast.remove(), 3500);
-        }
 
         function updateDateTime() {
             const now = new Date();
@@ -1499,18 +1474,19 @@
                 
                 document.querySelectorAll('.profile-photo-editable').forEach(area => {
                     area.style.cursor = 'pointer';
-                    area.onclick = function() {
-                        const newUrl = prompt("변경할 프로필 사진 이미지 링크(URL)를 입력하세요:");
-                        if (newUrl) {
-                            localStorage.setItem('profile_img_' + this.getAttribute('data-profile-key'), newUrl.trim());
-                            this.innerHTML = `<img src="${newUrl.trim()}" alt="사진">`;
-                            showToast("프로필 사진이 변경되었습니다.");
+                    area.onclick = function(e) {
+                        if (isDirectEditActive) {
+                            e.stopPropagation();
+                            const newUrl = prompt("변경할 프로필 사진 이미지 링크(URL)를 입력하세요:");
+                            if (newUrl) {
+                                localStorage.setItem('profile_img_' + this.getAttribute('data-profile-key'), newUrl.trim());
+                                this.innerHTML = `<img src="${newUrl.trim()}" alt="사진">`;
+                            }
                         }
                     };
                 });
                 toggleBtn.innerText = "수정 모드 OFF (저장)";
                 toggleBtn.style.background = "#ef4444";
-                showToast("직접 수정 모드가 켜졌습니다.");
             } else {
                 targets.forEach(el => { el.removeAttribute('contenteditable'); el.classList.remove('editable-active'); });
                 toggleBtn.innerText = "수정 모드 ON";
@@ -1520,7 +1496,6 @@
                     const key = el.getAttribute('data-key');
                     if (key) localStorage.setItem('site_text_' + key, el.innerText);
                 });
-                showToast("변경 사항이 저장되었습니다.");
             }
         }
 
