@@ -117,18 +117,15 @@
             padding: 3px 8px; border-radius: 6px; pointer-events: none; box-shadow: 0 4px 10px rgba(29, 78, 216, 0.3);
         }
 
-        /* ★ [화이트톤 최적화] 접속하자마자 보이는 좌우 2분할 프리미엄 히어로 섹션 */
-        .hero-split-grid {
-            display: grid; grid-template-columns: 1.3fr 1fr; gap: 2rem; margin-bottom: 2.5rem; align-items: stretch;
-        }
-        .hero-left-box {
+        /* 첫 화면 프리미엄 히어로 단독 배너 (화이트 톤온톤) */
+        .hero-single-box {
             background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%);
-            border-radius: 28px; padding: 3.8rem 3rem; color: #fff;
+            border-radius: 28px; padding: 4.5rem 3.5rem; color: #fff;
             box-shadow: 0 20px 40px -10px rgba(29, 78, 216, 0.3); position: relative; overflow: hidden;
-            display: flex; flex-direction: column; justify-content: space-between;
+            margin-bottom: 2.5rem;
         }
-        .hero-left-box::before {
-            content: ''; position: absolute; top: -50%; right: -20%; width: 400px; height: 400px;
+        .hero-single-box::before {
+            content: ''; position: absolute; top: -50%; right: -10%; width: 500px; height: 500px;
             background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
             border-radius: 50%; pointer-events: none;
         }
@@ -139,28 +136,35 @@
             border-radius: 30px; font-size: 0.78rem; font-weight: 800; margin-bottom: 1.2rem; letter-spacing: 1.5px;
             box-shadow: 0 4px 12px rgba(217, 119, 6, 0.2); width: fit-content;
         }
-        .hero-left-box h1 { font-size: 2.5rem; font-weight: 900; color: #fff; margin-bottom: 1rem; line-height: 1.25; }
-        .hero-left-box p { font-size: 1.05rem; color: #e2e8f0; margin-bottom: 2rem; line-height: 1.7; }
+        .hero-single-box h1 { font-size: 2.8rem; font-weight: 900; color: #fff; margin-bottom: 1rem; line-height: 1.25; }
+        .hero-single-box p { font-size: 1.12rem; color: #e2e8f0; margin-bottom: 2.2rem; line-height: 1.7; max-width: 750px; }
         
         .btn-action {
             display: inline-flex; align-items: center; gap: 0.8rem;
-            background: #d97706; color: #fff; padding: 0.95rem 2rem; border-radius: 12px;
+            background: #d97706; color: #fff; padding: 0.95rem 2.2rem; border-radius: 12px;
             font-weight: 800; border: none; cursor: pointer; text-decoration: none; transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 10px 20px -5px rgba(217, 119, 6, 0.4); font-size: 0.95rem; width: fit-content;
+            box-shadow: 0 10px 20px -5px rgba(217, 119, 6, 0.4); font-size: 0.98rem; width: fit-content;
         }
         .btn-action:hover { background: #b45309; transform: translateY(-3px); }
 
-        /* 우측 화이트 글래스모피즘 실시간 위젯 박스 */
-        .hero-right-box {
-            background: #ffffff; border: 1px solid var(--border-color); border-radius: 28px; padding: 2.5rem;
-            box-shadow: var(--shadow-md); display: flex; flex-direction: column; justify-content: space-between; color: var(--text-main);
+        /* ★ [하단 배치 및 구체화] 사이트 현황 및 작전 통계 대시보드 위젯 그리드 */
+        .site-status-container {
+            background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 24px;
+            padding: 2.5rem; box-shadow: var(--shadow-md); margin-bottom: 2.5rem;
         }
-        .hero-right-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; margin-bottom: 1.2rem; }
-        .hero-right-title { font-size: 0.95rem; font-weight: 800; color: var(--accent-blue); display: flex; align-items: center; gap: 0.6rem; letter-spacing: 0.5px; }
-        
-        .live-info-row { display: flex; justify-content: space-between; align-items: center; padding: 0.9rem 1rem; background: #f8fafc; border: 1px solid var(--border-color); border-radius: 12px; margin-bottom: 0.8rem; }
-        .live-info-label { font-size: 0.88rem; color: var(--text-muted); font-weight: 700; display: flex; align-items: center; gap: 0.5rem; }
-        .live-info-value { font-size: 1.05rem; font-weight: 900; color: var(--accent-navy); font-family: monospace; }
+        .site-status-container h3 {
+            font-size: 1.25rem; font-weight: 900; color: var(--accent-navy); margin-bottom: 1.5rem;
+            display: flex; align-items: center; gap: 0.7rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;
+        }
+        .status-metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+        .metric-card {
+            background: #f8fafc; border: 1px solid var(--border-color); border-radius: 16px; padding: 1.8rem;
+            display: flex; flex-direction: column; justify-content: space-between; transition: 0.25s;
+        }
+        .metric-card:hover { border-color: #cbd5e1; box-shadow: var(--shadow-sm); transform: translateY(-2px); }
+        .metric-title { font-size: 0.82rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
+        .metric-value { font-size: 1.6rem; font-weight: 900; color: var(--accent-navy); font-family: monospace; }
+        .metric-sub { font-size: 0.85rem; color: #059669; font-weight: 700; margin-top: 0.4rem; display: flex; align-items: center; gap: 0.4rem; }
 
         /* 부대 홍보 연계 하이라이트 카드 섹션 */
         .promo-highlight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.8rem; margin-bottom: 2.5rem; }
@@ -385,7 +389,6 @@
         }
 
         @media(max-width: 950px) {
-            .hero-split-grid { grid-template-columns: 1fr; }
             .commander-top-layout { grid-template-columns: 1fr; text-align: center; justify-items: center; }
             .commander-details-grid { grid-template-columns: 1fr; }
             .home-sections-grid { grid-template-columns: 1fr; }
@@ -466,42 +469,47 @@
                 </div>
             </div>
 
-            <!-- ★ [화이트 배경 유지] 접속하자마자 가장 먼저 보이는 최상단 좌우 2분할 프리미엄 히어로 섹션 -->
-            <div class="hero-split-grid">
-                <!-- 좌측: 강력한 부대 타이틀 및 부대 홍보 직통 버튼 -->
-                <div class="hero-left-box">
-                    <div>
-                        <div class="hero-badge"><i class="fa-solid fa-star"></i> REPUBLIC OF KOREA ARMY - 3사단 22여단</div>
-                        <h1 id="editable-hero-title" class="editable-target">철통같은 경계와 최정예 전투태세의 중추</h1>
-                        <p id="editable-hero-desc" class="editable-target">완벽한 임무 수행 능력과 불굴의 백골 정신으로 조국의 최전방 평화와 안전을 최선두에서 수호합니다.</p>
-                    </div>
-                    <button onclick="switchPage('promo')" class="btn-action">
-                        <i class="fa-solid fa-bullhorn"></i> 부대 홍보관 및 훈련 갤러리 바로가기 <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                </div>
+            <!-- ★ [최상단 깔끔한 단독 히어로 배너] -->
+            <div class="hero-single-box">
+                <div class="hero-badge"><i class="fa-solid fa-star"></i> REPUBLIC OF KOREA ARMY - 3사단 22여단</div>
+                <h1 id="editable-hero-title" class="editable-target">철통같은 경계와 최정예 전투태세의 중추</h1>
+                <p id="editable-hero-desc" class="editable-target">완벽한 임무 수행 능력과 불굴의 백골 정신으로 조국의 최전방 평화와 안전을 최선두에서 수호합니다.</p>
+                <button onclick="switchPage('promo')" class="btn-action">
+                    <i class="fa-solid fa-bullhorn"></i> 부대 홍보관 및 훈련 갤러리 바로가기 <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
 
-                <!-- 우측: 접속 시 가장 먼저 시선을 사로잡는 화이트톤 실시간 택티컬 대시보드 위젯 박스 -->
-                <div class="hero-right-box">
-                    <div class="hero-right-header">
-                        <span class="hero-right-title"><i class="fa-solid fa-terminal"></i> 여단 예하대대 실시간 지휘통제 현황</span>
-                        <span style="width: 8px; height: 8px; background: #059669; border-radius: 50%; box-shadow: 0 0 8px #059669;"></span>
+            <!-- ★ [요청 반영: 아래로 내린 구체적인 사이트 및 작전 현황 대시보드] -->
+            <div class="site-status-container">
+                <h3><i class="fa-solid fa-chart-pie" style="color: var(--accent-blue);"></i> 실시간 전술망 및 대대 종합 작전 현황</h3>
+                <div class="status-metrics-grid">
+                    <div class="metric-card">
+                        <div>
+                            <div class="metric-title"><i class="fa-regular fa-clock"></i> 표준시각 (KST)</div>
+                            <div class="metric-value" id="clock">00:00:00</div>
+                        </div>
+                        <div class="metric-sub" style="color: var(--text-muted);"><i class="fa-solid fa-calendar-days"></i> 2026년 10월 9일 금요일</div>
                     </div>
-                    <div style="display: flex; flex-direction: column; justify-content: space-around; flex-grow: 1;">
-                        <div class="live-info-row">
-                            <span class="live-info-label"><i class="regular fa-clock text-blue-600"></i> 표준시각 (KST)</span>
-                            <span class="live-info-value" id="clock">00:00:00</span>
+                    <div class="metric-card">
+                        <div>
+                            <div class="metric-title"><i class="fa-solid fa-shield-halved"></i> 철책 경계 작전 대비태세</div>
+                            <div class="metric-value" style="color: #1d4ed8;">상시 1급 완비</div>
                         </div>
-                        <div class="live-info-row">
-                            <span class="live-info-label"><i class="fa-solid fa-shield-halved text-emerald-600"></i> 작전 대비태세</span>
-                            <span class="live-info-value" style="color: #059669;">UPPER-READY</span>
-                        </div>
-                        <div class="live-info-row">
-                            <span class="live-info-label"><i class="fa-solid fa-chart-line text-amber-600"></i> 누적 방문자</span>
-                            <span class="live-info-value" style="color: #d97706;">5,420 명</span>
-                        </div>
+                        <div class="metric-sub"><span style="width: 8px; height: 8px; background: #059669; border-radius: 50%; display: inline-block;"></span> 무결점 경계 유지 중</div>
                     </div>
-                    <div style="font-size: 0.78rem; color: var(--text-muted); text-align: right; margin-top: 0.5rem; font-family: monospace;">
-                        BOGOL_NET // SECURE_22BRIGADE
+                    <div class="metric-card">
+                        <div>
+                            <div class="metric-title"><i class="fa-solid fa-server"></i> 여단 통합 전술 통신망</div>
+                            <div class="metric-value" style="color: #059669;">OPTIMAL</div>
+                        </div>
+                        <div class="metric-sub"><i class="fa-solid fa-wifi"></i> 패킷 손실률 0.0% (보안 A+)</div>
+                    </div>
+                    <div class="metric-card">
+                        <div>
+                            <div class="metric-title"><i class="fa-solid fa-users"></i> 누적 홍보포털 방문 현황</div>
+                            <div class="metric-value" style="color: #d97706;">5,420 명</div>
+                        </div>
+                        <div class="metric-sub" style="color: #d97706;"><i class="fa-solid fa-arrow-trend-up"></i> 오늘 방문 장병·민원인 186명</div>
                     </div>
                 </div>
             </div>
